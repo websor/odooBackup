@@ -1,0 +1,324 @@
+@charset "UTF-8";
+/*  Mixins */
+/*  Fonts */
+/* --------------------------------------------------------------- 
+   Google Fonts
+-----------------------------------------------------------------*/
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,400,500,600,700,800|Nunito:300,400,600,700,800");
+
+html {
+    overflow-x: hidden;
+  }
+
+body{
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+header{
+    width:100%;
+    height:150px;
+    background:#fec470;
+    display: flex;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.imgLogo{
+    padding: 25px;
+}
+
+footer{
+    width:100%;
+    height:100px;
+    background:#152c4e;
+    display: flex;
+    
+    font-size: 18px;
+}
+
+footer p{
+    color: white;
+    size: 84px;
+    margin:auto;
+    display: flex;
+}
+
+footer a{
+    color:#fec470;
+    display: flex;
+}
+
+section{
+    width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.row{
+    width: 100%;
+    height: auto;
+    float:left;
+}
+
+section h3{
+    margin:5% 0% 0% 45%;
+    font-size: 40px;
+}
+
+.menu-detailed-title{
+  float:left;
+  margin-top:1.7%; 
+  font-size:50px; 
+  margin-right:2%; 
+  margin-left:1%
+}
+
+section input{
+    margin:1% 0% 0% 38.1%;
+    font-size: 20px;
+    border-radius: 15px;
+    width: 500px;
+    min-width: 200px; ;
+    padding: 15px;
+}
+
+section button{
+    margin:1% 0% 5% 38.6%;
+    font-size: 25px;
+    background:#fec470; 
+    border-color:black; 
+    color:black; 
+    font-weight:bold;
+    border-radius: 15px;
+    border: none;
+    padding: 15px;
+    width: 500px;
+}
+
+section h1{
+    font-size: 60px;
+    padding-left: 40px;
+    padding-top: none;
+}
+
+.card
+{
+    width:250px;
+    height: 250px;
+    margin:30px 0px 40px 125px;
+    border-radius: 20px;
+    border: 30px solid #152c4e;
+    background:#fec470;
+    float:left;
+    font-weight: bold;
+    color:black;
+}
+
+.card h2{
+    font-size: 30px;
+    text-align: center;
+}
+
+.card img{
+    width: 40%;
+    height: 40%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card:hover h2{
+  font-size: 33px;
+  text-align: center;
+}
+
+.card:hover img{
+  width: 45%;
+  height: 45%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.error{
+    width: 80%;
+    background: red;
+    color:white;
+    font-weight:bold;
+    font-size:40px;
+    text-align: center;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 2%;
+}
+
+.welcome{
+    font-size: 20px;
+    color:black;
+    margin-top:2%;
+    margin-left:5%;
+    margin-right:5%;
+}
+
+.logout{
+    width:5%;
+    height:40px;
+    background:#152c4e;
+    color:white;
+    margin-left: 10%;
+    margin-right: 3%;
+    border-radius: 10px;
+    margin-top:40px;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 25px;
+}
+
+.addButton{
+    width:100px;
+    height:30px;
+    background:#152c4e;
+    color:white;
+    border-radius: 10px;
+    margin-top:40px;
+    margin-left: 20px;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 14px;
+}
+
+.page_body{
+    width:100%;
+    margin-bottom: 3%;
+  }
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin: auto;
+    font-size: 14px;
+  }
+
+  th{
+    text-align: center;
+    border: 1px solid black;
+    padding: 8px;
+  }
+  
+  td {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  .invoice-table{
+    width: 40%;
+    margin-left: 6%;
+    float: left;
+    margin-bottom: 2%;
+    font-size: 18px;
+    border: 5px solid #dddddd;
+    border-radius: 10px;
+  }
+
+.invoice-table td{
+    padding: 25px;
+}
+
+.invoice-table td:nth-child(odd){
+    font-size: bold;
+}
+
+.invoice-table td{
+    background:white;
+}
+
+.invoice-table tr, td{
+    border:none;
+}
+
+.invoice-line-table{
+    width: 97%;
+    margin: auto;
+    margin-bottom: 2%;
+    font-size: 18px;
+    border: 5px solid #dddddd;
+    border-radius: 10px;
+  }
+
+  .invoice-line-table td{
+    border: 1px solid #dddddd;
+  }
+
+  .invoice-total-line{
+    width:400px;
+    float: right;
+    margin-right: 1%;
+    font-size: 18px;
+    margin-bottom: 3%;
+  }
+
+  .invoice-total-line td:nth-child(odd){
+    font-weight: bold;
+    background: white;
+  }
+
+  .invoice-total-line td:nth-child(even){
+    background:white;
+  }
+
+  .inv-content{
+    width: 98%;
+    border: 1px solid #dddddd;
+    float: left;
+    margin: 1%;
+    box-shadow: grey;
+  }
+
+  .adding_block{
+    width: 98%;
+    display: flex;
+    margin: auto;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: grey;
+  }
+
+  .print_button{
+    width: 200px;
+    height: 50px;
+    font-size: 16px;
+    background: #152c4e;
+    float: right;
+    margin-right: 2%;
+    color: white;
+    font-weight: bold;
+    border-color: #152c4e;
+    border:1px solid;
+}
+
+.print_button:hover{
+  font-size:18px;
+  font-weight: bold;
+  height: 50px;
+  border-color: #152c4e;
+  border:3px solid;
+}
+
+.search_field{
+  width: 10%;
+  float: left;
+  margin-left: 1%;
+  margin-bottom: 2%;
+  font-size: 14px;
+  padding: 1%;
+  margin-top: 1.9%;
+}
