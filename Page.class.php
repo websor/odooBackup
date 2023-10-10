@@ -128,7 +128,7 @@ class Page {
         </section>
    <?php }
 
-   static function menuDetailed($typ, $invoices, $user, $type, $invoice_number){ ?>
+   static function menuDetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch){ ?>
         <section>   
             <dic class="row">
                <!-- <h1> <?php echo $typ;?> </h1> -->
@@ -136,12 +136,12 @@ class Page {
             <dic class="row">
                 <form method="post">
                     <h1 class="menu-detailed-title"><?php echo $typ;?></h1>
-                    <?php if($invoice_number == ""){ ?><input type="text" placeholder="Invoice Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <?php } ?>
-                    <input type="text" placeholder="Sales Order Number" name="salesOrderSearch" class="search_field">
-                    <input type="text" placeholder="Customer" name="customerSearch" class="search_field">
-                    <input type="text" placeholder="Invoice Date" name="invoiceDateSearch" class="search_field">
+                    <?php if($invoice_number == ""){ ?><input type="text" placeholder="Invoice Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
+                    <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Sales Order Number" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
+                    <?php if($dateSearch == ""){ ?><input type="text" placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
+                    <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
                     <input type="submit" value="search" class="search_field" name="search">
-                    <?php if($invoice_number != ""){ ?><input type="submit" value="Clear" class="search_field" name="clear"><?php }else{} ?>
+                    <?php if($invoice_number != "" || $customerSearch == "" || $dateSearch == "" || $salesOrderSearch == ""){ ?><input type="submit" value="Clear" class="search_field" name="clear"><?php }else{} ?>
                 </form>
             </div>
             <div class="page_body">
