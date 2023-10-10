@@ -53,6 +53,8 @@ $conection = include 'config/conection.php';
      $inv = "";
  }
 
+ 
+
  //check post for print
  if(isset($_POST["print"]))
  {

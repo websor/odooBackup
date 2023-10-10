@@ -43,11 +43,12 @@ $conection = include 'config/conection.php';
      $typ = "";
  }
 
+
 $invoice_number="";
+$salesOrderSearch="";
 $dateSearch="";
 $customerSearch="";
-$salesOrderSearch="";
-
+ 
 $invoices = array();
 /**
 * Call to the database to get all invoices

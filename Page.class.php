@@ -43,7 +43,7 @@ class Page {
             
             <?php }?>
             <?php if(isset($_GET["type"])){ ?>
-                <a href="menu.php?user=<?php echo $email; ?>&type=<?php echo $type; ?>" class="addButton"><div>Go Back</div></a>
+                <a href="menu.php?user=<?php echo $email; ?>&type=<?php echo $type; ?>" class="addButton"><div>MENU</div></a>
             <?php } ?>
             
             
@@ -177,7 +177,7 @@ class Page {
                                 <td><?php if($invoice->getAmountDue()!=""){echo "$".$invoice->getAmountDue();}else{echo "$0.00";} ?></td>
                                 <td><?php if($invoice->getTax()!=""){echo "$".$invoice->getTax();}else{echo "$0.00";} ?></td>
                                 <td><?php if($invoice->getTotal()!=""){echo "$".$invoice->getTotal();}else{echo "$0.00";} ?></td>
-                                <td><a href="invoice-detailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getInvoiceNumber(); ?>"><input type="button" value="Open Invoice" class="openInvoice" /></a></td>
+                                <td><a href="invoice-detailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getInvoiceNumber(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Invoice" class="openInvoice" /></a></td>
                             </tr></a>
 
                             <?php     
@@ -218,9 +218,11 @@ static function invoiceDetailed($typ, $invoice, $invoice_lines, $user, $type, $i
     <section class="inv-content">   
         <div class="row">
             <h1 class="menu-detailed-title"> <?php echo $invo;?> </h1>
+            <a href="menu-detailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="print_button" /></a>
             <form method="POST">
                 <input type="submit" value="Print" name="print" class="print_button" />
             </form>
+
         </div>
         <div class="row">
             <div class="invoice-table">
