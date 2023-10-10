@@ -151,6 +151,58 @@ if(isset($_POST["import2"]))
     } 
 }
 
+//Cheching if the document invoice line file is correct, and them add the data to DB
+if(isset($_POST["import3"]))
+{
+    //print_r($_FILES);
+    $fileName = $_FILES["creditNoteFile"]["name"];
+    //$fileExtension = explode('.', $fileName);
+    //$fileExtension - strtolower(end($fileExtension));
+    
+    $newFileName = date("y.m.d")."-".date("h.i.sa")."-".$fileName;
+
+    $targetDirectory = "uploads/". $newFileName;
+    
+    move_uploaded_file($_FILES["creditNoteFile"]["tmp_name"], $targetDirectory);
+
+    error_reporting(0);
+    ini_set('display_errors',0);
+
+    require "excelReader/excel_reader2.php";
+    require "excelReader/SpreadsheetReader.php";
+
+    $reader = new SpreadsheetReader($targetDirectory);
+    foreach($reader as $key => $row)
+    {
+        $creditnote_number = $row[0];
+        $customer = $row[1];
+        $address = $row[2];
+        $invoice_date = $row[3];
+        $sales_person = $row[4];
+        $due_date = $row[5];
+        $source_document = $row[6];
+        $untaxed_amount = $row[7];
+        $tax = $row[8];
+        $total = $row[9];
+        $amount_due = $row[10];
+        $status = $row[11];
+        $payment_terms = $row[12];
+        $global_comments = $row[14];
+        $invoices_notes = $row[15];
+        $customer_po = $row[16];
+        $warehouse_note = $row[17];
+        $customer_notes = $row[18];
+
+        mysqli_query($conection, "INSERT INTO creditnotes VALUES('', '$creditnote_number', '$customer', '$address', '$invoice_date',
+        '$sales_person', '$due_date', '$source_document', '$untaxed_amount', '$tax', '$total', '$amount_due',
+        '$status', '$payment_terms', '$global_comments','$invoices_notes', '$customer_po', '$warehouse_note','$customer_notes')"); 
+        
+        $typ="CreditNote";
+
+        header("Location: menu-CNdetailed.php?user=$email&type=$type&typ=$typ"); 
+    } 
+}
+
 //Website Structure
 Page::head();
 Page::header($email, $type);
