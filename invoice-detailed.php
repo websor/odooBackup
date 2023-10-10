@@ -237,7 +237,7 @@ $result_User = mysqli_query($conection,$query_user);
 while($row_user = mysqli_fetch_assoc($result_User))
 { 
     $newInvoice->setInvoiceNumber($row_user['invoice_number']);
-    $newInvoice->setSalesOrder($row_user['sales_order_#']);
+    $newInvoice->setSalesOrder($row_user['sales_order']);
     $newInvoice->setCustomer($row_user['customer']);
     $newInvoice->setDeliveryAddress($row_user['delivery_address']);
     $newInvoice->setPaymentTerms($row_user['payment_terms']);
@@ -269,7 +269,7 @@ while($row_user = mysqli_fetch_assoc($result_User_line))
     $newInvoiceLine = new InvoiceLine();
     $newInvoiceLine->setCreatedOn($row_user['created_on']);
     $newInvoiceLine->setInvoiceNumber($row_user['invoice_number']);
-    $newInvoiceLine->setSalesOrder($row_user['salers_order_#']);
+    $newInvoiceLine->setSalesOrder($row_user['salers_order']);
     $newInvoiceLine->setSku($row_user['sku']);
     $newInvoiceLine->setProduct($row_user['product']);
     $newInvoiceLine->setVendor($row_user['vendor']);
