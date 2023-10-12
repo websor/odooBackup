@@ -100,10 +100,6 @@ class Page {
                     <h2>Customers</h2>
                     <img src="images/customer.png"/>
                 </div></a>
-                <a href="menu-detailed?typ=Sales"><div class="card">
-                    <h2>Sales Order</h2>
-                    <img src="images/sales.png"/>
-                </div></a>
                 <a href="menu-detailed?typ=Invoices&user=<?php echo $email; ?>&type=<?php echo $type; ?>"><div class="card">
                     <h2>Invoices</h2>
                     <img src="images/invoice.png"/>
@@ -112,16 +108,12 @@ class Page {
                     <h2>Credit Notes</h2>
                     <img src="images/credit.png"/>
                 </div></a>
-                <a href="menu-detailed?typ=Purchase"><div class="card">
+                <a href="menu-Pdetailed?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Purchases"><div class="card">
                     <h2>Purchases</h2>
                     <img src="images/purchase.png"/>
                 </div></a>
-                <a href="menu-detailed?typ=Picking"><div class="card">
-                    <h2>Picking</h2>
-                    <img src="images/picking.png"/>
-                </div></a>
-                <a href="menu-detailed?typ=sn"><div class="card">
-                    <h2>Serial Numbers</h2>
+                <a href="menu-ILdetailed?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Invoice Line"><div class="card">
+                    <h2>Invoice Line</h2>
                     <img src="images/sn.png"/>
                 </div></a>
             </div>
@@ -178,6 +170,133 @@ static function menuCNdetailed($typ, $invoices, $user, $type, $invoice_number, $
                             <td><?php if($invoice->getTax()!=""){echo "$".$invoice->getTax();}else{echo "$0.00";} ?></td>
                             <td><?php if($invoice->getTotal()!=""){echo "$".$invoice->getTotal();}else{echo "$0.00";} ?></td>
                             <td><a href="invoice-CNdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getCreditnote_number(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Invoice" class="openInvoice" /></a></td>
+                        </tr></a>
+
+                        <?php     
+                    } 
+                ?>
+            </table>
+        </div>
+    </section>
+<?php }
+
+static function menuILdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch){ ?>
+    <section>   
+        <dic class="row">
+           <!-- <h1> <?php echo $typ;?> </h1> -->
+        </div>
+        <dic class="row">
+            <form method="post">
+                <h1 class="menu-detailed-title"><?php echo $typ;?></h1>
+                <?php if($invoice_number == ""){ ?><input type="text" placeholder="Reference" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
+                <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Product" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
+                <?php if($dateSearch == ""){ ?><input type="text" placeholder="Serial Number" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
+                <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
+                <input type="submit" value="search" class="search_field" name="search">
+                <input type="submit" value="Clear" class="search_field" name="clear">
+            </form>
+        </div>
+        <div class="page_body">
+            <table>
+                <tr>
+                    <th>Created On</th>
+                    <th>Reference</th>
+                    <th>Sales Order</th>
+                    <th>Sku</th>
+                    <th>Product</th>
+                    <th>Vendor</th>
+                    <th>Customer</th>
+                    <th>Quantity</th>
+                    <th>QTY Delivered</th>
+                    <th>Serial Number</th>
+                    <th>Unit Price</th>
+                    <th>Taxes</th>
+                    <th>Untaxed Amount</th>
+                </tr>
+                <?php
+                    /**
+                     * READING THE INVOICE OBJECT
+                     * 
+                     */ 
+
+                    foreach ($invoices as $invoice)
+                    { 
+                        $serialExplode = explode("/",$invoice->getSerial());
+                        $arrayCount = count($serialExplode);
+                        ?>
+                    
+                        <tr>
+                            <td><?php echo $invoice->getCreatedOn() ?></td>
+                            <td><?php echo $invoice->getInvoice_number() ?></td>
+                            <td><?php echo $invoice->getSales_order() ?></td>
+                            <td><?php echo $invoice->getSku() ?></td>
+                            <td><?php echo $invoice->getProduct() ?></td>
+                            <td><?php echo $invoice->getVendor() ?></td>
+                            <td><?php echo $invoice->getCustomer() ?></td>
+                            <td><?php echo $invoice->getQuantity() ?></td>
+                            <td><?php echo $invoice->getQty_delivered() ?></td>
+                            <td><?php for($x = 0; $x<$arrayCount; $x++){echo $serialExplode[$x]."  ";} ?></td>
+                            <td><?php echo $invoice->getUnit_price() ?></td>
+                            <td><?php if($invoice->getTaxes()!=""){echo "$".$invoice->getTaxes();}else{echo "$0.00";} ?></td>
+                            <td><?php if($invoice->getUntaxed_amount()!=""){echo "$". $invoice->getUntaxed_amount();}else{echo "$0.00";} ?></td>
+                        </tr></a>
+
+                        <?php     
+                    } 
+                ?>
+            </table>
+        </div>
+    </section>
+<?php }
+
+static function menuPdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch){ ?>
+    <section>   
+        <dic class="row">
+           <!-- <h1> <?php echo $typ;?> </h1> -->
+        </div>
+        <dic class="row">
+            <form method="post">
+                <h1 class="menu-detailed-title"><?php echo $typ;?></h1>
+                <?php if($invoice_number == ""){ ?><input type="text" placeholder="Purchase Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
+                <?php if($customerSearch == ""){ ?><input type="text" placeholder="Vendor" name="VendorSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="VendorSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="VendorSearch"  /><?php } ?>
+                <?php if($salesOrderSearch == ""){ ?><input type="text" style="display:none;" placeholder="Source Document" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" style="display:none;" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
+                <?php if($dateSearch == ""){ ?><input type="text" placeholder="Order Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
+                <input type="submit" value="search" class="search_field" name="search">
+                <input type="submit" value="Clear" class="search_field" name="clear">
+            </form>
+        </div>
+        <div class="page_body">
+            <table>
+                <tr>
+                    <th>Purchase Number</th>
+                    <th>Order Date</th>
+                    <th>Vendor</th>
+                    <th>Schedule Date</th>
+                    <th>Sales Person</th>
+                    <th>Source Document</th>
+                    <th>Untaxed Amount</th>
+                    <th>Tax</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+                <?php
+                    /**
+                     * READING THE INVOICE OBJECT
+                     * 
+                     */ 
+                    foreach ($invoices as $invoice)
+                    { ?>
+                        <tr>
+                            <td><?php echo $invoice->getPurchase_number() ?></td>
+                            <td><?php echo $invoice->getOrder_date() ?></td>
+                            <td><?php echo $invoice->getVendor() ?></td>
+                            <td><?php echo $invoice->getSchedule_date() ?></td>
+                            <td><?php echo $invoice->getSales_person() ?></td>
+                            <td><?php echo $invoice->getSource_document() ?></td>
+                            <td><?php if($invoice->getUntaxed_amount()!=""){echo "$". $invoice->getUntaxed_amount();}else{echo "$0.00";} ?></td>
+                            <td><?php if($invoice->getTax()!=""){echo "$".$invoice->getTax();}else{echo "$0.00";} ?></td>
+                            <td><?php if($invoice->getTotal()!=""){echo "$".$invoice->getTotal();}else{echo "$0.00";} ?></td>
+                            <td><a href="invoice-Pdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getPurchase_number(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Invoice" class="openInvoice" /></a></td>
                         </tr></a>
 
                         <?php     
@@ -406,6 +525,173 @@ static function invoiceCNDetailed($typ, $invoice, $invoice_lines, $user, $type, 
 <?php }
 
 
+static function invoicePDetailed($typ, $invoice, $invoice_lines, $user, $type, $invo){ 
+    
+    
+    foreach ($invoice as $inv)
+    {
+        $purchase_number = $invoice->getPurchase_number();
+        $order_date = $invoice->getOrder_date();
+        $vendor = $invoice->getVendor();
+        $schedule_date = $invoice->getSchedule_date();
+        $sales_person = $invoice->getSales_person();
+        $source_document = $invoice->getSource_document();
+        $untaxed_amount = $invoice->getUntaxed_amount();
+        $total_total = $invoice->getTotal();
+        $status = $invoice->getStatus();
+        $stellar_status = $invoice->getStellar_status();
+        $currancy = $invoice->getCurrancy();
+        $deliver_to = $invoice->getDeliver_to();
+        $broker = $invoice->getBroker();
+        $invoice_number = $invoice->getInvoice_number();
+        $sales_number = $invoice->getSales_number();
+        $bill_reference = $invoice->getBill_reference();
+        $comments = $invoice->getComments();
+        $terms = $invoice->getTerms();
+        $total_taxes = $invoice->getTax();
+        $vendor_reference = $invoice->getVendor_reference();
+    }
+    
+    
+    ?>
+
+    <section class="inv-content">   
+        <div class="row">
+            <h1 class="menu-detailed-title"> <?php echo $invo;?> </h1>
+            <a href="menu-Pdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="print_button" /></a>
+            <form method="POST">
+                <input type="submit" value="Print" name="print" class="print_button" />
+            </form>
+
+        </div>
+        <div class="row">
+            <div class="invoice-table">
+                <table>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Vendor</td>
+                        <td><?php echo $vendor; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Deliver to</td>
+                        <td><?php echo $deliver_to; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Payment Terms</td>
+                        <td><?php echo $terms; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Comments</td>
+                        <td><?php echo $comments; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Status</td>
+                        <td><?php echo $status; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Stellar Status</td>
+                        <td><?php echo $stellar_status; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Sales order</td>
+                        <td><?php echo $sales_number; ?></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="invoice-table">
+                <table>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Order Date</td>
+                        <td><?php echo $order_date; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Schedule Date</td>
+                        <td><?php echo $schedule_date; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Sales Person</td>
+                        <td><?php echo $sales_person; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Broker</td>
+                        <td><?php echo $broker; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Source Document</td>
+                        <td><?php echo $source_document; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Currancy</td>
+                        <td><?php echo $currancy; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Bill Reference</td>
+                        <td><?php echo $bill_reference; ?></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="invoice-line-table">
+                    <table>
+                        <tr>
+                            <th>Created On</th>
+                            <th>Purchase Order</th>
+                            <th>Sku</th>
+                            <th>Product</th>
+                            <th>Vendor</th>
+                            <th>Quantity</th>
+                            <th>Received Qty</th>
+                            <th>Unit Cost</th>
+                            <th>Taxes</th>
+                            <th>Subtotal</th>
+                            <th>Total</th>
+
+                        
+                        <?php
+                        
+                            foreach($invoice_lines as $line)
+                            { ?>
+                                <tr>
+                                    <td><?php echo $line->getCreated_on(); ?></td>
+                                    <td><?php echo $line->getPurchase_number(); ?></td>
+                                    <td><?php echo $line->getSku() ?></td>
+                                    <td><?php echo $line->getProduct(); ?></td>
+                                    <td><?php echo $line->getVendor(); ?></td>
+                                    <td><?php echo $line->getQuantity(); ?></td>
+                                    <td><?php echo $line->getReceive_qty(); ?></td>
+                                    <td><?php echo $line->getUnit_cost(); ?></td>
+                                    <td>$<?php echo $line->getTaxes(); ?></td>
+                                    <td>$<?php echo $line->getSubtotal(); ?></td>
+                                    <td>$<?php echo $line->getTotal(); ?></td>
+                                </tr>
+                           <?php }
+                        
+                        ?>
+                   
+                    </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="invoice-total-line">
+                    <table>
+                        <tr>
+                            <td>Untaxed Amount:</td>
+                            <td>$<?php if($untaxed_amount == ""){echo "0.00";}else{echo $untaxed_amount;} ?></td>
+                        </tr>
+                        <tr>
+                            <td>Tax:</td>
+                            <td>$<?php if($total_taxes == ""){echo "0.00";}else{echo $total_taxes;} ?></td>
+                        </tr>
+                        <tr>
+                            <td>Total:</td>
+                            <td>$<?php if($total_total == ""){echo "0.00";}else{echo $total_total;} ?></td>
+                        </tr>
+                    </table>
+            </div>
+        </div>
+    </section>
+<?php }
+
 static function invoiceDetailed($typ, $invoice, $invoice_lines, $user, $type, $invo){ 
     
     
@@ -598,12 +884,38 @@ static function formAdd($typ){ ?>
 
         <div class="adding_block">
             <div class="row">
-                <h1>Add the CreditNote line file lot</h1>
+                <h1>Add the CreditNote file lot</h1>
             </div>
             <div class="row">
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="creditNoteFile"/> <br><br>
                     <input type="submit" value="Submit file" name="import3" style="background:#152c4e; color:white;"/>
+                    <br><br><br><br>
+                </form>
+            </div>
+        </div>
+
+        <div class="adding_block">
+            <div class="row">
+                <h1>Add Purchases file lot</h1>
+            </div>
+            <div class="row">
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="file" name="purchasesFile"/> <br><br>
+                    <input type="submit" value="Submit file" name="import4" style="background:#152c4e; color:white;"/>
+                    <br><br><br><br>
+                </form>
+            </div>
+        </div>
+
+        <div class="adding_block">
+            <div class="row">
+                <h1>Add Purchases Line file lot</h1>
+            </div>
+            <div class="row">
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="file" name="purchasesLineFile"/> <br><br>
+                    <input type="submit" value="Submit file" name="import5" style="background:#152c4e; color:white;"/>
                     <br><br><br><br>
                 </form>
             </div>

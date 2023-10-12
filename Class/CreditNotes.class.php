@@ -1,6 +1,6 @@
 <?php
 
-class Invoice{
+class CreditNotes{
 
     //Variables inizialitation 
     public $creditnote_number = "";

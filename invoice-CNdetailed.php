@@ -232,7 +232,7 @@ $conection = include 'config/conection.php';
 * Call to the database to get the invoices
 * 
 */ 
-$newInvoice = new Invoice();
+$newInvoice = new CreditNotes();
 
 $query_user = "select * from creditnotes where creditnote_number = '$inv';";
 $result_User = mysqli_query($conection,$query_user);

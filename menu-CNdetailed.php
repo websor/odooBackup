@@ -58,7 +58,7 @@ $query_user = "select * from creditnotes order by invoice_date DESC;";
 $result_User = mysqli_query($conection,$query_user);
 while($row_user = mysqli_fetch_assoc($result_User))
 { 
-    $newInvoice = new Invoice();
+    $newInvoice = new CreditNotes();
     $newInvoice->setCreditnote_number($row_user['creditnote_number']);
     $newInvoice->setCustomer($row_user['customer']);
     $newInvoice->setAddress($row_user['address']);
@@ -93,15 +93,12 @@ if(isset($_POST["search"]))
         $customerSearch = strtoupper($_POST['customerSearch']);
         $dateSearch = $_POST['invoiceDateSearch'];
         $salesOrderSearch = strtoupper($_POST['salesOrderSearch']);
-        var_dump($invoice_number);
-        var_dump($customerSearch);
-        var_dump($dateSearch);
-        var_dump($salesOrderSearch);
+
         $query_user = "select * from creditnotes where creditnote_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND invoice_date like '%$dateSearch%' AND source_document like '%$salesOrderSearch%';";
         $result_User = mysqli_query($conection,$query_user);
         while($row_user = mysqli_fetch_assoc($result_User))
         { 
-            $newInvoice = new Invoice();
+            $newInvoice = new CreditNotes();
             $newInvoice->setCreditnote_number($row_user['creditnote_number']);
             $newInvoice->setCustomer($row_user['customer']);
             $newInvoice->setAddress($row_user['address']);
