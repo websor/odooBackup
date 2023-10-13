@@ -50,10 +50,16 @@ $dateSearch="";
 $customerSearch="";
  
 $invoices = array();
+$count =0;
 /**
 * Call to the database to get all invoices
 * 
 */ 
+
+$query_user = "select * from invoice_line order by created_on DESC;";
+$result_User = mysqli_query($conection,$query_user);
+while($row_user = mysqli_fetch_assoc($result_User))
+{ $count = $count +1;} 
 
 $query_user = "select * from invoice_line order by created_on DESC limit 50;";
 $result_User = mysqli_query($conection,$query_user);
@@ -85,6 +91,7 @@ while($row_user = mysqli_fetch_assoc($result_User))
 if(isset($_POST["search"]))
 {
     $invoices = array();
+    $count =0;
 
     //DO THE OTHER FILTERS HERE!!!!
     if(isset($_POST["invoiceNumberSearch"]) && isset($_POST["customerSearch"]) && isset($_POST["invoiceDateSearch"]) && isset($_POST["salesOrderSearch"]))
@@ -93,10 +100,11 @@ if(isset($_POST["search"]))
         $customerSearch = strtoupper($_POST['customerSearch']);
         $dateSearch = strtoupper($_POST['invoiceDateSearch']);
         $salesOrderSearch = strtoupper($_POST['salesOrderSearch']);
-        var_dump($invoice_number);
-        var_dump($customerSearch);
-        var_dump($dateSearch);
-        var_dump($salesOrderSearch);
+
+        $query_user = "select * from invoice_line where invoice_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND serial_numbers like '%$dateSearch%' AND product like '%$salesOrderSearch%' limit 50;";
+        $result_User = mysqli_query($conection,$query_user);
+        while($row_user = mysqli_fetch_assoc($result_User))
+        { $count = $count+1; }
 
         $query_user = "select * from invoice_line where invoice_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND serial_numbers like '%$dateSearch%' AND product like '%$salesOrderSearch%' limit 50;";
         $result_User = mysqli_query($conection,$query_user);
@@ -139,7 +147,7 @@ if(isset($_POST["search"]))
 //Website Structure
 Page::head();
 Page::header($email, $type);
-Page::menuILdetailed($typ, $invoices, $email, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch);
+Page::menuILdetailed($typ, $invoices, $email, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count);
 Page::footer();
 Page::endHead();
 
