@@ -371,7 +371,7 @@ static function menuPdetailed($typ, $invoices, $user, $type, $invoice_number, $c
     </section>
 <?php }
 
-   static function menuDetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch){ ?>
+   static function menuDetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
         <section>   
             <dic class="row">
                <!-- <h1> <?php echo $typ;?> </h1> -->
@@ -385,6 +385,7 @@ static function menuPdetailed($typ, $invoices, $user, $type, $invoice_number, $c
                     <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
                     <input type="submit" value="search" class="search_field" name="search">
                     <?php if($invoice_number != "" || $customerSearch == "" || $dateSearch == "" || $salesOrderSearch == ""){ ?><input type="submit" value="Clear" class="search_field" name="clear"><?php }else{} ?>
+                    <spam>Total rows: <?php echo $count; ?></spam>
                 </form>
             </div>
             <div class="page_body">
