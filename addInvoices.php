@@ -342,8 +342,121 @@ if(isset($_POST["import6"]))
         '$customer', '$amount', '$status', '$payment_type', '$memo', '$payment_trans','$payment_date')"); 
         
         $error = mysqli_error($conection);
+        //var_dump($error);
         $typ="Payments";
 
+        header("Location: menu.php?user=$email&type=$type"); 
+    } 
+}
+
+//Cheching if the document customers file is correct, and them add the data to DB
+if(isset($_POST["import7"]))
+{
+    //print_r($_FILES);
+    $fileName = $_FILES["alfredoFile"]["name"];
+    //$fileExtension = explode('.', $fileName);
+    //$fileExtension - strtolower(end($fileExtension));
+    
+    $newFileName = date("y.m.d")."-".date("h.i.sa")."-".$fileName;
+
+    $targetDirectory = "uploads/". $newFileName;
+    
+    move_uploaded_file($_FILES["alfredoFile"]["tmp_name"], $targetDirectory);
+
+    error_reporting(0);
+    ini_set('display_errors',0);
+
+    require "excelReader/excel_reader2.php";
+    require "excelReader/SpreadsheetReader.php";
+
+    $reader = new SpreadsheetReader($targetDirectory);
+    foreach($reader as $key => $row)
+    {
+        $name = strtoupper($row[0]);
+        $parent_name = strtoupper($row[1]);
+        $state = strtoupper($row[2]);
+        $city = strtoupper($row[3]);
+        $country = strtoupper($row[4]);
+        $postal_code = strtoupper($row[5]);
+        $fiscal_position = strtoupper($row[6]);
+        $phone = $row[7];
+        $email = strtoupper($row[8]);
+        $created_by = $row[9];
+        $customer_id_number = $row[10];
+        $mobile = $row[11];
+        $fax = $row[12];
+        $phone2 = $row[13];
+        $contact_name = strtoupper($row[14]);
+        $second_contact_name = strtoupper($row[15]);
+        $tags = strtoupper($row[16]);
+        $pst = $row[17];
+        $notes = $row[18];
+        $warning = $row[19];
+        $is_customer = $row[20];
+        $is_vendor = $row[21];
+        $payment_terms = $row[22];
+        $price_list = $row[23];
+        $street = $row[24];
+        
+        mysqli_query($conection, "INSERT INTO customer VALUES('', '$name', '$parent_name', '$state', '$city',
+        '$country', '$postal_code', '$fiscal_position', '$phone', '$email', '$created_by','$customer_id_number',
+        '$mobile', '$fax', '$phone2', '$contact_name', '$second_contact_name', '$tags','$pst',
+        '$notes', '$warning', '$is_customer', '$is_vendor', '$payment_terms', '$price_list', '$street')"); 
+        
+        $error = mysqli_error($conection);
+        $typ="Customer";
+        //var_dump($error);
+        header("Location: menu.php?user=$email&type=$type"); 
+    } 
+}
+
+//Cheching if the document customers file is correct, and them add the data to DB
+if(isset($_POST["import8"]))
+{
+    var_dump("ENTROOOOO");
+    //print_r($_FILES);
+    $fileName = $_FILES["inventoryFile"]["name"];
+    //$fileExtension = explode('.', $fileName);
+    //$fileExtension - strtolower(end($fileExtension));
+    
+    $newFileName = date("y.m.d")."-".date("h.i.sa")."-".$fileName;
+
+    $targetDirectory = "uploads/". $newFileName;
+    
+    move_uploaded_file($_FILES["inventoryFile"]["tmp_name"], $targetDirectory);
+
+    error_reporting(0);
+    ini_set('display_errors',0);
+
+    require "excelReader/excel_reader2.php";
+    require "excelReader/SpreadsheetReader.php";
+
+    $reader = new SpreadsheetReader($targetDirectory);
+    foreach($reader as $key => $row)
+    {
+        $sku = strtoupper($row[0]);
+        $product = strtoupper($row[1]);
+        $vendor = strtoupper($row[2]);
+        $barcode = strtoupper($row[3]);
+        $sales_price = $row[4];
+        $cost = $row[5];
+        $category = strtoupper($row[6]);
+        $type = strtoupper($row[7]);
+        $qty_onhand = $row[8];
+        $created_by = $row[9];
+        $created_on = $row[10];
+        $qty_sold = $row[11];
+        $customer_tax = strtoupper($row[12]);
+        $we_description = strtoupper($row[13]);
+ 
+        
+        mysqli_query($conection, "INSERT INTO inventory VALUES('', '$sku', '$product', '$vendor', '$barcode',
+        '$sales_price', '$cost', '$category', '$type', '$qty_onhand', '$created_by','$created_on',
+        '$qty_sold', '$customer_tax', '$we_description')"); 
+        
+        $error = mysqli_error($conection);
+        $typ="Customer";
+        //var_dump($error);
         header("Location: menu.php?user=$email&type=$type"); 
     } 
 }
