@@ -147,7 +147,7 @@ if(isset($_POST["import2"]))
         '$product', '$vendor', '$customer', '$qty_delivered', '$quantity', '$untaxed_amount', '$unit_price',
         '$unit_price_after', '$cost', '$taxes','$notes', '$rma', '$quantity_bo','$serial')"); 
         
-        $error = mysqli_error($con);
+        $error = mysqli_error($conection);
         var_dump($error);
         //header("Location: menu-detailed.php?user=$email&type=$type&typ=$typ"); 
     } 
@@ -298,6 +298,51 @@ if(isset($_POST["import5"]))
         '$taxes', '$subtotal', '$purchases_number', '$vendor', '$total', '$received_qty', '$created_on')"); 
         
         $typ="Purchases";
+
+        header("Location: menu.php?user=$email&type=$type"); 
+    } 
+}
+
+//Cheching if the document payments file is correct, and them add the data to DB
+if(isset($_POST["import6"]))
+{
+    //print_r($_FILES);
+    $fileName = $_FILES["paymentsFile"]["name"];
+    //$fileExtension = explode('.', $fileName);
+    //$fileExtension - strtolower(end($fileExtension));
+    
+    $newFileName = date("y.m.d")."-".date("h.i.sa")."-".$fileName;
+
+    $targetDirectory = "uploads/". $newFileName;
+    
+    move_uploaded_file($_FILES["paymentsFile"]["tmp_name"], $targetDirectory);
+
+    error_reporting(0);
+    ini_set('display_errors',0);
+
+    require "excelReader/excel_reader2.php";
+    require "excelReader/SpreadsheetReader.php";
+
+    $reader = new SpreadsheetReader($targetDirectory);
+    foreach($reader as $key => $row)
+    {
+        $payment_number = strtoupper($row[0]);
+        $customer_ref = strtoupper($row[1]);
+        $employee = strtoupper($row[2]);
+        $payment_journal = strtoupper($row[3]);
+        $customer = strtoupper($row[4]);
+        $amount = $row[5];
+        $status = strtoupper($row[6]);
+        $payment_type = strtoupper($row[7]);
+        $memo = strtoupper($row[8]);
+        $payment_trans = strtoupper($row[9]);
+        $payment_date = $row[10];
+        
+        mysqli_query($conection, "INSERT INTO payments VALUES('', '$payment_number', '$customer_ref', '$employee', '$payment_journal',
+        '$customer', '$amount', '$status', '$payment_type', '$memo', '$payment_trans','$payment_date')"); 
+        
+        $error = mysqli_error($conection);
+        $typ="Payments";
 
         header("Location: menu.php?user=$email&type=$type"); 
     } 
