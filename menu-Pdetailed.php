@@ -50,11 +50,17 @@ $dateSearch="";
 $customerSearch="";
  
 $invoices = array();
+$count = 0;
 /**
 * Call to the database to get all invoices
 * 
-*/ 
+*/
 $query_user = "select * from purchases order by order_date DESC;";
+$result_User = mysqli_query($conection,$query_user);
+while($row_user = mysqli_fetch_assoc($result_User))
+{ $count = $count +1; }
+
+$query_user = "select * from purchases order by order_date DESC limit 50;";
 $result_User = mysqli_query($conection,$query_user);
 while($row_user = mysqli_fetch_assoc($result_User))
 { 
@@ -87,6 +93,7 @@ while($row_user = mysqli_fetch_assoc($result_User))
 if(isset($_POST["search"]))
 {
     $invoices = array();
+    $count =0;
 
     //DO THE OTHER FILTERS HERE!!!!
     if(isset($_POST["invoiceNumberSearch"]) && isset($_POST["VendorSearch"]) && isset($_POST["invoiceDateSearch"]))
@@ -96,8 +103,12 @@ if(isset($_POST["search"]))
         $dateSearch = $_POST['invoiceDateSearch'];
         $salesOrderSearch ="";
         
-
         $query_user = "select * from purchases where purchase_number like '%$invoice_number%' AND vendor like '%$customerSearch%' AND order_date like '%$dateSearch%';";
+        $result_User = mysqli_query($conection,$query_user);
+        while($row_user = mysqli_fetch_assoc($result_User))
+        { $count = $count + 1; }
+
+        $query_user = "select * from purchases where purchase_number like '%$invoice_number%' AND vendor like '%$customerSearch%' AND order_date like '%$dateSearch%' limit 50;";
         $result_User = mysqli_query($conection,$query_user);
         while($row_user = mysqli_fetch_assoc($result_User))
         { 
@@ -141,7 +152,7 @@ if(isset($_POST["search"]))
 //Website Structure
 Page::head();
 Page::header($email, $type);
-Page::menuPdetailed($typ, $invoices, $email, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch);
+Page::menuPdetailed($typ, $invoices, $email, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count);
 Page::footer();
 Page::endHead();
 

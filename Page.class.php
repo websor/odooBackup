@@ -314,7 +314,7 @@ static function menuILdetailed($typ, $invoices, $user, $type, $invoice_number, $
     </section>
 <?php }
 
-static function menuPdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch){ ?>
+static function menuPdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
     <section>   
         <dic class="row">
            <!-- <h1> <?php echo $typ;?> </h1> -->
@@ -328,6 +328,7 @@ static function menuPdetailed($typ, $invoices, $user, $type, $invoice_number, $c
                 <?php if($dateSearch == ""){ ?><input type="text" placeholder="Order Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
                 <input type="submit" value="search" class="search_field" name="search">
                 <input type="submit" value="Clear" class="search_field" name="clear">
+                <spam>Total Rows: <?php echo $count ?></spam>
             </form>
         </div>
         <div class="page_body">
