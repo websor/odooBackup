@@ -124,6 +124,10 @@ class Page {
                     <h2>Payments</h2>
                     <img src="images/payment.png"/>
                 </div></a>
+                <a href="menu-MoDetailed?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Montly Reports"><div class="card">
+                    <h2>Monthly Reports</h2>
+                    <img src="images/rpeorts.png"/>
+                </div></a>
             </div>
         </section>
    <?php }
@@ -184,6 +188,186 @@ static function menuCNdetailed($typ, $invoices, $user, $type, $invoice_number, $
                         <?php     
                     } 
                 ?>
+            </table>
+        </div>
+    </section>
+<?php }
+
+static function menuMonDetailed($typ, $user, $type){ ?>
+    <section>   
+        <dic class="row">
+            <h1> <?php echo $typ; ?> </h1> 
+        </div>
+
+        <div class="page_body">
+            <table>
+                <tr>
+                    <th>Monthly Report Package</th>
+                    <th></th>
+                </tr> 
+                <!-- 2023 -->
+                <tr>
+                    <td>October 2023</td>
+                    <td><a href=""><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>September 2023</td>
+                    <td><a href="reports/2023/2023_September.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>August 2023</td>
+                    <td><a href="reports/2023/2023 August.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>July 2023</td>
+                    <td><a href="reports/2023/2023 July.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>June 2023</td>
+                    <td><a href="reports/2023/2023 June.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>May 2023</td>
+                    <td><a href="reports/2023/2023 May.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>April 2023</td>
+                    <td><a href="reports/2023/2023 April.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>March 2023</td>
+                    <td><a href="reports/2023/2023 March.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>February 2023</td>
+                    <td><a href="reports/2023/2023 February.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr> 
+                <tr>
+                    <td>January 2023</td>
+                    <td><a href="reports/2023/2023 January.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr> 
+                <!-- END 2023 --> 
+
+                <!--  2022 --> 
+                <tr>
+                    <td>December 2022</td>
+                    <td><a href="reports/2022/2022 December.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>November 2022</td>
+                    <td><a href="reports/2022/2022 November.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>              
+                <tr>
+                    <td>October 2022</td>
+                    <td><a href="reports/2022/2022 October.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>September 2022</td>
+                    <td><a href="reports/2022/2022 September.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>August 2022</td>
+                    <td><a href="reports/2022/2022 August.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>July 2022</td>
+                    <td><a href="reports/2022/2022 July.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>June 2022</td>
+                    <td><a href="reports/2022/2022 June.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>May 2022</td>
+                    <td><a href="reports/2022/2022 May.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>April 2022</td>
+                    <td><a href="reports/2022/2022 April.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>March 2022</td>
+                    <td><a href="reports/2022/2022 March.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>February 2022</td>
+                    <td><a href="reports/2022/2022 February.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr> 
+                <tr>
+                    <td>January 2022</td>
+                    <td><a href="reports/2022/2022 January.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <!-- END 2022 -->
+
+                <!-- 2021 -->
+                <tr>
+                    <td>December 2021</td>
+                    <td><a href="reports/2021/December.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>November 2021</td>
+                    <td><a href="reports/2021/November.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>              
+                <tr>
+                    <td>October 2021</td>
+                    <td><a href="reports/2021/October.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>September 2021</td>
+                    <td><a href="reports/2021/September.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>August 2021</td>
+                    <td><a href="reports/2021/August.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>July 2021</td>
+                    <td><a href="reports/2021/July.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>June 2021</td>
+                    <td><a href="reports/2021/June.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>May 2021</td>
+                    <td><a href="reports/2021/May.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>April 2021</td>
+                    <td><a href="reports/2021/April.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>March 2021</td>
+                    <td><a href="reports/2021/March.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>February 2021</td>
+                    <td><a href="reports/2021/February.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr> 
+                <tr>
+                    <td>January 2021</td>
+                    <td><a href="reports/2021/January.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <!-- END 2021 -->
+
+                <!-- 2020 -->
+                <tr>
+                    <td>December 2020</td>
+                    <td><a href="reports/2020/December.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>November 2020</td>
+                    <td><a href="reports/2020/November.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>              
+                <tr>
+                    <td>October 2020</td>
+                    <td><a href="reports/2020/October.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <tr>
+                    <td>September 2020</td>
+                    <td><a href="reports/2020/September.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                </tr>
+                <!-- END 2020 -->
             </table>
         </div>
     </section>
