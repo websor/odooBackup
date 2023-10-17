@@ -100,9 +100,17 @@ class Page {
                     <h2>Customers</h2>
                     <img src="images/customer.png"/>
                 </div></a>
+                <a href="menu-Badetailed?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=balances"><div class="card">
+                    <h2>Customer Balances</h2>
+                    <img src="images/balance.png"/>
+                </div></a>
                 <a href="menu-detailed?typ=Invoices&user=<?php echo $email; ?>&type=<?php echo $type; ?>"><div class="card">
                     <h2>Invoices</h2>
                     <img src="images/invoice.png"/>
+                </div></a>
+                <a href="menu-ILdetailed?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Invoice Line"><div class="card">
+                    <h2>Invoice Line</h2>
+                    <img src="images/sn.png"/>
                 </div></a>
                 <a href="menu-CNdetailed?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=CreditNote"><div class="card">
                     <h2>Credit Notes</h2>
@@ -112,13 +120,9 @@ class Page {
                     <h2>Purchases</h2>
                     <img src="images/purchase.png"/>
                 </div></a>
-                <a href="menu-ILdetailed?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Invoice Line"><div class="card">
-                    <h2>Invoice Line</h2>
-                    <img src="images/sn.png"/>
-                </div></a>
                 <a href="menu-Padetailed?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Payments"><div class="card">
                     <h2>Payments</h2>
-                    <img src="images/sn.png"/>
+                    <img src="images/payment.png"/>
                 </div></a>
             </div>
         </section>
@@ -373,6 +377,52 @@ static function menuCLIdetailed($typ, $invoices, $user, $type, $invoice_number, 
     </section>
 <?php }
 
+static function menuBadetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
+    <section>   
+        <dic class="row">
+           <!-- <h1> <?php echo $typ;?> </h1> -->
+        </div>
+        <dic class="row">
+            <form method="post">
+                <h1 class="menu-detailed-title"><?php echo $typ;?></h1>
+                <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
+                <input type="submit" value="search" class="search_field" name="search">
+                <input type="submit" value="Clear" class="search_field" name="clear">
+                <spam>Total Rows: <?php echo $count; ?></spam>
+            </form>
+        </div>
+        <div class="page_body">
+            <table>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Last Update</th>
+                    <th>Total Receivable</th>
+                    <th></th>
+                </tr>
+                <?php
+                    /**
+                     * READING THE Balance OBJECT
+                     * 
+                     */ 
+
+                    foreach ($invoices as $invoice)
+                    {   ?>
+                    
+                        <tr>
+                            <td><?php echo $invoice->getCustomer() ?></td>
+                            <td><?php echo $invoice->getLast_update() ?></td>
+                            <td>$<?php echo $invoice->getTotal_receivable() ?></td>
+                            <td><a href="menu-detailed.php?user=<?php echo $user; ?>&typ=Invoices&type=<?php echo $type; ?>&inv=<?php echo $invoice->getCustomer(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="More Details" class="openInvoice" /></a></td>
+                        </tr></a>
+
+                        <?php     
+                    } 
+                ?>
+            </table>
+        </div>
+    </section>
+<?php }
+
 static function menuINdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
     <section>   
         <dic class="row">
@@ -486,7 +536,7 @@ static function menuPdetailed($typ, $invoices, $user, $type, $invoice_number, $c
     </section>
 <?php }
 
-   static function menuDetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
+   static function menuDetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count, $inv){ ?>
         <section>   
             <dic class="row">
                <!-- <h1> <?php echo $typ;?> </h1> -->
@@ -500,6 +550,7 @@ static function menuPdetailed($typ, $invoices, $user, $type, $invoice_number, $c
                     <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
                     <input type="submit" value="search" class="search_field" name="search">
                     <?php if($invoice_number != "" || $customerSearch == "" || $dateSearch == "" || $salesOrderSearch == ""){ ?><input type="submit" value="Clear" class="search_field" name="clear"><?php }else{} ?>
+                    <?php if ($inv == ""){}else{ ?> <a href="menu-Badetailed.php?user=<?php echo $user; ?>&type=<?php echo $type ?>&typ=Balances"><input type="button" value="Go Back" class="search_field" name="back" style="background:#152c4e; color:white; width:5%; font-size:12px"></a> <?php } ?>
                     <spam>Total rows: <?php echo $count; ?></spam>
                 </form>
             </div>
@@ -704,7 +755,7 @@ static function invoiceCNDetailed($typ, $invoice, $invoice_lines, $user, $type, 
     </section>
 <?php }
 
-static function invoiceINDetailed($typ, $invoice, $user, $type, $invo){ 
+static function invoiceINDetailed($typ, $invoice, $user, $typee, $invo){ 
     
     
     foreach ($invoice as $inv)
@@ -731,7 +782,7 @@ static function invoiceINDetailed($typ, $invoice, $user, $type, $invo){
     <section class="inv-content">   
         <div class="row">
             <h1 class="menu-detailed-title"> <?php echo $product;?> </h1>
-            <a href="menu-INdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="print_button" /></a>
+            <a href="menu-INdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $typee; ?>"><input type="button" value="Go back" name="goBack" class="print_button" /></a>
             <form method="POST">
                 <input type="submit" value="Print" name="print" class="print_button" />
             </form>
@@ -1330,7 +1381,7 @@ static function formAdd($typ){ ?>
 
         <div class="adding_block">
             <div class="row">
-                <h1>Add Payment file lot</h1>
+                <h1>Add Customer file lot</h1>
             </div>
             <div class="row">
                 <form method="POST" enctype="multipart/form-data">
@@ -1349,6 +1400,19 @@ static function formAdd($typ){ ?>
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="inventoryFile"/> <br><br>
                     <input type="submit" value="Submit file" name="import8" style="background:#152c4e; color:white;"/>
+                    <br><br><br><br>
+                </form>
+            </div>
+        </div>
+
+        <div class="adding_block">
+            <div class="row">
+                <h1>Add Balances file lot</h1>
+            </div>
+            <div class="row">
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="file" name="balanceFile"/> <br><br>
+                    <input type="submit" value="Submit file" name="import9" style="background:#152c4e; color:white;"/>
                     <br><br><br><br>
                 </form>
             </div>
