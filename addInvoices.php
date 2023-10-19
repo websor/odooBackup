@@ -496,6 +496,47 @@ if(isset($_POST["import9"]))
     } 
 }
 
+if(isset($_POST["import10"]))
+{
+    //print_r($_FILES);
+    $fileName = $_FILES["journalEntries"]["name"];
+    //$fileExtension = explode('.', $fileName);
+    //$fileExtension - strtolower(end($fileExtension));
+    
+    $newFileName = date("y.m.d")."-".date("h.i.sa")."-".$fileName;
+
+    $targetDirectory = "uploads/". $newFileName;
+    
+    move_uploaded_file($_FILES["journalEntries"]["tmp_name"], $targetDirectory);
+
+    error_reporting(0);
+    ini_set('display_errors',0);
+
+    require "excelReader/excel_reader2.php";
+    require "excelReader/SpreadsheetReader.php";
+
+    $reader = new SpreadsheetReader($targetDirectory);
+    foreach($reader as $key => $row)
+    {
+        $create_on = strtoupper($row[0]);
+        $date = strtoupper($row[1]);
+        $number = strtoupper($row[2]);
+        $customer = strtoupper($row[3]);
+        $reference = strtoupper($row[4]);
+        $journal = strtoupper($row[5]);
+        $status = strtoupper($row[6]);
+        $amount = strtoupper($row[7]);
+ 
+        mysqli_query($conection, "INSERT INTO journal_entries VALUES('', '$create_on', '$date',
+         '$number', '$customer', '$reference', '$journal', '$status', '$amount')"); 
+        
+        $error = mysqli_error($conection);
+        $typ="balances";
+        var_dump($error);
+        //header("Location: menu.php?user=$email&type=$type"); 
+    } 
+}
+
 //Website Structure
 Page::head();
 Page::header($email, $type);

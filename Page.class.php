@@ -124,6 +124,10 @@ class Page {
                     <h2>Payments</h2>
                     <img src="images/payment.png"/>
                 </div></a>
+                <a href="menu-JoEdetailed?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Journal Entries"><div class="card">
+                    <h2>Journal Entries</h2>
+                    <img src="images/journal_entries.png"/>
+                </div></a>
                 <a href="menu-MoDetailed?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Montly Reports"><div class="card">
                     <h2>Monthly Reports</h2>
                     <img src="images/rpeorts.png"/>
@@ -595,7 +599,7 @@ static function menuBadetailed($typ, $invoices, $user, $type, $invoice_number, $
                         <tr>
                             <td><?php echo $invoice->getCustomer() ?></td>
                             <td><?php echo $invoice->getLast_update() ?></td>
-                            <td>$<?php echo $invoice->getTotal_receivable() ?></td>
+                            <td>$<?php if($invoice->getTotal_receivable() == ""){echo "0.00";}else{ echo $invoice->getTotal_receivable(); }  ?></td>
                             <td><a href="menu-detailed.php?user=<?php echo $user; ?>&typ=Invoices&type=<?php echo $type; ?>&inv=<?php echo $invoice->getCustomer(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="More Details" class="openInvoice" /></a></td>
                         </tr></a>
 
@@ -650,7 +654,7 @@ static function menuINdetailed($typ, $invoices, $user, $type, $invoice_number, $
                             <td>$<?php echo $invoice->getSales_price() ?></td>
                             <td>$<?php echo $invoice->getCost() ?></td>
                             <td><?php echo $invoice->getQty_onhand() ?></td>
-                            <td><a href="invoice-INdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getSku(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Customer" class="openInvoice" /></a></td>
+                            <td><a href="invoice-INdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getSku(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Item" class="openInvoice" /></a></td>
                         </tr></a>
 
                         <?php     
@@ -710,6 +714,61 @@ static function menuPdetailed($typ, $invoices, $user, $type, $invoice_number, $c
                             <td><?php if($invoice->getTax()!=""){echo "$".$invoice->getTax();}else{echo "$0.00";} ?></td>
                             <td><?php if($invoice->getTotal()!=""){echo "$".$invoice->getTotal();}else{echo "$0.00";} ?></td>
                             <td><a href="invoice-Pdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getPurchase_number(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Invoice" class="openInvoice" /></a></td>
+                        </tr></a>
+
+                        <?php     
+                    } 
+                ?>
+            </table>
+        </div>
+    </section>
+<?php }
+
+static function menuJoEdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
+    <section>   
+        <dic class="row">
+           <!-- <h1> <?php echo $typ;?> </h1> -->
+        </div>
+        <dic class="row">
+            <form method="post">
+                <h1 class="menu-detailed-title"><?php echo $typ;?></h1>
+                <?php if($invoice_number == ""){ ?><input type="text" placeholder="Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
+                <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="VendorSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="VendorSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="VendorSearch"  /><?php } ?>
+                <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Reference" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch"  class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
+                <?php if($dateSearch == ""){ ?><input type="text" placeholder="Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
+                <input type="submit" value="search" class="search_field" name="search">
+                <input type="submit" value="Clear" class="search_field" name="clear">
+                <spam>Total Rows: <?php echo $count ?></spam>
+            </form>
+        </div>
+        <div class="page_body">
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Number</th>
+                    <th>Customer</th>
+                    <th>Reference</th>
+                    <th>Journal</th>
+                    <th>Status</th>
+                    <th>Amount</th>
+                    <th></th>
+                </tr>
+                <?php
+                    /**
+                     * READING THE INVOICE OBJECT
+                     * 
+                     */ 
+                    foreach ($invoices as $invoice)
+                    { ?>
+                        <tr>
+                            <td><?php echo $invoice->getDate() ?></td>
+                            <td><?php echo $invoice->getNumber() ?></td>
+                            <td><?php echo $invoice->getCustomer() ?></td>
+                            <td><?php echo $invoice->getReference() ?></td>
+                            <td><?php echo $invoice->getJournal() ?></td>
+                            <td><?php echo $invoice->getStatus() ?></td>
+                            <td><?php if($invoice->getAmount()!=""){echo "$". $invoice->getAmount();}else{echo "$0.00";} ?></td>
+                            <td><a href="invoice-JoIdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getNumber(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="More Details" class="openInvoice" /></a></td>
                         </tr></a>
 
                         <?php     
@@ -1597,6 +1656,19 @@ static function formAdd($typ){ ?>
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="balanceFile"/> <br><br>
                     <input type="submit" value="Submit file" name="import9" style="background:#152c4e; color:white;"/>
+                    <br><br><br><br>
+                </form>
+            </div>
+        </div>
+
+        <div class="adding_block">
+            <div class="row">
+                <h1>Add Journal Entries file lot</h1>
+            </div>
+            <div class="row">
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="file" name="journalEntries"/> <br><br>
+                    <input type="submit" value="Submit file" name="import10" style="background:#152c4e; color:white;"/>
                     <br><br><br><br>
                 </form>
             </div>
