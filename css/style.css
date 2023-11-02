@@ -6,6 +6,50 @@
 -----------------------------------------------------------------*/
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,400,500,600,700,800|Nunito:300,400,600,700,800");
 
+*,*:after,*:before{
+  margin:0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#contenedor_carga{
+  background-color: rgba(250,240, 245,0.9);
+  height: 100%;
+  width:100%;
+  position:fixed;
+  -webkit-box-sizing: all 1s ease;
+  -moz-box-sizing: all 1s ease;
+  box-sizing: all 1s ease;
+  z-index:10000;
+}
+
+#cargar{
+  border: 15px solid #ccc;
+  border-top-color:#F4266A;
+  border-top-style:groove;
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom:0;
+  margin: auto;
+
+  -webkit-animation: girar 1.5s linear infinite;
+  -o-animation: girar 1.5s linear infinite;
+  animation: girar 1.5s linear infinite;
+}
+
+@keyframes girar{
+  from { transform: rotate(0deg);}
+  to { transform: rotate(360deg);}
+}
+
 html {
     overflow-x: hidden;
   }
@@ -322,4 +366,19 @@ section h1{
   font-size: 14px;
   padding: 1%;
   margin-top: 1.9%;
+}
+
+.succes{
+  width: 50%;
+  height: 50px;
+  background: #152c4e;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  text-align: center;
+  padding-top: 10px;
+  border-radius: 20px;
+  color:white;
+  font-weight: bold;
+  font-size: 22px;
 }

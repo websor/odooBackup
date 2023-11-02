@@ -18,10 +18,12 @@ class Page {
                 <!-- Document title -->
                 <title>Stellar Wholesale Odoo Backup</title>
                 <!-- Stylesheets & Fonts -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
                 <link href="css/style.css" rel="stylesheet">
             </head>
 
             <body>
+
                 <!-- Body Inner -->
                 <div class="container">
 
@@ -89,9 +91,11 @@ class Page {
         <!-- end: Footer -->
     <?php } 
 
-    static function menu($email, $type){ ?>
+    static function menu($email, $type, $msg){ ?>
         <section>
             <div class="row">
+                <?php if($msg==""){ ?><div class="succes" id="msg" style="display:none;">The file has been uploaded SUCCESSFULLY </div> <?php }else{ ?> <div class="succes" id="msg">The file has been uploaded SUCCESSFULLY </div> <?php } ?>
+               
                 <a href="menu-INdetailed?typ=Inventory&user=<?php echo $email; ?>&type=<?php echo $type; ?>"><div class="card">
                     <h2>Inventory</h2>
                     <img src="images/inventory.png"/>
@@ -1380,6 +1384,107 @@ static function invoicePDetailed($typ, $invoice, $invoice_lines, $user, $type, $
     </section>
 <?php }
 
+static function invoiceJoIDetailed($typ, $invoice, $invoice_lines, $user, $type, $invo){ 
+    
+    
+    foreach ($invoice as $inv)
+    {
+        $created_on = $invoice->getCreated_on();
+        $date = $invoice->getDate();
+        $number = $invoice->getNumber();
+        $Customer = $invoice->getCustomer();
+        $Reference = $invoice->getReference();
+        $journal = $invoice->getJournal();
+        $status = $invoice->getStatus();
+        $amount = $invoice->getAmount();
+    }
+    
+    
+    ?>
+
+    <section class="inv-content">   
+        <div class="row">
+            <h1 class="menu-detailed-title"> <?php echo $invo;?> </h1>
+            <a href="menu-JoEdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="print_button" /></a>
+            <form method="POST">
+                <input type="submit" value="Print" name="print" class="print_button" />
+            </form>
+
+        </div>
+        <div class="row">
+            <div class="invoice-table">
+                <table>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Date</td>
+                        <td><?php echo $date; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Customer</td>
+                        <td><?php echo $Customer; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Reference</td>
+                        <td><?php echo $Reference; ?></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="invoice-table">
+                <table>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Journal</td>
+                        <td><?php echo $journal; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Status</td>
+                        <td><?php echo $status; ?></td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px; font-weight:bold;">Amount</td>
+                        <td><?php echo $amount; ?></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="invoice-line-table">
+                    <table>
+                        <tr>
+                            <th>Created On</th>
+                            <th>Number</th>
+                            <th>Account</th>
+                            <th>Customer</th>
+                            <th>label</th>
+                            <th>reference</th>
+                            <th>Debit</th>
+                            <th>Credit</th>
+                            <th>Due Date</th>
+
+                        
+                        <?php
+                        
+                            foreach($invoice_lines as $line)
+                            { ?>
+                                <tr>
+                                    <td><?php echo $line->getCreated_on(); ?></td>
+                                    <td><?php echo $line->getNumber(); ?></td>
+                                    <td><?php echo $line->getAccount() ?></td>
+                                    <td><?php echo $line->getCustomer(); ?></td>
+                                    <td><?php echo $line->getLabel(); ?></td>
+                                    <td><?php echo $line->getReference(); ?></td>
+                                    <td><?php if($line->getDebit() == ""){ }else{ ?> $ <?php echo $line->getDebit(); } ?></td>
+                                    <td><?php if($line->getCredit() == ""){ }else{ ?> $ <?php echo $line->getCredit(); } ?></td>
+                                    <td><?php echo $line->getDate(); ?></td>
+                                </tr>
+                           <?php }
+                        
+                        ?>
+                   
+                    </table>
+            </div>
+        </div>
+    </section>
+<?php }
+
 static function invoiceDetailed($typ, $invoice, $invoice_lines, $user, $type, $invo){ 
     
     
@@ -1551,7 +1656,7 @@ static function formAdd($typ){ ?>
             <div class="row">
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="invoiceFile"/> <br><br>
-                    <input type="submit" value="Submit file" name="import" style="background:#152c4e; color:white;"/>
+                    <input type="submit" value="Submit file"  name="import" style="background:#152c4e; color:white;"/>
                     <br><br><br><br>
                 </form>
             </div>
@@ -1564,7 +1669,7 @@ static function formAdd($typ){ ?>
             <div class="row">
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="invoiceLineFile"/> <br><br>
-                    <input type="submit" value="Submit file" name="import2" style="background:#152c4e; color:white;"/>
+                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import2" style="background:#152c4e; color:white;"/>
                     <br><br><br><br>
                 </form>
             </div>
@@ -1577,7 +1682,7 @@ static function formAdd($typ){ ?>
             <div class="row">
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="creditNoteFile"/> <br><br>
-                    <input type="submit" value="Submit file" name="import3" style="background:#152c4e; color:white;"/>
+                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import3" style="background:#152c4e; color:white;"/>
                     <br><br><br><br>
                 </form>
             </div>
@@ -1590,7 +1695,7 @@ static function formAdd($typ){ ?>
             <div class="row">
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="purchasesFile"/> <br><br>
-                    <input type="submit" value="Submit file" name="import4" style="background:#152c4e; color:white;"/>
+                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import4" style="background:#152c4e; color:white;"/>
                     <br><br><br><br>
                 </form>
             </div>
@@ -1603,7 +1708,7 @@ static function formAdd($typ){ ?>
             <div class="row">
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="purchasesLineFile"/> <br><br>
-                    <input type="submit" value="Submit file" name="import5" style="background:#152c4e; color:white;"/>
+                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import5" style="background:#152c4e; color:white;"/>
                     <br><br><br><br>
                 </form>
             </div>
@@ -1616,7 +1721,7 @@ static function formAdd($typ){ ?>
             <div class="row">
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="paymentsFile"/> <br><br>
-                    <input type="submit" value="Submit file" name="import6" style="background:#152c4e; color:white;"/>
+                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import6" style="background:#152c4e; color:white;"/>
                     <br><br><br><br>
                 </form>
             </div>
@@ -1629,7 +1734,7 @@ static function formAdd($typ){ ?>
             <div class="row">
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="alfredoFile"/> <br><br>
-                    <input type="submit" value="Submit file" name="import7" style="background:#152c4e; color:white;"/>
+                    <input type="submit" value="Submit file" name="import7" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="background:#152c4e; color:white;"/>
                     <br><br><br><br>
                 </form>
             </div>
@@ -1642,7 +1747,7 @@ static function formAdd($typ){ ?>
             <div class="row">
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="inventoryFile"/> <br><br>
-                    <input type="submit" value="Submit file" name="import8" style="background:#152c4e; color:white;"/>
+                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import8" style="background:#152c4e; color:white;"/>
                     <br><br><br><br>
                 </form>
             </div>
@@ -1655,7 +1760,7 @@ static function formAdd($typ){ ?>
             <div class="row">
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="balanceFile"/> <br><br>
-                    <input type="submit" value="Submit file" name="import9" style="background:#152c4e; color:white;"/>
+                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import9" style="background:#152c4e; color:white;"/>
                     <br><br><br><br>
                 </form>
             </div>
@@ -1668,7 +1773,20 @@ static function formAdd($typ){ ?>
             <div class="row">
                 <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="journalEntries"/> <br><br>
-                    <input type="submit" value="Submit file" name="import10" style="background:#152c4e; color:white;"/>
+                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import10" style="background:#152c4e; color:white;"/>
+                    <br><br><br><br>
+                </form>
+            </div>
+        </div>
+
+        <div class="adding_block">
+            <div class="row">
+                <h1>Add Journal Items file lot</h1>
+            </div>
+            <div class="row">
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="file" name="journalItems"/> <br><br>
+                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import11" style="background:#152c4e; color:white;"/>
                     <br><br><br><br>
                 </form>
             </div>
@@ -1681,6 +1799,11 @@ static function formAdd($typ){ ?>
             
 
             </div><!-- End COntainer -->
+            <script>
+                setTimeout(function() {
+                $('#msg').fadeOut('fast');
+                }, 2000); // <-- time in milliseconds
+            </script>
         </div>
         <!-- End Body -->
     <?php }

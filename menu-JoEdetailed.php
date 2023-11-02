@@ -81,7 +81,6 @@ while($row_user = mysqli_fetch_assoc($result_User))
 } 
 
 
-
  //Cheching for POST FILTERS
 if(isset($_POST["search"]))
 {
@@ -120,7 +119,6 @@ if(isset($_POST["search"]))
 
             $invoices[] = $newInvoiceLine;
         }
-
     }
     
 }

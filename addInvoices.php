@@ -42,14 +42,6 @@ $conection = include 'config/conection.php';
      $typ = "";
  }
 
- // Allowed mime types 
- //$excelMimes = array('text/xls', 'text/xlsx', 'application/excel', 'application/vnd.msexcel', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); 
-     
-/*if($_server["REQUEST_METHOD"] !== "POST")
-{
-    exit("POST request method reqired");
-}*/
-
 //Cheching if the document file is not empty
 if(isset($_POST["import"]))
 {
@@ -97,7 +89,7 @@ if(isset($_POST["import"]))
         '$payment_terms', '$invoice_date', '$due_date', '$sales_person', '$sales_team', '$global_comments', '$invoice_notes',
         '$customer_po', '$currancy', '$untaxed_amount', '$tax', '$total', '$amount_due', '$warehouseNotes', '$customerNotes')");
         
-        header("Location: menu-detailed.php?user=$email&type=$type&typ=$typ"); 
+        header("Location: menu.php?user=$email&type=$type&msg=1"); 
     } 
 }
 
@@ -148,8 +140,8 @@ if(isset($_POST["import2"]))
         '$unit_price_after', '$cost', '$taxes','$notes', '$rma', '$quantity_bo','$serial')"); 
         
         $error = mysqli_error($conection);
-        var_dump($error);
-        //header("Location: menu-detailed.php?user=$email&type=$type&typ=$typ"); 
+        //var_dump($error);
+        header("Location: menu.php?user=$email&type=$type&msg=1"); 
     } 
 }
 
@@ -201,7 +193,7 @@ if(isset($_POST["import3"]))
         
         $typ="CreditNote";
 
-        header("Location: menu-CNdetailed.php?user=$email&type=$type&typ=$typ"); 
+        header("Location: menu.php?user=$email&type=$type&msg=1"); 
     } 
 }
 
@@ -255,7 +247,7 @@ if(isset($_POST["import4"]))
         
         $typ="Purchases";
 
-        header("Location: menu-Pdetailed.php?user=$email&type=$type&typ=$typ"); 
+        header("Location: menu.php?user=$email&type=$type&msg=1");  
     } 
 }
 
@@ -299,7 +291,7 @@ if(isset($_POST["import5"]))
         
         $typ="Purchases";
 
-        header("Location: menu.php?user=$email&type=$type"); 
+        header("Location: menu.php?user=$email&type=$type&msg=1"); 
     } 
 }
 
@@ -345,7 +337,7 @@ if(isset($_POST["import6"]))
         //var_dump($error);
         $typ="Payments";
 
-        header("Location: menu.php?user=$email&type=$type"); 
+        header("Location: menu.php?user=$email&type=$type&msg=1"); 
     } 
 }
 
@@ -406,11 +398,11 @@ if(isset($_POST["import7"]))
         $error = mysqli_error($conection);
         $typ="Customer";
         //var_dump($error);
-        header("Location: menu.php?user=$email&type=$type"); 
+        header("Location: menu.php?user=$email&type=$type&msg=1"); 
     } 
 }
 
-//Cheching if the document customers file is correct, and them add the data to DB
+//Cheching if the document inventory file is correct, and them add the data to DB
 if(isset($_POST["import8"]))
 {
     //print_r($_FILES);
@@ -440,7 +432,7 @@ if(isset($_POST["import8"]))
         $sales_price = $row[4];
         $cost = $row[5];
         $category = strtoupper($row[6]);
-        $type = strtoupper($row[7]);
+        $t = strtoupper($row[7]);
         $qty_onhand = $row[8];
         $created_by = $row[9];
         $created_on = $row[10];
@@ -450,13 +442,13 @@ if(isset($_POST["import8"]))
  
         
         mysqli_query($conection, "INSERT INTO inventory VALUES('', '$sku', '$product', '$vendor', '$barcode',
-        '$sales_price', '$cost', '$category', '$type', '$qty_onhand', '$created_by','$created_on',
+        '$sales_price', '$cost', '$category', '$t', '$qty_onhand', '$created_by','$created_on',
         '$qty_sold', '$customer_tax', '$we_description')"); 
         
         $error = mysqli_error($conection);
         $typ="Customer";
         //var_dump($error);
-        header("Location: menu.php?user=$email&type=$type"); 
+        header("Location: menu.php?user=$email&type=$type&msg=1"); 
     } 
 }
 
@@ -492,7 +484,7 @@ if(isset($_POST["import9"]))
         $error = mysqli_error($conection);
         $typ="balances";
         var_dump($error);
-        header("Location: menu.php?user=$email&type=$type"); 
+        header("Location: menu.php?user=$email&type=$type&msg=1"); 
     } 
 }
 
@@ -532,8 +524,49 @@ if(isset($_POST["import10"]))
         
         $error = mysqli_error($conection);
         $typ="balances";
+        header("Location: menu.php?user=$email&type=$type&msg=1"); 
+    } 
+}
+
+if(isset($_POST["import11"]))
+{
+    //print_r($_FILES);
+    $fileName = $_FILES["journalItems"]["name"];
+    //$fileExtension = explode('.', $fileName);
+    //$fileExtension - strtolower(end($fileExtension));
+    
+    $newFileName = date("y.m.d")."-".date("h.i.sa")."-".$fileName;
+
+    $targetDirectory = "uploads/". $newFileName;
+    
+    move_uploaded_file($_FILES["journalItems"]["tmp_name"], $targetDirectory);
+
+    error_reporting(0);
+    ini_set('display_errors',0);
+
+    require "excelReader/excel_reader2.php";
+    require "excelReader/SpreadsheetReader.php";
+
+    $reader = new SpreadsheetReader($targetDirectory);
+    foreach($reader as $key => $row)
+    {
+        $created_on = strtoupper($row[0]);
+        $number = strtoupper($row[1]);
+        $account = strtoupper($row[2]);
+        $customer = strtoupper($row[3]);
+        $label = strtoupper($row[4]);
+        $reference = strtoupper($row[5]);
+        $debit = strtoupper($row[6]);
+        $credit = strtoupper($row[7]);
+        $due_date = strtoupper($row[8]);
+ 
+        mysqli_query($conection, "INSERT INTO journal_items VALUES('', '$created_on', '$number',
+         '$account', '$customer', '$label', '$reference', '$debit', '$credit', '$due_date')"); 
+        
+        $error = mysqli_error($conection);
+        $typ="balances";
         var_dump($error);
-        //header("Location: menu.php?user=$email&type=$type"); 
+        header("Location: menu.php?user=$email&type=$type&msg=1");  
     } 
 }
 

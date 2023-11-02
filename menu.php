@@ -26,13 +26,22 @@ else
     $email = "";
 }
 
+if(isset($_GET["msg"]))
+{
+    $msg = $_GET["msg"];
+}
+else
+{
+    $msg = "";
+}
+
 
 require_once('Page.class.php');
 
 //Website Structure
 Page::head();
 Page::header($email, $type);
-Page::menu( $email, $type);
+Page::menu( $email, $type, $msg);
 Page::footer();
 Page::endHead();
 

@@ -101,7 +101,7 @@ if(isset($_POST["search"]))
         $dateSearch = strtoupper($_POST['invoiceDateSearch']);
         $salesOrderSearch = strtoupper($_POST['salesOrderSearch']);
 
-        $query_user = "select * from invoice_line where invoice_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND serial_numbers like '%$dateSearch%' AND product like '%$salesOrderSearch%' limit 50;";
+        $query_user = "select * from invoice_line where invoice_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND serial_numbers like '%$dateSearch%' AND product like '%$salesOrderSearch%';";
         $result_User = mysqli_query($conection,$query_user);
         while($row_user = mysqli_fetch_assoc($result_User))
         { $count = $count+1; }
