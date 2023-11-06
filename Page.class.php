@@ -253,7 +253,16 @@ static function footer2() { ?>
                             </div></a>
                         </div>
                     </div>
-
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="plan featured">
+                            <a href="menu-PLdetailed.php?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Purchases Line"><div class="plan-header" style="background:#fec470; color:black;  height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                                <img src="images/purchasesLine.png" style="width:70%;" />
+                                <p class="text-muted"></p>
+                                <p class="text-muted"></p>
+                                <div class="plan-price" style="font-size:30px;">Purchases Line</div>
+                            </div></a>
+                        </div>
+                    </div>
                     <div class="col-lg-4 col-md-12 col-12">
                         <div class="plan featured">
                             <a href="menu-Padetailed.php?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Payments"><div class="plan-header" style="background:#fec470; color:black; height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
@@ -375,7 +384,7 @@ static function menuMonDetailed($typ, $user, $type){ ?>
                                     <!-- 2023 -->
                 <tr>
                     <td>October 2023</td>
-                    <td><a href="reports/2023/2023 October.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
+                    <td><a href="reports/2023/2023_October.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>September 2023</td>
@@ -680,6 +689,77 @@ static function menuILdetailed($typ, $invoices, $user, $type, $invoice_number, $
                             <td><?php echo $invoice->getUnit_price() ?></td>
                             <td><?php if($invoice->getTaxes()!=""){echo "$".$invoice->getTaxes();}else{echo "$0.00";} ?></td>
                             <td><?php if($invoice->getUntaxed_amount()!=""){echo "$". $invoice->getUntaxed_amount();}else{echo "$0.00";} ?></td>
+                        </tr></a>
+
+                        <?php     
+                    } 
+                ?>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+        </div>
+    </section>
+        <!-- end: Page Content -->
+<?php }
+
+static function menuPLdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
+    <!-- Page Content -->
+    <section id="page-content">
+        <div class="content col-lg-12">   
+            <div class="row">
+                    <div class="content col-lg-3">
+                        <h2 class="menu-detailed-title"><?php echo $typ;?></h2>
+                    </div>
+                    <div class="content col-lg-9">
+                        <form method="post">
+                            <?php if($invoice_number == ""){ ?><input type="text" placeholder="Purchase Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
+                            <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Sku" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
+                            <?php if($dateSearch == ""){ ?><input type="text" placeholder="Created On" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
+                            <?php if($customerSearch == ""){ ?><input type="text" placeholder="Vendor" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
+                            <input type="submit" value="search" class="btn btn-light" name="search" style="background:#0a3d67; color:white;">
+                            <input type="submit" value="Clear" class="btn btn-light" name="clear" style="background:#0a3d67; color:white;">
+                            <spam class="btn btn-light" style="background:#0a3d67; color:white;">Total Rows: <?php echo $count; ?></spam>
+                        </form>
+                    </div>
+                        <table class="table">
+                            <thead class="thead" style="background:#0a3d67; color:white;">
+                                <tr>
+                                    <th scope="col">Created On</th>
+                                    <th scope="col">Purchase Number</th>
+                                    <th scope="col">Sku</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Unit Cost</th>
+                                    <th scope="col">Taxes</th>
+                                    <th scope="col">Subtotal</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Vendor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                    /**
+                     * READING THE INVOICE OBJECT
+                     * 
+                     */ 
+
+                    foreach ($invoices as $invoice)
+                    {  ?>
+                    
+                        <tr>
+                            <td><?php echo $invoice->getCreated_on() ?></td>
+                            <td><a href="invoice-Pdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getPurchase_number(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><?php echo $invoice->getPurchase_number() ?></a></td>
+                            <td><?php echo $invoice->getSku() ?></td>
+                            <td><?php echo $invoice->getProduct() ?></td>
+                            <td><?php echo $invoice->getQuantity() ?></td>
+                            <td><?php echo $invoice->getUnit_cost() ?></td>
+                            <td><?php if($invoice->getTaxes()!=""){echo "$".$invoice->getTaxes();}else{echo "$0.00";} ?></td>
+                            <td><?php if($invoice->getSubtotal()!=""){echo "$". $invoice->getSubtotal();}else{echo "$0.00";} ?></td>
+                            <td><?php if($invoice->getTotal()!=""){echo "$". $invoice->getTotal();}else{echo "$0.00";} ?></td>
+                            <td><?php echo $invoice->getVendor() ?></td>
+                            
+                            
                         </tr></a>
 
                         <?php     
@@ -1091,7 +1171,7 @@ static function menuJoEdetailed($typ, $invoices, $user, $type, $invoice_number, 
                             <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
                             <input type="submit" value="search" class="btn btn-light" style="color:white; background:#0a3d67;" name="search">
                             <?php if($invoice_number != "" || $customerSearch == "" || $dateSearch == "" || $salesOrderSearch == ""){ ?><input type="submit" value="Clear" class="btn btn-light" style="color:white; background:#0a3d67;" name="clear"><?php }else{} ?>
-                            <?php if ($inv == ""){}else{ ?> <a href="menu-Badetailed.php?user=<?php echo $user; ?>&type=<?php echo $type ?>&typ=Balances"><input type="button" value="Go Back" class="search_field" name="back" style="background:#152c4e; color:white; width:5%; font-size:12px"></a> <?php } ?>
+                            
                             <spam class="btn btn-light" style="color:white; background:#0a3d67;">Total rows: <?php echo $count; ?></spam>
                         </form>
                         </div>
@@ -1354,17 +1434,17 @@ static function invoiceINDetailed($typ, $invoice, $user, $typee, $invo){
 <section>
             <div class="col-lg-12">
                 <div class="row">
+                <div class="col-lg-12" style="text-align:center;">
+                            <form method="POST">
+                                <a href="menu-INdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $typee; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
+                            </form>
+                        </div>
 
                     <div class="row center" style="width:95%; border-radius:10px; padding:30px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
                         <div class="col-lg-4">
                             <h2 class="menu-detailed-title"> <?php echo $product;?> </h2>
                         </div>
-                        <div class="col-lg-8">
-                            <form method="POST">
-                                <a href="menu-INdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
-                                <input type="submit" value="Print" name="print" class="btn btn-light" style="color:white; background:#0a3d67;" />
-                            </form>
-                        </div><br><br><br><br><br><br>
+                        <br><br><br><br><br><br>
                         <div class="col-lg-4">
                             <div>
                                 <h4>SKU</h4>
@@ -1622,7 +1702,7 @@ static function invoicePDetailed($typ, $invoice, $invoice_lines, $user, $type, $
         <div class="row">
                     <div class="col-lg-12" style="text-align:center;">
                         <form method="POST">
-                            <a href="menu-Pdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
+                            <a href="menu-Pdetailed.php?user=<?php echo $user; ?>&typ=Purchases&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
                             <input type="submit" value="Print" name="print" class="btn btn-light" style="color:white; background:#0a3d67;" />
                         </form>
                     </div>
