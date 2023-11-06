@@ -266,10 +266,10 @@ while($row_user = mysqli_fetch_assoc($result_User))
 
 
 //Website Structure
-Page::head();
-Page::header($email, $type);
+Page::head2();
+Page::header2($email, $type);
 Page::invoiceCLIDetailed($typ, $newInvoiceLine, $email, $type, $inv);
-Page::footer();
-Page::endHead();
+Page::footer2();
+Page::endHead2();
 
  ?>

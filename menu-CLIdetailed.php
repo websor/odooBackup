@@ -126,10 +126,10 @@ if(isset($_POST["search"]))
  }
 
 //Website Structure
-Page::head();
-Page::header($email, $type);
+Page::head2();
+Page::header2($email, $type);
 Page::menuCLIdetailed($typ, $invoices, $email, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count);
-Page::footer();
-Page::endHead();
+Page::footer2();
+Page::endHead2();
 
  ?>

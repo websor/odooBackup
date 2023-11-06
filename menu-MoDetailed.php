@@ -45,10 +45,10 @@ $conection = include 'config/conection.php';
 
 
 //Website Structure
-Page::head();
-Page::header($email, $type);
+Page::head2();
+Page::header2($email, $type);
 Page::menuMonDetailed($typ, $email, $type);
-Page::footer();
-Page::endHead();
+Page::footer2();
+Page::endHead2();
 
  ?>

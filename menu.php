@@ -39,10 +39,10 @@ else
 require_once('Page.class.php');
 
 //Website Structure
-Page::head();
-Page::header($email, $type);
-Page::menu( $email, $type, $msg);
-Page::footer();
-Page::endHead();
+Page::head2();
+Page::header2($email, $type);
+Page::menu2( $email, $type, $msg);
+Page::footer2();
+Page::endHead2();
 
  ?>

@@ -94,10 +94,10 @@ if(isset($_POST["search"]))
         $customerSearch = strtoupper($_POST['VendorSearch']);
         $dateSearch = strtoupper($_POST['invoiceDateSearch']);
         $salesOrderSearch = strtoupper($_POST['salesOrderSearch']);
-        var_dump($invoice_number);
-        var_dump($customerSearch);
-        var_dump($dateSearch);
-        var_dump($salesOrderSearch);
+        //var_dump($invoice_number);
+        //var_dump($customerSearch);
+        //var_dump($dateSearch);
+        //var_dump($salesOrderSearch);
         $query_user = "select * from journal_entries where number like '%$invoice_number%' AND customer like '%$customerSearch%' AND date like '%$dateSearch%' AND reference like '%$salesOrderSearch%' ;";
         $result_User = mysqli_query($conection,$query_user);
         while($row_user = mysqli_fetch_assoc($result_User))
@@ -133,10 +133,10 @@ if(isset($_POST["search"]))
  }
 
 //Website Structure
-Page::head();
-Page::header($email, $type);
+Page::head2();
+Page::header2($email, $type);
 Page::menuJoEdetailed($typ, $invoices, $email, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count);
-Page::footer();
-Page::endHead();
+Page::footer2();
+Page::endHead2();
 
  ?>

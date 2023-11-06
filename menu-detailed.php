@@ -157,7 +157,7 @@ if(isset($_POST["search"]))
         $customerSearch = strtoupper($_POST['customerSearch']);
         $dateSearch = $_POST['invoiceDateSearch'];
         $salesOrderSearch = strtoupper($_POST['salesOrderSearch']);
-
+        //var_dump($invoice_number);
         $query_user = "select * from invoices where invoice_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND invoice_date like '%$dateSearch%' AND sales_order like '%$salesOrderSearch%';";
         $result_User = mysqli_query($conection,$query_user);
         while($row_user = mysqli_fetch_assoc($result_User))
@@ -165,7 +165,7 @@ if(isset($_POST["search"]))
             $count = $count +1;
         }
 
-        $query_user = "select * from invoices where invoice_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND invoice_date like '%$dateSearch%' AND sales_order like '%$salesOrderSearch%' order by inovice_date DESC limit 50;";
+        $query_user = "select * from invoices where invoice_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND invoice_date like '%$dateSearch%' AND sales_order like '%$salesOrderSearch%' limit 50;";
         $result_User = mysqli_query($conection,$query_user);
         while($row_user = mysqli_fetch_assoc($result_User))
         { 
@@ -206,10 +206,10 @@ if(isset($_POST["search"]))
  }
 
 //Website Structure
-Page::head();
-Page::header($email, $type);
+Page::head2();
+Page::header2($email, $type);
 Page::menuDetailed($typ, $invoices, $email, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count, $inv);
-Page::footer();
-Page::endHead();
+Page::footer2();
+Page::endHead2();
 
  ?>

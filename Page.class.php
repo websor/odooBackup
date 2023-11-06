@@ -19,7 +19,7 @@ class Page {
                 <title>Stellar Wholesale Odoo Backup</title>
                 <!-- Stylesheets & Fonts -->
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <link href="css/style.css" rel="stylesheet">
+                <link href="css/custom.css" rel="stylesheet">
             </head>
 
             <body>
@@ -28,6 +28,30 @@ class Page {
                 <div class="container">
 
     <?php } 
+
+static function head2(){ ?>
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />    
+        <meta name="author" content="Alfredo Morales" />    
+        <link rel="icon" type="image/png" href="images/favicon.png">   
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- Document title -->
+        <title>Stellar Wholesale Inc</title>
+        <!-- Stylesheets & Fonts -->
+        <link href="css/plugins.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- Body Inner -->
+        <div class="body-inner">
+
+<?php } 
 
     static function header($email, $type) { ?>
         <!-- Header -->
@@ -52,35 +76,78 @@ class Page {
         </header>
     <?php } 
 
-    static function login($error)
-    { ?>
-        <!-- Section -->
-        <section>
-            <div class="row">
-                <?php if($error == 1)
-                { ?>
-                    <div class="error">The user does not exist</div>
-                <?php } else if($error == 2) { ?>
-                    <div class="error">wrong email or password. Please Try again</div>
-                <?php } ?>
-                <h3><b>SIGN IN</b></h3>
+static function header2($email, $type) { ?>
+    <!-- Header -->
+    <header id="header" data-transparent="true" data-fullwidth="true" class="dark submenu-light" style="background:#fec470;">
+            <div class="header-inner">
+                <div class="container">
+                    <!--Logo-->
+                    <div id="logo">
+                       
+                            <img src="images/logo.png" style="width:300px;"/>
+                        
+                    </div>
+                    <!--Navigation Resposnive Trigger-->
+                    <div id="mainMenu-trigger">
+                        <a class="lines-button x"><span class="lines"></span></a>
+                    </div>
+                    <!--end: Navigation Resposnive Trigger-->
+                    <!--End: Logo-->
+                    <div id="mainMenu">
+                        <div class="container" >
+                            <nav>
+                                <ul>
+                                    <?php if($email !=""){ ?><li><div class="col-lg-3"  style="margin-top:15px;">
+                                        <a href="menu.php?user=<?php echo $email; ?>&type=<?php echo $type; ?>"><button type="button" class="btn btn-light" style="background:#0a3d67; border-color:#0a3d67; color:white;">Menu</button></a>
+                                    </div></li>
+                                    <li><div class="col-lg-3" style="margin-top:15px;">
+                                        <a href="index.php?logout"><button type="button" class="btn btn-light" style="background:#0a3d67; border-color:#0a3d67; color:white;">Logout</button></a>
+                                    </div></li>
+                                    <li><div class="col-lg-3" style="margin-top:15px;">
+                                        <button type="" class="btn btn-light" style="background:#0a3d67; border-color:#0a3d67; color:white;"><?php echo $email; ?></button>
+                                    </div></li> <?php }else{} ?>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
             </div>
-        
-                <form method="POST">
-                    <div class="row">
-                        <input type="email" required name="email" class="form-control" placeholder="Type your email">
-                        <input type="password" required name="password" class="form-control" placeholder="Type your password">
+        </header>
+        <!-- end: Header -->
+<?php } 
+
+    static function login2($error)
+    { ?>
+       <!-- Section -->
+       <section>
+            <div class="container">
+                <div class="row">
+                    <div id="loginError" class="col-lg-12 center" style="background: red; border-radius:10px; font-size:12px; text-align:center;">
+                        <?php if($error == "1"){ ?><h3 style="color:white;">The user does not exist</h3> <?php }else if ($error=="2"){ ?> <h3 style="color:white;">wrong email or password. Please Try again</h3> <?php } ?>
                     </div>
-                    <div class="row">
-                        <button type="submit" class="btn">SIGN IN</button>
+                    <div class="col-lg-4 center">
+                        <div class="panel ">
+                            <div class="panel-body" style="text-align:center;">
+                                <h3>Login</h3>
+                                <form method="POST">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Email" name="email" class="form-control">
+                                    </div>
+                                    <div class="form-group m-b-5">
+                                        <input type="password" placeholder="Password" name="password" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn" type="submit" name="submit" style="background:#fec470; border-color:#fec470; color:#0a3d67;">Login</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                      
                     </div>
-                </form>
+                </div>
+            </div>
         </section>
         <!-- end: Section -->
-    </div>
-    <!-- end: Body Inner -->
-    <!-- Scroll top -->
-    <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
     <?php }
 
     static function footer() { ?>
@@ -90,6 +157,153 @@ class Page {
         </footer>
         <!-- end: Footer -->
     <?php } 
+
+static function footer2() { ?>
+    <!-- Footer -->
+    <footer id="footer">
+            <div class="copyright-content" style="background:#0a3d67; color:white;">
+                <div class="container">
+                    <div class="copyright-text text-center">&copy; 2023 Stellar Wholesale Inc. All Rights Reserved. Stellar Wholesale Inc</div>
+                </div>
+            </div>
+        </footer>
+        <!-- end: Footer -->
+<?php } 
+
+    static function menu2($email, $type, $msg){ ?>
+        <!-- Pricing Table -->
+        <section id="section3" class="p-t-120 p-b-120">
+            <div class="container">
+                <hr class="space">
+                <div class="row pricing-table">
+
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="plan featured">
+                        <a href="menu-INdetailed.php?typ=Inventory&user=<?php echo $email; ?>&type=<?php echo $type; ?>"><div class="plan-header" style="background:#fec470; height:320px; color:black; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                                <img src="images/inventory.png" style="width:50%;" />
+                                <p class="text-muted"></p>
+                                <p class="text-muted"></p>
+                                <div class="plan-price" style="font-size:30px;">Inventory</div>
+                            </div></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="plan featured">
+                        <a href="menu-CLIdetailed.php?typ=Customer&user=<?php echo $email; ?>&type=<?php echo $type; ?>"><div class="plan-header" style="background:#fec470; color:black; height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                                <img src="images/customer.png" style="width:50%;" />
+                                <p class="text-muted"></p>
+                                <p class="text-muted"></p>
+                                <div class="plan-price" style="font-size:30px;">Customer</div>
+                            </div></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="plan featured">
+                        <a href="menu-Badetailed.php?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=balances"><div class="plan-header" style="background:#fec470; color:black; height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                                <img src="images/balance.png" style="width:50%;" />
+                                <p class="text-muted"></p>
+                                <p class="text-muted"></p>
+                                <div class="plan-price" style="font-size:30px;">Customer Balances</div>
+                            </div></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="plan featured">
+                            <a href="menu-detailed.php?typ=Invoices&user=<?php echo $email; ?>&type=<?php echo $type; ?>"><div class="plan-header" style="background:#fec470; color:black; height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                                <img src="images/invoice.png" style="width:50%;" />
+                                <p class="text-muted"></p>
+                                <p class="text-muted"></p>
+                                <div class="plan-price" style="font-size:30px;">Invoices</div>
+                            </div></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="plan featured">
+                            <a href="menu-ILdetailed.php?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Invoice Line"><div class="plan-header" style="background:#fec470; color:black; height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                                <img src="images/sn.png" style="width:50%;" />
+                                <p class="text-muted"></p>
+                                <p class="text-muted"></p>
+                                <div class="plan-price" style="font-size:30px;">Invoice Lines</div>
+                            </div></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="plan featured">
+                            <a href="menu-CNdetailed.php?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=CreditNote"><div class="plan-header" style="background:#fec470; color:black; height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                                <img src="images/credit.png" style="width:50%;" />
+                                <p class="text-muted"></p>
+                                <p class="text-muted"></p>
+                                <div class="plan-price" style="font-size:30px;">Credit Notes</div>
+                            </div></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="plan featured">
+                            <a href="menu-Pdetailed.php?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Purchases"><div class="plan-header" style="background:#fec470; color:black;  height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                                <img src="images/purchase.png" style="width:50%;" />
+                                <p class="text-muted"></p>
+                                <p class="text-muted"></p>
+                                <div class="plan-price" style="font-size:30px;">Purchases</div>
+                            </div></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="plan featured">
+                            <a href="menu-Padetailed.php?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Payments"><div class="plan-header" style="background:#fec470; color:black; height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                                <img src="images/payment.png" style="width:50%;" />
+                                <p class="text-muted"></p>
+                                <p class="text-muted"></p>
+                                <div class="plan-price" style="font-size:30px;">Payments</div>
+                            </div></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="plan featured">
+                            <a href="menu-JoEdetailed.php?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Journal Entries"><div class="plan-header" style="background:#fec470; color:black; height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                                <img src="images/inventory.png" style="width:50%;" />
+                                <p class="text-muted"></p>
+                                <p class="text-muted"></p>
+                                <div class="plan-price" style="font-size:30px;">Journal Entries</div>
+                            </div></a>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="plan featured">
+                            <a href="menu-MoDetailed.php?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Montly Reports"><div class="plan-header" style="background:#fec470; color:black;  height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                                <img src="images/rpeorts.png" style="width:50%;" />
+                                <p class="text-muted"></p>
+                                <p class="text-muted"></p>
+                                <div class="plan-price" style="font-size:30px;">Monthly Reports</div>
+                            </div></a>
+                        </div>
+                    </div>
+
+                     <?php if($type=="1"){ ?><div class="col-lg-4 col-md-12 col-12">
+                        <div class="plan featured">
+                            <a href="admin.php?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Montly Reports"><div class="plan-header" style="background:#fec470; color:black;  height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                                <img src="images/admin.png" style="width:50%;" />
+                                <p class="text-muted"></p>
+                                <p class="text-muted"></p>
+                                <div class="plan-price" style="font-size:30px;">Admin</div>
+                            </div></a>
+                        </div>
+                        <?php }else{} ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end: Pricing Table -->
+    <?php }
 
     static function menu($email, $type, $msg){ ?>
         <section>
@@ -140,277 +354,233 @@ class Page {
         </section>
    <?php }
 
-static function menuCNdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
-    <section>   
-        <dic class="row">
-           <!-- <h1> <?php echo $typ;?> </h1> -->
-        </div>
-        <dic class="row">
-            <form method="post">
-                <h1 class="menu-detailed-title"><?php echo $typ;?></h1>
-                <?php if($invoice_number == ""){ ?><input type="text" placeholder="Credit Note Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
-                <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Source Document" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
-                <?php if($dateSearch == ""){ ?><input type="text" placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
-                <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
-                <input type="submit" value="search" class="search_field" name="search">
-                <input type="submit" value="Clear" class="search_field" name="clear">
-                <spam>Total Rows: <?php echo $count; ?></spam>
-            </form>
-        </div>
-        <div class="page_body">
-            <table>
-                <tr>
-                    <th>Credit Note Number</th>
-                    <th>Source Document</th>
-                    <th>Customer</th>
-                    <th>Sales Person</th>
-                    <th>Invoice Date</th>
-                    <th>Due Date</th>
-                    <th>untaxed Amount</th>
-                    <th>Amount Due</th>
-                    <th>Tax</th>
-                    <th>Total</th>
-                    <th></th>
-                </tr>
-                <?php
-                    /**
-                     * READING THE INVOICE OBJECT
-                     * 
-                     */ 
-                    foreach ($invoices as $invoice)
-                    { ?>
-                        <tr>
-                            <td><?php echo $invoice->getCreditnote_number() ?></td>
-                            <td><?php echo $invoice->getSource_document() ?></td>
-                            <td><?php echo $invoice->getCustomer() ?></td>
-                            <td><?php echo $invoice->getSales_person() ?></td>
-                            <td><?php echo $invoice->getInvoice_date() ?></td>
-                            <td><?php echo $invoice->getDue_date() ?></td>
-                            <td><?php if($invoice->getUntaxed_amount()!=""){echo "$". $invoice->getUntaxed_amount();}else{echo "$0.00";} ?></td>
-                            <td><?php if($invoice->getAmount_due()!=""){echo "$".$invoice->getAmount_due();}else{echo "$0.00";} ?></td>
-                            <td><?php if($invoice->getTax()!=""){echo "$".$invoice->getTax();}else{echo "$0.00";} ?></td>
-                            <td><?php if($invoice->getTotal()!=""){echo "$".$invoice->getTotal();}else{echo "$0.00";} ?></td>
-                            <td><a href="invoice-CNdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getCreditnote_number(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Invoice" class="openInvoice" /></a></td>
-                        </tr></a>
-
-                        <?php     
-                    } 
-                ?>
-            </table>
-        </div>
-    </section>
-<?php }
 
 static function menuMonDetailed($typ, $user, $type){ ?>
-    <section>   
-        <dic class="row">
-            <h1> <?php echo $typ; ?> </h1> 
-        </div>
-
-        <div class="page_body">
-            <table>
-                <tr>
-                    <th>Monthly Report Package</th>
-                    <th></th>
-                </tr> 
-                <!-- 2023 -->
+    <!-- Page Content -->
+    <section id="page-content">
+        <div class="content col-lg-12"> 
+            <div class="row"> 
+                <div class="content col-lg-12">
+                    <h2> <?php echo $typ; ?> </h2> 
+                </div>  
+                        <table class="table">
+                            <thead class="thead" style="background:#0a3d67; color:white;">
+                                <tr>
+                                    <th scope="col">Monthly Report</th>
+                                    <th scope="col">Package</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <!-- 2023 -->
                 <tr>
                     <td>October 2023</td>
-                    <td><a href=""><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2023/2023 October.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>September 2023</td>
-                    <td><a href="reports/2023/2023_September.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2023/2023_September.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>August 2023</td>
-                    <td><a href="reports/2023/2023 August.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2023/2023 August.zip" download><input type="submit" name="Download" value="Download"class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>July 2023</td>
-                    <td><a href="reports/2023/2023 July.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2023/2023 July.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>June 2023</td>
-                    <td><a href="reports/2023/2023 June.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2023/2023 June.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;" /></a></td>
                 </tr>
                 <tr>
                     <td>May 2023</td>
-                    <td><a href="reports/2023/2023 May.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2023/2023 May.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>April 2023</td>
-                    <td><a href="reports/2023/2023 April.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2023/2023 April.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>March 2023</td>
-                    <td><a href="reports/2023/2023 March.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2023/2023 March.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>February 2023</td>
-                    <td><a href="reports/2023/2023 February.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2023/2023 February.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr> 
                 <tr>
                     <td>January 2023</td>
-                    <td><a href="reports/2023/2023 January.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2023/2023 January.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr> 
                 <!-- END 2023 --> 
 
                 <!--  2022 --> 
                 <tr>
                     <td>December 2022</td>
-                    <td><a href="reports/2022/2022 December.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2022/2022 December.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>November 2022</td>
-                    <td><a href="reports/2022/2022 November.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2022/2022 November.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>              
                 <tr>
                     <td>October 2022</td>
-                    <td><a href="reports/2022/2022 October.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2022/2022 October.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>September 2022</td>
-                    <td><a href="reports/2022/2022 September.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2022/2022 September.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>August 2022</td>
-                    <td><a href="reports/2022/2022 August.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2022/2022 August.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>July 2022</td>
-                    <td><a href="reports/2022/2022 July.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2022/2022 July.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>June 2022</td>
-                    <td><a href="reports/2022/2022 June.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2022/2022 June.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>May 2022</td>
-                    <td><a href="reports/2022/2022 May.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2022/2022 May.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>April 2022</td>
-                    <td><a href="reports/2022/2022 April.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2022/2022 April.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>March 2022</td>
-                    <td><a href="reports/2022/2022 March.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2022/2022 March.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>February 2022</td>
-                    <td><a href="reports/2022/2022 February.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2022/2022 February.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr> 
                 <tr>
                     <td>January 2022</td>
-                    <td><a href="reports/2022/2022 January.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2022/2022 January.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <!-- END 2022 -->
 
                 <!-- 2021 -->
                 <tr>
                     <td>December 2021</td>
-                    <td><a href="reports/2021/December.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2021/December.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>November 2021</td>
-                    <td><a href="reports/2021/November.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2021/November.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>              
                 <tr>
                     <td>October 2021</td>
-                    <td><a href="reports/2021/October.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2021/October.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>September 2021</td>
-                    <td><a href="reports/2021/September.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2021/September.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>August 2021</td>
-                    <td><a href="reports/2021/August.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2021/August.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>July 2021</td>
-                    <td><a href="reports/2021/July.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2021/July.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>June 2021</td>
-                    <td><a href="reports/2021/June.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2021/June.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>May 2021</td>
-                    <td><a href="reports/2021/May.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2021/May.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>April 2021</td>
-                    <td><a href="reports/2021/April.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2021/April.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>March 2021</td>
-                    <td><a href="reports/2021/March.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2021/March.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>February 2021</td>
-                    <td><a href="reports/2021/February.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2021/February.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr> 
                 <tr>
                     <td>January 2021</td>
-                    <td><a href="reports/2021/January.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2021/January.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <!-- END 2021 -->
 
                 <!-- 2020 -->
                 <tr>
                     <td>December 2020</td>
-                    <td><a href="reports/2020/December.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2020/December.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>November 2020</td>
-                    <td><a href="reports/2020/November.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2020/November.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>              
                 <tr>
                     <td>October 2020</td>
-                    <td><a href="reports/2020/October.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2020/October.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <tr>
                     <td>September 2020</td>
-                    <td><a href="reports/2020/September.zip" download><input type="submit" name="Download" value="Download" style="width:20%; height:40px;"/></a></td>
+                    <td><a href="reports/2020/September.zip" download><input type="submit" name="Download" value="Download" class="btn btn-light" style="background:#0a3d67; color:white;"/></a></td>
                 </tr>
                 <!-- END 2020 -->
-            </table>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+            </div>
         </div>
     </section>
+        <!-- end: Page Content -->
 <?php }
 
 static function menuPadetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
-    <section>   
-        <dic class="row">
-           <!-- <h1> <?php echo $typ; ?> </h1> -->
-        </div>
-        <dic class="row">
-            <form method="post">
-                <h1 class="menu-detailed-title"><?php echo $typ;?></h1>
-                <?php if($invoice_number == ""){ ?><input type="text" placeholder="Payment Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
-                <?php if($dateSearch == ""){ ?><input type="text" placeholder="Payment Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
-                <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
-                <input type="submit" value="search" class="search_field" name="search">
-                <input type="submit" value="Clear" class="search_field" name="clear">
-                <td><spam class="search_field">Total rows: <?php echo $count; ?></spam></td>
-            </form>
-        </div>
-        <div class="page_body">
-            <table>
-                <tr>
-                    <th>Payment Date</th>
-                    <th>Payment Number</th>
-                    <th>Customer</th>
-                    <th>Customer Ref</th>
-                    <th>Employee</th>
-                    <th>Payment Journal</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Memo</th>
-                </tr>
-                <?php
+    <!-- Page Content -->
+    <section id="page-content">
+        <div class="content col-lg-12">
+            <div class="row">
+                    <div class="content col-lg-3">
+                        <h2 class="menu-detailed-title"><?php echo $typ;?></h2>
+                    </div>
+                    <div class="content col-lg-9">
+                    <form method="post">
+                        <?php if($invoice_number == ""){ ?><input type="text" placeholder="Payment Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
+                        <?php if($dateSearch == ""){ ?><input type="text" placeholder="Payment Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
+                        <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
+                        <input type="submit" value="search" class="btn btn-light" name="search" style="background:#0a3d67; color:white;">
+                        <input type="submit" value="Clear" class="btn btn-light" name="clear" style="background:#0a3d67; color:white;">
+                        <spam class="btn btn-light" style="background:#0a3d67; color:white;">Total rows: <?php echo $count; ?></spam>
+                    </form>
+                    </div>
+                        <table class="table">
+                            <thead class="thead" style="background:#0a3d67; color:white;">
+                                <tr>
+                                    <th scope="col">Payment Date</th>
+                                    <th scope="col">Payment Number</th>
+                                    <th scope="col">Customer</th>
+                                    <th scope="col">Customer Ref</th>
+                                    <th scope="col">Employee</th>
+                                    <th scope="col">Payment Journal</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Memo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
                     /**
                      * READING THE INVOICE OBJECT
                      * 
@@ -436,46 +606,55 @@ static function menuPadetailed($typ, $invoices, $user, $type, $invoice_number, $
                         <?php     
                     } 
                 ?>
-            </table>
+                            </tbody>
+                        </table>
+                    </div>
+
+            </div>
         </div>
     </section>
+    <!-- end: Page Content -->
 <?php }
 
 static function menuILdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
-    <section>   
-        <dic class="row">
-           <!-- <h1> <?php echo $typ;?> </h1> -->
-        </div>
-        <dic class="row">
-            <form method="post">
-                <h1 class="menu-detailed-title"><?php echo $typ;?></h1>
-                <?php if($invoice_number == ""){ ?><input type="text" placeholder="Reference" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
-                <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Product" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
-                <?php if($dateSearch == ""){ ?><input type="text" placeholder="Serial Number" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
-                <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
-                <input type="submit" value="search" class="search_field" name="search">
-                <input type="submit" value="Clear" class="search_field" name="clear">
-                <spam>Total Rows: <?php echo $count; ?></spam>
-            </form>
-        </div>
-        <div class="page_body">
-            <table>
-                <tr>
-                    <th>Created On</th>
-                    <th>Reference</th>
-                    <th>Sales Order</th>
-                    <th>Sku</th>
-                    <th>Product</th>
-                    <th>Vendor</th>
-                    <th>Customer</th>
-                    <th>Quantity</th>
-                    <th>QTY Delivered</th>
-                    <th>Serial Number</th>
-                    <th>Unit Price</th>
-                    <th>Taxes</th>
-                    <th>Untaxed Amount</th>
-                </tr>
-                <?php
+    <!-- Page Content -->
+    <section id="page-content">
+        <div class="content col-lg-12">   
+            <div class="row">
+                    <div class="content col-lg-3">
+                        <h2 class="menu-detailed-title"><?php echo $typ;?></h2>
+                    </div>
+                    <div class="content col-lg-9">
+                        <form method="post">
+                            <?php if($invoice_number == ""){ ?><input type="text" placeholder="Reference" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
+                            <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Product" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
+                            <?php if($dateSearch == ""){ ?><input type="text" placeholder="Serial Number" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
+                            <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
+                            <input type="submit" value="search" class="btn btn-light" name="search" style="background:#0a3d67; color:white;">
+                            <input type="submit" value="Clear" class="btn btn-light" name="clear" style="background:#0a3d67; color:white;">
+                            <spam class="btn btn-light" style="background:#0a3d67; color:white;">Total Rows: <?php echo $count; ?></spam>
+                        </form>
+                    </div>
+                        <table class="table">
+                            <thead class="thead" style="background:#0a3d67; color:white;">
+                                <tr>
+                                    <th scope="col">Created On</th>
+                                    <th scope="col">Reference</th>
+                                    <th scope="col">Sales Order</th>
+                                    <th scope="col">Sku</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Vendor</th>
+                                    <th scope="col">Customer</th>
+                                    <th scope="col">Qty</th>
+                                    <th scope="col">Qty Delivered</th>
+                                    <th scope="col">Serial Number</th>
+                                    <th scope="col">Unit Price</th>
+                                    <th scope="col">Taxes</th>
+                                    <th scope="col">Untaxed AMount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
                     /**
                      * READING THE INVOICE OBJECT
                      * 
@@ -506,93 +685,173 @@ static function menuILdetailed($typ, $invoices, $user, $type, $invoice_number, $
                         <?php     
                     } 
                 ?>
-            </table>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
         </div>
     </section>
+        <!-- end: Page Content -->
 <?php }
 
-static function menuCLIdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
-    <section>   
-        <dic class="row">
-           <!-- <h1> <?php echo $typ;?> </h1> -->
-        </div>
-        <dic class="row">
-            <form method="post">
-                <h1 class="menu-detailed-title"><?php echo $typ;?></h1>
-                <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
-                <?php if($invoice_number == ""){ ?><input type="text" placeholder="Price List" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
-                <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="State" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
-                <input type="submit" value="search" class="search_field" name="search">
-                <input type="submit" value="Clear" class="search_field" name="clear">
-                <spam>Total Rows: <?php echo $count; ?></spam>
-            </form>
-        </div>
-        <div class="page_body">
-            <table>
-                <tr>
-                    <th>Customer Name</th>
-                    <th>Street</th>
-                    <th>State</th>
-                    <th>City</th>
-                    <th>Postal Code</th>
-                    <th>Phone</th>
-                    <th>emal</th>
-                    <th>Price List</th>
-                    <th></th>
-                </tr>
-                <?php
+static function menuCNdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
+    <!-- Page Content -->
+    <section id="page-content">
+        <div class="content col-lg-12"> 
+            <div class="row">
+                    <div class="content col-lg-3">
+                        <h2 class="menu-detailed-title"><?php echo $typ;?></h2>
+                    </div>
+                    <div class="content col-lg-9">
+                        <form method="post">
+                            <?php if($invoice_number == ""){ ?><input type="text" placeholder="Credit Note Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
+                            <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Source Document" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
+                            <?php if($dateSearch == ""){ ?><input type="text" placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
+                            <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
+                            <input type="submit" value="search" class="btn btn-light" name="search" style="background:#0a3d67; color:white;">
+                            <input type="submit" value="Clear" class="btn btn-light" name="clear" style="background:#0a3d67; color:white;">
+                            <spam class="btn btn-light" style="background:#0a3d67; color:white;">Total Rows: <?php echo $count; ?></spam>
+                        </form>
+                    </div>
+                    
+                        <table class="table">
+                            <thead class="thead" style="background:#0a3d67; color:white;">
+                                <tr>
+                                    <th scope="col">Credit Note#</th>
+                                    <th scope="col">Source Document</th>
+                                    <th scope="col">Customer</th>
+                                    <th scope="col">Sales Person</th>
+                                    <th scope="col">Invoice Date</th>
+                                    <th scope="col">Due Date</th>
+                                    <th scope="col">Untaxed Amount</th>
+                                    <th scope="col">Amount Due</th>
+                                    <th scope="col">Tax</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
                     /**
                      * READING THE INVOICE OBJECT
                      * 
                      */ 
-
                     foreach ($invoices as $invoice)
-                    {   ?>
-                    
+                    { ?>
                         <tr>
-                            <td><?php echo $invoice->getName() ?></td>
-                            <td><?php echo $invoice->getStreet() ?></td>
-                            <td><?php echo $invoice->getState() ?></td>
-                            <td><?php echo $invoice->getCity() ?></td>
-                            <td><?php echo $invoice->getPostal_code() ?></td>
-                            <td><?php echo $invoice->getPhone() ?></td>
-                            <td><?php echo $invoice->getEmail() ?></td>
-                            <td><?php echo $invoice->getPrice_list() ?></td>
-                            <td><a href="invoice-CLIdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getName(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Customer" class="openInvoice" /></a></td>
+                            <td><?php echo $invoice->getCreditnote_number() ?></td>
+                            <td><?php echo $invoice->getSource_document() ?></td>
+                            <td><?php echo $invoice->getCustomer() ?></td>
+                            <td><?php echo $invoice->getSales_person() ?></td>
+                            <td><?php echo $invoice->getInvoice_date() ?></td>
+                            <td><?php echo $invoice->getDue_date() ?></td>
+                            <td><?php if($invoice->getUntaxed_amount()!=""){echo "$". $invoice->getUntaxed_amount();}else{echo "$0.00";} ?></td>
+                            <td><?php if($invoice->getAmount_due()!=""){echo "$".$invoice->getAmount_due();}else{echo "$0.00";} ?></td>
+                            <td><?php if($invoice->getTax()!=""){echo "$".$invoice->getTax();}else{echo "$0.00";} ?></td>
+                            <td><?php if($invoice->getTotal()!=""){echo "$".$invoice->getTotal();}else{echo "$0.00";} ?></td>
+                            <td><a href="invoice-CNdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getCreditnote_number(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Invoice" class="btn btn-light" style="background:#0a3d67; color:white;" /></a></td>
                         </tr></a>
 
                         <?php     
                     } 
                 ?>
-            </table>
+                            </tbody>
+                        </table>
+                    </div>
+
+            </div>
         </div>
     </section>
 <?php }
 
+static function menuCLIdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
+    <!-- Page Content -->
+    <section id="page-content">
+                    <div class="col-lg-12">
+                        <div class="row">
+                                <div class="col-lg-3">
+                                    <h2><?php echo $typ; ?></h2>
+                                </div>
+                                <div class="col-lg-9">
+                                    <form method="post">
+                                    <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
+                                    <?php if($invoice_number == ""){ ?><input type="text" placeholder="Price List" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
+                                    <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="State" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
+                                    <input type="submit" value="search" class="btn btn-light" name="search" style="background:#0a3d67; color:white;" >
+                                    <input type="submit" value="Clear" class="btn btn-light" name="clear" style="background:#0a3d67; color:white;">
+                                    <spam class="btn btn-light" style="background:#0a3d67; color:white;">Total Rows: <?php echo $count; ?></spam>
+                                    </form>
+                                </div>
+                            </div>
+                        <table class="table">
+                            <thead class="thead" style="background:#0a3d67; color:white;">
+                                <tr>
+                                    <th scope="col">Customer</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">State</th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">Postal Code</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                /**
+                                 * READING THE INVOICE OBJECT
+                                 * 
+                                 */ 
+
+                                foreach ($invoices as $invoice)
+                                {   ?>
+                                    <tr>
+                                        <td><?php echo $invoice->getName() ?></td>
+                                        <td><?php echo $invoice->getStreet() ?></td>
+                                        <td><?php echo $invoice->getState() ?></td>
+                                        <td><?php echo $invoice->getCity() ?></td>
+                                        <td><?php echo $invoice->getPostal_code() ?></td>
+                                        <td><?php echo $invoice->getPhone() ?></td>
+                                        <td><?php echo $invoice->getEmail() ?></td>
+                                        <td><a href="invoice-CLIdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getName(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Customer" class="btn btn-light" style="background:#0a3d67; border-color:#0a3d67; color:white;" /></a></td>
+                                    </tr></a>
+
+                                    <?php     
+                                } 
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+        </section>
+<?php }
+
 static function menuBadetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
-    <section>   
-        <dic class="row">
-           <!-- <h1> <?php echo $typ;?> </h1> -->
-        </div>
-        <dic class="row">
-            <form method="post">
-                <h1 class="menu-detailed-title"><?php echo $typ;?></h1>
-                <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
-                <input type="submit" value="search" class="search_field" name="search">
-                <input type="submit" value="Clear" class="search_field" name="clear">
-                <spam>Total Rows: <?php echo $count; ?></spam>
-            </form>
-        </div>
-        <div class="page_body">
-            <table>
-                <tr>
-                    <th>Customer Name</th>
-                    <th>Last Update</th>
-                    <th>Total Receivable</th>
-                    <th></th>
-                </tr>
-                <?php
-                    /**
+        <!-- Page Content -->
+        <section id="page-content">
+                    <div class="content col-lg-12">
+                    <dic class="row">
+                        <div class="col-lg-3">
+                            <h2 class="menu-detailed-title"><?php echo $typ;?></h2>
+                        </div>
+                        <div class="col-lg-9">
+                            <form method="post">
+                                <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
+                                <input type="submit" value="search" class="btn btn-light" name="search" style="background:#0a3d67; color:white;">
+                                <input type="submit" value="Clear" class="btn btn-light" name="clear" style="background:#0a3d67; color:white;">
+                                <spam class="btn btn-light" style="background:#0a3d67; color:white;">Total Rows: <?php echo $count; ?></spam>
+                            </form>
+                        </div>
+                        <table class="table">
+                            <thead class="thead" style="background:#0a3d67; color:white">
+                                <tr>
+                                    <th scope="col">Customer Name</th>
+                                    <th scope="col">Last Updated</th>
+                                    <th scope="col">Total Receivable</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                          <?php   /**
                      * READING THE Balance OBJECT
                      * 
                      */ 
@@ -604,103 +863,120 @@ static function menuBadetailed($typ, $invoices, $user, $type, $invoice_number, $
                             <td><?php echo $invoice->getCustomer() ?></td>
                             <td><?php echo $invoice->getLast_update() ?></td>
                             <td>$<?php if($invoice->getTotal_receivable() == ""){echo "0.00";}else{ echo $invoice->getTotal_receivable(); }  ?></td>
-                            <td><a href="menu-detailed.php?user=<?php echo $user; ?>&typ=Invoices&type=<?php echo $type; ?>&inv=<?php echo $invoice->getCustomer(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="More Details" class="openInvoice" /></a></td>
+                            <td><a href="menu-detailed.php?user=<?php echo $user; ?>&typ=Invoices&type=<?php echo $type; ?>&inv=<?php echo $invoice->getCustomer(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="More Details" class="btn btn-light" style="background:#0a3d67; color:white" /></a></td>
                         </tr></a>
 
                         <?php     
                     } 
                 ?>
-            </table>
-        </div>
-    </section>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+        </section>
+        <!-- end: Page Content -->
 <?php }
 
 static function menuINdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
-    <section>   
-        <dic class="row">
-           <!-- <h1> <?php echo $typ;?> </h1> -->
-        </div>
-        <dic class="row">
-            <form method="post">
-                <h1 class="menu-detailed-title"><?php echo $typ;?></h1>
-                <?php if($invoice_number == ""){ ?><input type="text" placeholder="Sku" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
-                <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Product" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
-                <?php if($customerSearch == ""){ ?><input type="text" placeholder="Vendor" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
-                <input type="submit" value="search" class="search_field" name="search">
-                <input type="submit" value="Clear" class="search_field" name="clear">
-                <spam>Total Rows: <?php echo $count; ?></spam>
-            </form>
-        </div>
-        <div class="page_body">
-            <table>
-                <tr>
-                    <th>SKU</th>
-                    <th>Product</th>
-                    <th>Vendor</th>
-                    <th>Sales Price</th>
-                    <th>Cost</th>
-                    <th>QTY On Hand</th>
-                    <th></th>
-                </tr>
-                <?php
-                    /**
-                     * READING THE INVOICE OBJECT
-                     * 
-                     */ 
+    <!-- Page Content -->
+    <section id="page-content">
 
-                    foreach ($invoices as $invoice)
-                    {   ?>
-                    
-                        <tr>
-                            <td><?php echo $invoice->getSku() ?></td>
-                            <td><?php echo $invoice->getProduct() ?></td>
-                            <td><?php echo $invoice->getVendor() ?></td>
-                            <td>$<?php echo $invoice->getSales_price() ?></td>
-                            <td>$<?php echo $invoice->getCost() ?></td>
-                            <td><?php echo $invoice->getQty_onhand() ?></td>
-                            <td><a href="invoice-INdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getSku(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Item" class="openInvoice" /></a></td>
-                        </tr></a>
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h2><?php echo $typ; ?></h2>
+                            </div>
+                            <div class="col-lg-9">
+                                <form method="post">
+                                    <?php if($invoice_number == ""){ ?><input type="text" placeholder="Sku" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
+                                    <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Product" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
+                                    <?php if($customerSearch == ""){ ?><input type="text" placeholder="Vendor" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
+                                    <input type="submit" value="search" class="btn btn-light" name="search" style="background:#0a3d67; border-color:#0a3d67; color:white;">
+                                    <input type="submit" value="Clear" class="btn btn-light" name="clear" style="background:#0a3d67; border-color:#0a3d67; color:white;">
+                                    <spam class="btn btn-light" style="color:white; background:#0a3d67;">Total Rows: <?php echo $count; ?></spam>
+                                </form>
+                            </div>
+                        </div>
+    
+                        <table class="table">
+                            <thead class="thead" style="background:#0a3d67; Color:white;">
+                                <tr>
+                                    <th scope="col">Sku</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Vendor</th>
+                                    <th scope="col">Sales Price</th>
+                                    <th scope="col">Cost</th>
+                                    <th scope="col">Qty On Hand</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    /**
+                                     * READING THE INVOICE OBJECT
+                                     * 
+                                     */ 
 
-                        <?php     
-                    } 
-                ?>
-            </table>
-        </div>
-    </section>
+                                    foreach ($invoices as $invoice)
+                                    {   ?>
+                                    
+                                        <tr>
+                                            <td><?php echo $invoice->getSku() ?></td>
+                                            <td><?php echo $invoice->getProduct() ?></td>
+                                            <td><?php echo $invoice->getVendor() ?></td>
+                                            <td>$<?php echo $invoice->getSales_price() ?></td>
+                                            <td>$<?php echo $invoice->getCost() ?></td>
+                                            <td><?php echo $invoice->getQty_onhand() ?></td>
+                                            <td><a href="invoice-INdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getSku(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Item" class="btn btn-light" style="background:#0a3d67; color: white;" /></a></td>
+                                        </tr></a>
+
+                                        <?php     
+                                    } 
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+        </section>
+        <!-- end: Page Content -->
 <?php }
 
 static function menuPdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
-    <section>   
-        <dic class="row">
-           <!-- <h1> <?php echo $typ;?> </h1> -->
-        </div>
-        <dic class="row">
-            <form method="post">
-                <h1 class="menu-detailed-title"><?php echo $typ;?></h1>
-                <?php if($invoice_number == ""){ ?><input type="text" placeholder="Purchase Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
-                <?php if($customerSearch == ""){ ?><input type="text" placeholder="Vendor" name="VendorSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="VendorSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="VendorSearch"  /><?php } ?>
-                <?php if($salesOrderSearch == ""){ ?><input type="text" style="display:none;" placeholder="Source Document" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" style="display:none;" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
-                <?php if($dateSearch == ""){ ?><input type="text" placeholder="Order Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
-                <input type="submit" value="search" class="search_field" name="search">
-                <input type="submit" value="Clear" class="search_field" name="clear">
-                <spam>Total Rows: <?php echo $count ?></spam>
-            </form>
-        </div>
-        <div class="page_body">
-            <table>
-                <tr>
-                    <th>Purchase Number</th>
-                    <th>Order Date</th>
-                    <th>Vendor</th>
-                    <th>Schedule Date</th>
-                    <th>Sales Person</th>
-                    <th>Source Document</th>
-                    <th>Untaxed Amount</th>
-                    <th>Tax</th>
-                    <th>Total</th>
-                    <th></th>
-                </tr>
-                <?php
+    <!-- Page Content -->
+    <section id="page-content">
+        <div class="content col-lg-12">
+            <div class="row">
+                    <div class="content col-lg-3">
+                        <h2 class="menu-detailed-title"><?php echo $typ;?></h2>
+                    </div>
+                    <div class="content col-lg-9">
+                        <form method="post">
+                            <?php if($invoice_number == ""){ ?><input type="text" placeholder="Purchase Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
+                            <?php if($customerSearch == ""){ ?><input type="text" placeholder="Vendor" name="VendorSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="VendorSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="VendorSearch"  /><?php } ?>
+                            <?php if($salesOrderSearch == ""){ ?><input type="text" style="display:none;" placeholder="Source Document" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" style="display:none;" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
+                            <?php if($dateSearch == ""){ ?><input type="text" placeholder="Order Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
+                            <input type="submit" value="search" class="btn btn-light" name="search" style="background:#0a3d67; border-color:#0a3d67; color:white;">
+                            <input type="submit" value="Clear" class="btn btn-light" name="clear" style="background:#0a3d67; border-color:#0a3d67; color:white;">
+                            <spam class="btn btn-light" style="color:white; background:#0a3d67;">Total Rows: <?php echo $count ?></spam>
+                        </form>
+                    </div>
+        
+                        <table class="table">
+                            <thead class="thead" style="background:#0a3d67; color:white;">
+                                <tr>
+                                    <th scope="col">Purchase #</th>
+                                    <th scope="col">Order Date</th>
+                                    <th scope="col">Vendor</th>
+                                    <th scope="col">Schedule Date</th>
+                                    <th scope="col">Sales Person</th>
+                                    <th scope="col">Source Document</th>
+                                    <th scope="col">Untaxed Amount</th>
+                                    <th scope="col">Tax</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
                     /**
                      * READING THE INVOICE OBJECT
                      * 
@@ -717,47 +993,57 @@ static function menuPdetailed($typ, $invoices, $user, $type, $invoice_number, $c
                             <td><?php if($invoice->getUntaxed_amount()!=""){echo "$". $invoice->getUntaxed_amount();}else{echo "$0.00";} ?></td>
                             <td><?php if($invoice->getTax()!=""){echo "$".$invoice->getTax();}else{echo "$0.00";} ?></td>
                             <td><?php if($invoice->getTotal()!=""){echo "$".$invoice->getTotal();}else{echo "$0.00";} ?></td>
-                            <td><a href="invoice-Pdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getPurchase_number(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Invoice" class="openInvoice" /></a></td>
+                            <td><a href="invoice-Pdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getPurchase_number(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Invoice" class="btn btn-light" style="color:white; background:#0a3d67;" /></a></td>
                         </tr></a>
 
                         <?php     
                     } 
                 ?>
-            </table>
+                            </tbody>
+                        </table>
+                    </div>
+
+            </div>
         </div>
     </section>
+        <!-- end: Page Content -->
 <?php }
 
 static function menuJoEdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
-    <section>   
-        <dic class="row">
-           <!-- <h1> <?php echo $typ;?> </h1> -->
-        </div>
-        <dic class="row">
-            <form method="post">
-                <h1 class="menu-detailed-title"><?php echo $typ;?></h1>
-                <?php if($invoice_number == ""){ ?><input type="text" placeholder="Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
-                <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="VendorSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="VendorSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="VendorSearch"  /><?php } ?>
-                <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Reference" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch"  class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
-                <?php if($dateSearch == ""){ ?><input type="text" placeholder="Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
-                <input type="submit" value="search" class="search_field" name="search">
-                <input type="submit" value="Clear" class="search_field" name="clear">
-                <spam>Total Rows: <?php echo $count ?></spam>
-            </form>
-        </div>
-        <div class="page_body">
-            <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Number</th>
-                    <th>Customer</th>
-                    <th>Reference</th>
-                    <th>Journal</th>
-                    <th>Status</th>
-                    <th>Amount</th>
-                    <th></th>
-                </tr>
-                <?php
+    <!-- Page Content -->
+    <section id="page-content">
+        <div class="content col-lg-12">  
+            <div class="row">
+                    <div class="content col-lg-3">
+                        <h2 class="menu-detailed-title"><?php echo $typ;?></h2>
+                    </div>
+                    <div class="content col-lg-9">
+                        <form method="post">
+                            <?php if($invoice_number == ""){ ?><input type="text" placeholder="Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
+                            <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="VendorSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="VendorSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="VendorSearch"  /><?php } ?>
+                            <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Reference" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch"  class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
+                            <?php if($dateSearch == ""){ ?><input type="text" placeholder="Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
+                            <input type="submit" value="search"class="btn btn-light" name="search" style="background:#0a3d67; border-color:#0a3d67; color:white;">
+                            <input type="submit" value="Clear" class="btn btn-light" name="clear" style="background:#0a3d67; border-color:#0a3d67; color:white;">
+                            <spam class="btn btn-light" style="color:white; background:#0a3d67;">Total Rows: <?php echo $count ?></spam>
+                        </form>
+                    </div>
+                       
+                        <table class="table">
+                            <thead class="thead" style="background:#0a3d67; color:white;">
+                                <tr>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Number</th>
+                                    <th scope="col">Customer</th>
+                                    <th scope="col">Reference</th>
+                                    <th scope="col">Journal</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
                     /**
                      * READING THE INVOICE OBJECT
                      * 
@@ -772,51 +1058,61 @@ static function menuJoEdetailed($typ, $invoices, $user, $type, $invoice_number, 
                             <td><?php echo $invoice->getJournal() ?></td>
                             <td><?php echo $invoice->getStatus() ?></td>
                             <td><?php if($invoice->getAmount()!=""){echo "$". $invoice->getAmount();}else{echo "$0.00";} ?></td>
-                            <td><a href="invoice-JoIdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getNumber(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="More Details" class="openInvoice" /></a></td>
+                            <td><a href="invoice-JoIdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getNumber(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="More Details" class="btn btn-light" style="color:white; background:#0a3d67;" /></a></td>
                         </tr></a>
 
                         <?php     
                     } 
                 ?>
-            </table>
-        </div>
-    </section>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+     </section>
+    <!-- end: Page Content -->
+    
 <?php }
 
    static function menuDetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count, $inv){ ?>
-        <section>   
-            <dic class="row">
-               <!-- <h1> <?php echo $typ;?> </h1> -->
-            </div>
-            <dic class="row">
-                <form method="post">
-                    <h1 class="menu-detailed-title"><?php echo $typ;?></h1>
-                    <?php if($invoice_number == ""){ ?><input type="text" placeholder="Invoice Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
-                    <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Sales Order Number" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
-                    <?php if($dateSearch == ""){ ?><input type="text" placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
-                    <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
-                    <input type="submit" value="search" class="search_field" name="search">
-                    <?php if($invoice_number != "" || $customerSearch == "" || $dateSearch == "" || $salesOrderSearch == ""){ ?><input type="submit" value="Clear" class="search_field" name="clear"><?php }else{} ?>
-                    <?php if ($inv == ""){}else{ ?> <a href="menu-Badetailed.php?user=<?php echo $user; ?>&type=<?php echo $type ?>&typ=Balances"><input type="button" value="Go Back" class="search_field" name="back" style="background:#152c4e; color:white; width:5%; font-size:12px"></a> <?php } ?>
-                    <spam>Total rows: <?php echo $count; ?></spam>
-                </form>
-            </div>
-            <div class="page_body">
-                <table>
-                    <tr>
-                        <th>Inovice Number</th>
-                        <th>Sales Order</th>
-                        <th>Customer</th>
-                        <th>Sales Person</th>
-                        <th>Invoice Date</th>
-                        <th>Due Date</th>
-                        <th>untaxed Amount</th>
-                        <th>Amount Due</th>
-                        <th>Tax</th>
-                        <th>Total</th>
-                        <th></th>
-                    </tr>
-                    <?php
+        <!-- Page Content -->
+        <section id="page-content">
+                <div class="content col-lg-12">
+                    <div class="row">
+                        <div class="content col-lg-3">
+                            <h2 class="menu-detailed-title"><?php echo $typ;?></h2>
+                        </div>
+                        <div class="content col-lg-9">
+                        <form method="post">
+                            <?php if($invoice_number == ""){ ?><input type="text" placeholder="Invoice Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
+                            <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Sales Order Number" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
+                            <?php if($dateSearch == ""){ ?><input type="text" placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
+                            <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
+                            <input type="submit" value="search" class="btn btn-light" style="color:white; background:#0a3d67;" name="search">
+                            <?php if($invoice_number != "" || $customerSearch == "" || $dateSearch == "" || $salesOrderSearch == ""){ ?><input type="submit" value="Clear" class="btn btn-light" style="color:white; background:#0a3d67;" name="clear"><?php }else{} ?>
+                            <?php if ($inv == ""){}else{ ?> <a href="menu-Badetailed.php?user=<?php echo $user; ?>&type=<?php echo $type ?>&typ=Balances"><input type="button" value="Go Back" class="search_field" name="back" style="background:#152c4e; color:white; width:5%; font-size:12px"></a> <?php } ?>
+                            <spam class="btn btn-light" style="color:white; background:#0a3d67;">Total rows: <?php echo $count; ?></spam>
+                        </form>
+                        </div>
+                            <table class="table">
+                                <thead class="thead" style="background:#0a3d67; color:white;">
+                                    <tr>
+                                        <th scope="col">Invoice#</th>
+                                        <th scope="col">Sales Order#</th>
+                                        <th scope="col">Customer</th>
+                                        <th scope="col">Sales Person</th>
+                                        <th scope="col">Invoice Date</th>
+                                        <th scope="col">Due Date</th>
+                                        <th scope="col">Untaxed Amount</th>
+                                        <th scope="col">Amount Due</th>
+                                        <th scope="col">Tax</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
                         /**
                          * READING THE INVOICE OBJECT
                          * 
@@ -834,15 +1130,19 @@ static function menuJoEdetailed($typ, $invoices, $user, $type, $invoice_number, 
                                 <td><?php if($invoice->getAmountDue()!=""){echo "$".$invoice->getAmountDue();}else{echo "$0.00";} ?></td>
                                 <td><?php if($invoice->getTax()!=""){echo "$".$invoice->getTax();}else{echo "$0.00";} ?></td>
                                 <td><?php if($invoice->getTotal()!=""){echo "$".$invoice->getTotal();}else{echo "$0.00";} ?></td>
-                                <td><a href="invoice-detailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getInvoiceNumber(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Invoice" class="openInvoice" /></a></td>
+                                <td><a href="invoice-detailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getInvoiceNumber(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Invoice" class="btn btn-light" style="color:white; background:#0a3d67;" /></a></td>
                             </tr></a>
 
                             <?php     
                         } 
                     ?>
-                </table>
-            </div>
+                                </tbody>
+                            </table>
+                        
+                    </div>
+                </div>
         </section>
+        <!-- end: Page Content -->
    <?php }
 
 static function invoiceCNDetailed($typ, $invoice, $invoice_lines, $user, $type, $invo){ 
@@ -1025,79 +1325,105 @@ static function invoiceINDetailed($typ, $invoice, $user, $typee, $invo){
     
     
     ?>
+<section>
+            <div class="col-lg-12">
+                <div class="row">
 
-    <section class="inv-content">   
-        <div class="row">
-            <h1 class="menu-detailed-title"> <?php echo $product;?> </h1>
-            <a href="menu-INdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $typee; ?>"><input type="button" value="Go back" name="goBack" class="print_button" /></a>
-            <form method="POST">
-                <input type="submit" value="Print" name="print" class="print_button" />
-            </form>
-        </div>
-        <div class="row">
-            <div class="invoice-table">
-                <table>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Sku</td>
-                        <td><?php echo $sku; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Description</td>
-                        <td><?php echo $product; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Vendor</td>
-                        <td><?php echo $vendor; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Barcode</td>
-                        <td><?php echo $barcode; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Sales Price</td>
-                        <td>$<?php echo $sales_price; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Cost</td>
-                        <td>$<?php echo $cost; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Customer Tax</td>
-                        <td><?php echo $customer_tax; ?></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="invoice-table">
-                <table>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Category</td>
-                        <td><?php echo $category; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Product Type</td>
-                        <td><?php echo $type; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Qty on hand</td>
-                        <td><?php echo $qty_onhand; ?></td>
-                    </tr>
+                    <div class="row center" style="width:95%; border-radius:10px; padding:30px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+                        <div class="col-lg-4">
+                            <h2 class="menu-detailed-title"> <?php echo $product;?> </h2>
+                        </div>
+                        <div class="col-lg-8">
+                            <form method="POST">
+                                <a href="menu-INdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
+                                <input type="submit" value="Print" name="print" class="btn btn-light" style="color:white; background:#0a3d67;" />
+                            </form>
+                        </div><br><br><br><br><br><br>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>SKU</h4>
+                                <p><?php echo $sku; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Vendor</h4>
+                                <p><?php echo $vendor; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Barcode</h4>
+                                <p><?php echo $barcode; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Sales Price</h4>
+                                <p><?php if($sales_price !=""){ echo "$".$sales_price;  } else{} ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Cost</h4>
+                                <p><?php if($cost !=""){ echo "$".$cost;  } else{} ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Category</h4>
+                                <p><?php echo $category; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Invoice Type</h4>
+                                <p><?php echo $type; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Qty On hand</h4>
+                                <p><?php echo $qty_onhand; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>created by</h4>
+                                <p><?php echo $created_by; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Created On</h4>
+                                <p><?php echo $created_on; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Qty Sold</h4>
+                                <p><?php echo $qty_sold; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Customer Tax</h4>
+                                <p><?php echo $customer_tax; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>web_description</h4>
+                                <p><?php echo $web_description; ?></p>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Created By</td>
-                        <td><?php echo $created_by; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Created On</td>
-                        <td><?php echo $created_on; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Web Description</td>
-                        <td><?php echo $web_description; ?></td>
-                    </tr>
-                </table>
+                </div>
             </div>
-        </div>
     </section>
+    <!-- Page Content -->
+    
 <?php }
 
 static function invoiceCLIDetailed($typ, $invoice, $user, $type, $invo){ 
@@ -1134,86 +1460,104 @@ static function invoiceCLIDetailed($typ, $invoice, $user, $type, $invo){
     }
     ?>
 
-    <section class="inv-content">   
-        <div class="row">
-            <h1 class="menu-detailed-title"> <?php echo $customer;?> </h1>
-            <a href="menu-CLIdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="print_button" /></a>
-            <form method="POST">
-                <input type="submit" value="Print" name="print" class="print_button" />
-            </form>
-
-        </div>
-        <div class="row">
-            <div class="invoice-table">
-                <table>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Customers</td>
-                        <td><?php echo $customer; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Delivery Address</td>
-                        <td><?php echo $street." ".$state.", ".$city.", ".$postal_code.", ".$country; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Payment Terms</td>
-                        <td><?php echo $payment_terms; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Fiscal Position</td>
-                        <td><?php echo $fiscal; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Created By</td>
-                        <td><?php echo $by; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Customer Id</td>
-                        <td><?php echo $customer_id; ?></td>
-                    </tr>
+<section>
+            <div class="col-lg-12">
+                <div class="row">
+                        <div class="col-lg-12" style="text-align:center;">
+                            <form method="POST">
+                                <a href="menu-CLIdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
+                               
+                            </form>
+                        </div>
+                    <div class="row center" style="width:95%; border-radius:10px; padding:30px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+                        <div class="col-lg-12" style="margin-bottom:50px;">
+                            <h2 class="menu-detailed-title"> <?php echo $customer;?> </h2>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Delivery Address</h4>
+                                <p><?php echo $street.", ".$city.", ".$state.", ".$postal_code.", ".$country; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Payment Terms</h4>
+                                <p><?php echo $payment_terms; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Fiscal Postion</h4>
+                                <p><?php echo $fiscal; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Created By</h4>
+                                <p><?php  echo $by;   ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Customer Id</h4>
+                                <p><?php echo $customer_id; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>phone</h4>
+                                <p><?php echo $phone." ".$phone2; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Email</h4>
+                                <p><?php echo $email; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Fax</h4>
+                                <p><?php echo $fax; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Contact Name</h4>
+                                <p><?php echo $contact_name; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>PST</h4>
+                                <p><?php echo $pst; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Tags</h4>
+                                <p><?php echo $tags; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Notes</h4>
+                                <p><?php echo $notes; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Warning Message</h4>
+                                <p><?php echo $warning; ?></p>
+                            </div>
+                        </div>
+                    </div>
                     
-                </table>
+                </div>
             </div>
-            <div class="invoice-table">
-                <table>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Phone</td>
-                        <td><?php echo $phone." ".$phone2." ".$mobile; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Email</td>
-                        <td><?php echo $email; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Fax</td>
-                        <td><?php echo $fax; ?></td>
-                    </tr>
-                    
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Contact Name</td>
-                        <td><?php echo $contact_name." ".$second_contact; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">PST</td>
-                        <td><?php echo $pst; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Tags</td>
-                        <td><?php echo $tags; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Notes</td>
-                        <td><?php echo $notes.", ".$warning; ?></td>
-                    </tr>
-
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Notes</td>
-                        <td><?php echo $notes.", ".$warning; ?></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
     </section>
+    <!-- Page Content -->
 <?php }
 
 
@@ -1512,139 +1856,171 @@ static function invoiceDetailed($typ, $invoice, $invoice_lines, $user, $type, $i
     
     ?>
 
-    <section class="inv-content">   
-        <div class="row">
-            <h1 class="menu-detailed-title"> <?php echo $invo;?> </h1>
-            <a href="menu-detailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="print_button" /></a>
-            <form method="POST">
-                <input type="submit" value="Print" name="print" class="print_button" />
-            </form>
+    <section>
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h2 class="menu-detailed-title"> <?php echo $invo;?> </h2>
+                    </div>
+                    <div class="col-lg-9" style="float:right;">
+                        <form method="POST">
+                            <a href="menu-detailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
+                            <input type="submit" value="Print" name="print" class="btn btn-light" style="color:white; background:#0a3d67;" />
+                        </form>
+                    </div><br><br><br><br><br><br>
 
-        </div>
-        <div class="row">
-            <div class="invoice-table">
-                <table>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Customers</td>
-                        <td><?php echo $customer; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Delivery Address</td>
-                        <td><?php echo $delivery_address; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Payment Terms</td>
-                        <td><?php echo $payment_terms; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Global Comments</td>
-                        <td><?php echo $global; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Invoice Notes</td>
-                        <td><?php echo $invoice_notes; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Customer Notes</td>
-                        <td><?php echo $customerNotes; ?></td>
-                    </tr>
-                </table>
+                    <div class="row center" style="width:95%; border-radius:10px; padding:30px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Customer</h4>
+                                <p><?php echo $customer; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Delivering Address</h4>
+                                <p><?php echo $delivery_address; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Payment Terms</h4>
+                                <p><?php echo $payment_terms; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Global Comments</h4>
+                                <p><?php echo $global; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Invoice Notes</h4>
+                                <p><?php echo $invoice_notes; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Customer Notes</h4>
+                                <p><?php echo $customerNotes; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Invoice Date</h4>
+                                <p><?php echo $invoice_date; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Due Date</h4>
+                                <p><?php echo $due_date; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Sales Person</h4>
+                                <p><?php echo $sales_person; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Sales Team</h4>
+                                <p><?php echo $sales_team; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Customer Po#</h4>
+                                <p><?php echo $customer_po; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Warehouse Notes</h4>
+                                <p><?php echo $warehouse_notes; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
-            <div class="invoice-table">
-                <table>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Invoice Date</td>
-                        <td><?php echo $invoice_date; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Due Date</td>
-                        <td><?php echo $due_date; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Sales Person</td>
-                        <td><?php echo $sales_person; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Sales Team</td>
-                        <td><?php echo $sales_team; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Customer PO#</td>
-                        <td><?php echo $customer_po; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Warehouse Notes</td>
-                        <td><?php echo $warehouse_notes; ?></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="invoice-line-table">
-                    <table>
-                        <tr>
-                            <th>Sku</th>
-                            <th>Product</th>
-                            <th>Serial Number</th>
-                            <th>Notes</th>
-                            <th>RMA Notes</th>
-                            <th>QTY Ordered</th>
-                            <th>Quantity</th>
-                            <th>QTY Bo</th>
-                            <th>Price</th>
-                            <th>Unit Price after Disocunt</th>
-                            <th>Taxes</th>
-                            <th>Subtotal</th>
-                        </tr>
-                        
-                        <?php
-                        
-                            foreach($invoice_lines as $line)
-                            { ?>
+    </section>
+    <!-- Page Content -->
+    <section id="page-content">
+        <div class="content col-lg-12">
+            <div class="row">
+                        <table class="table">
+                            <thead class="thead" style="background:#0a3d67; color:white;">
                                 <tr>
-                                    <td><?php echo $line->getSku(); ?></td>
-                                    <td><?php echo $line->getProduct(); ?></td>
-                                    <td><?php echo $line->getSerial() ?></td>
-                                    <td><?php echo $line->getNotes(); ?></td>
-                                    <td><?php echo $line->getRma(); ?></td>
-                                    <td><?php echo $line->getQty_delivered(); ?></td>
-                                    <td><?php echo $line->getQuantity(); ?></td>
-                                    <td><?php echo $line->getQuantity_bo(); ?></td>
-                                    <td>$<?php echo $line->getUnit_price(); ?></td>
-                                    <td>$<?php echo $line->getUnit_price_after(); ?></td>
-                                    <td><?php echo $line->getTaxes(); ?></td>
-                                    <td>$<?php echo $line->getUntaxed_amount(); ?></td>
+                                    <th scope="col">Sku</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Serial Number</th>
+                                    <th scope="col">Notes</th>
+                                    <th scope="col">RMA Notes</th>
+                                    <th scope="col">Qty Ordered</th>
+                                    <th scope="col">Qty</th>
+                                    <th scope="col">Qty Bo</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Unit Price after discount</th>
+                                    <th scope="col">Taxes</th>
+                                    <th scope="col">Subtotal</th>
                                 </tr>
-                           <?php }
+                            </thead>
+                            <tbody>
+                            <?php
                         
+                        foreach($invoice_lines as $line)
+                        { ?>
+                            <tr>
+                                <td><?php echo $line->getSku(); ?></td>
+                                <td><?php echo $line->getProduct(); ?></td>
+                                <td><?php echo $line->getSerial() ?></td>
+                                <td><?php echo $line->getNotes(); ?></td>
+                                <td><?php echo $line->getRma(); ?></td>
+                                <td><?php echo $line->getQty_delivered(); ?></td>
+                                <td><?php echo $line->getQuantity(); ?></td>
+                                <td><?php echo $line->getQuantity_bo(); ?></td>
+                                <td>$<?php echo $line->getUnit_price(); ?></td>
+                                <td>$<?php echo $line->getUnit_price_after(); ?></td>
+                                <td><?php echo $line->getTaxes(); ?></td>
+                                <td>$<?php echo $line->getUntaxed_amount(); ?></td>
+                            </tr>
+                       <?php }
+                    
                         ?>
-                   
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row" style=" float:right; margin-right:50px; ">
+            
+                        <table>
+                            <tr>
+                                <td >Untaxed Amount:</td>
+                                <td style="margin-left:10px;">$<?php if($untaxed_amount_total == ""){echo "0.00";}else{echo $untaxed_amount_total;} ?></td>
+                            </tr>
+                            <tr>
+                                <td>Tax:</td>
+                                <td>$<?php if($total_taxes == ""){echo "0.00";}else{echo $total_taxes;} ?></td>
+                            </tr>
+                            <tr>
+                                <td>Total:</td>
+                                <td>$<?php if($total_total == ""){echo "0.00";}else{echo $total_total;} ?></td>
+                            </tr>
+                            <tr>
+                                <td>Amount Due:</td>
+                                <td>$<?php if($amount_due_total == ""){echo "0.00";}else{echo $amount_due_total;} ?></td>
+                            </tr>
+                        </table>
+                    </div>
             </div>
         </div>
-        <div class="row">
-            <div class="invoice-total-line">
-                    <table>
-                        <tr>
-                            <td>Untaxed Amount:</td>
-                            <td>$<?php if($untaxed_amount_total == ""){echo "0.00";}else{echo $untaxed_amount_total;} ?></td>
-                        </tr>
-                        <tr>
-                            <td>Tax:</td>
-                            <td>$<?php if($total_taxes == ""){echo "0.00";}else{echo $total_taxes;} ?></td>
-                        </tr>
-                        <tr>
-                            <td>Total:</td>
-                            <td>$<?php if($total_total == ""){echo "0.00";}else{echo $total_total;} ?></td>
-                        </tr>
-                        <tr>
-                            <td>Amount Due:</td>
-                            <td>$<?php if($amount_due_total == ""){echo "0.00";}else{echo $amount_due_total;} ?></td>
-                        </tr>
-                    </table>
+
             </div>
         </div>
     </section>
+        <!-- end: Page Content -->
 <?php }
 
 static function formAdd($typ){ ?>
@@ -1807,5 +2183,28 @@ static function formAdd($typ){ ?>
         </div>
         <!-- End Body -->
     <?php }
+
+static function endHead2(){ ?>
+                </div> <!-- end: Body Inner -->
+        <!-- Scroll top -->
+        <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
+        <!--Plugins-->
+        <script src="js/jquery.js"></script>
+        <script src="js/plugins.js"></script>
+        <!--Template functions-->
+        <script src="js/functions.js"></script>
+        <script> //shows message after add information
+            setTimeout(function() {
+            $('#msg').fadeOut('fast');
+            }, 2000); // <-- time in milliseconds
+
+            setTimeoutLogError(function() {  //shows login error message
+            $('#loginError').fadeOut('fast');
+            }, 2000); // <-- time in milliseconds
+        </script>
+    </body>
+
+    </html>
+<?php }
 
 } ?>

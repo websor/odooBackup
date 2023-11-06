@@ -250,14 +250,14 @@ while($row_user = mysqli_fetch_assoc($result_User))
     $newInvoiceLine->setCreated_by($row_user['created_by']);
     $newInvoiceLine->setQty_sold($row_user['qty_sold']);
     $newInvoiceLine->setCustomer_tax($row_user['customer_tax']);
-    $newInvoiceLine->setWeb_description($row_user['created_by']);
+    $newInvoiceLine->setWeb_description($row_user['web_description']);
 }
 
 //Website Structure
-Page::head();
-Page::header($email, $type);
+Page::head2();
+Page::header2($email, $type);
 Page::invoiceINDetailed($typ, $newInvoiceLine, $email, $type, $inv);
-Page::footer();
-Page::endHead();
+Page::footer2();
+Page::endHead2();
 
  ?>
