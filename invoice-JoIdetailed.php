@@ -271,10 +271,10 @@ while($row_user = mysqli_fetch_assoc($result_User_line))
 } 
 
 //Website Structure
-Page::head();
-Page::header($email, $type);
+Page::head2();
+Page::header2($email, $type);
 Page::invoiceJoIDetailed($typ, $newInvoice, $invoiceLines, $email, $type, $inv);
-Page::footer();
-Page::endHead();
+Page::footer2();
+Page::endHead2();
 
  ?>

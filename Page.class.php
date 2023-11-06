@@ -749,7 +749,7 @@ static function menuCNdetailed($typ, $invoices, $user, $type, $invoice_number, $
                             <td><?php if($invoice->getAmount_due()!=""){echo "$".$invoice->getAmount_due();}else{echo "$0.00";} ?></td>
                             <td><?php if($invoice->getTax()!=""){echo "$".$invoice->getTax();}else{echo "$0.00";} ?></td>
                             <td><?php if($invoice->getTotal()!=""){echo "$".$invoice->getTotal();}else{echo "$0.00";} ?></td>
-                            <td><a href="invoice-CNdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getCreditnote_number(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Invoice" class="btn btn-light" style="background:#0a3d67; color:white;" /></a></td>
+                            <td><a href="invoice-CNdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getCreditnote_number(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open CreditNote" class="btn btn-light" style="background:#0a3d67; color:white;" /></a></td>
                         </tr></a>
 
                         <?php     
@@ -993,7 +993,7 @@ static function menuPdetailed($typ, $invoices, $user, $type, $invoice_number, $c
                             <td><?php if($invoice->getUntaxed_amount()!=""){echo "$". $invoice->getUntaxed_amount();}else{echo "$0.00";} ?></td>
                             <td><?php if($invoice->getTax()!=""){echo "$".$invoice->getTax();}else{echo "$0.00";} ?></td>
                             <td><?php if($invoice->getTotal()!=""){echo "$".$invoice->getTotal();}else{echo "$0.00";} ?></td>
-                            <td><a href="invoice-Pdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getPurchase_number(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Invoice" class="btn btn-light" style="color:white; background:#0a3d67;" /></a></td>
+                            <td><a href="invoice-Pdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getPurchase_number(); ?>&searchInvoice=<?php echo $invoice_number; ?>&searchSale=<?php echo $salesOrderSearch; ?>&searchCustomer=<?php echo $customerSearch; ?>&searchDate=<?php echo $dateSearch; ?>"><input type="button" value="Open Purchase" class="btn btn-light" style="color:white; background:#0a3d67;" /></a></td>
                         </tr></a>
 
                         <?php     
@@ -1170,136 +1170,162 @@ static function invoiceCNDetailed($typ, $invoice, $invoice_lines, $user, $type, 
     
     ?>
 
-    <section class="inv-content">   
-        <div class="row">
-            <h1 class="menu-detailed-title"> <?php echo $invo;?> </h1>
-            <a href="menu-CNdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="print_button" /></a>
-            <form method="POST">
-                <input type="submit" value="Print" name="print" class="print_button" />
-            </form>
+<section>
+    <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-12" style="text-align:center;">
+                        <form method="POST">
+                            <a href="menu-CNdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
+                            <input type="submit" value="Print" name="print" class="btn btn-light" style="color:white; background:#0a3d67;" />
+                        </form>
+                    </div>
+                    <div class="row center" style="width:95%; border-radius:10px; padding:30px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+                        <div class="col-lg-12" style="margin-bottom:40px;">
+                            <h2 class="menu-detailed-title"> <?php echo $invo;?> </h2>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Customer</h4>
+                                <p><?php echo $customer; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Delivering Address</h4>
+                                <p><?php echo $delivery_address; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Payment Terms</h4>
+                                <p><?php echo $payment_terms; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Global Comments</h4>
+                                <p><?php echo $global; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Invoice Notes</h4>
+                                <p><?php echo $invoice_notes; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Customer Notes</h4>
+                                <p><?php echo $customerNotes; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Invoice Date</h4>
+                                <p><?php echo $invoice_date; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Due Date</h4>
+                                <p><?php echo $due_date; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Sales Person</h4>
+                                <p><?php echo $sales_person; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Customer Po#</h4>
+                                <p><?php echo $customer_po; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Warehouse Notes</h4>
+                                <p><?php echo $warehouse_notes; ?></p>
+                            </div>
+                        </div>
+                        <br><br><br>
+                        <div class="content col-lg-12">
+                                    <div class="row">
+                                                <table class="table">
+                                                    <thead class="thead" style="background:#0a3d67; color:white;">
+                                                        <tr>
+                                                            <th scope="col">Sku</th>
+                                                            <th scope="col">Product</th>
+                                                            <th scope="col">Serial Number</th>
+                                                            <th scope="col">Notes</th>
+                                                            <th scope="col">RMA Notes</th>
+                                                            <th scope="col">Qty Ordered</th>
+                                                            <th scope="col">Qty</th>
+                                                            <th scope="col">Qty Bo</th>
+                                                            <th scope="col">Price</th>
+                                                            <th scope="col">Unit Price after discount</th>
+                                                            <th scope="col">Taxes</th>
+                                                            <th scope="col">Subtotal</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php
+                                                
+                                                foreach($invoice_lines as $line)
+                                                { ?>
+                                                    <tr>
+                                                        <td><?php echo $line->getSku(); ?></td>
+                                                        <td><?php echo $line->getProduct(); ?></td>
+                                                        <td><?php echo $line->getSerial() ?></td>
+                                                        <td><?php echo $line->getNotes(); ?></td>
+                                                        <td><?php echo $line->getRma(); ?></td>
+                                                        <td><?php echo $line->getQty_delivered(); ?></td>
+                                                        <td><?php echo $line->getQuantity(); ?></td>
+                                                        <td><?php echo $line->getQuantity_bo(); ?></td>
+                                                        <td>$<?php echo $line->getUnit_price(); ?></td>
+                                                        <td>$<?php echo $line->getUnit_price_after(); ?></td>
+                                                        <td><?php echo $line->getTaxes(); ?></td>
+                                                        <td>$<?php echo $line->getUntaxed_amount(); ?></td>
+                                                    </tr>
+                                            <?php }
+                                            
+                                                ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="row" style=" float:right; margin-right:50px; ">
+                                    
+                                                <table>
+                                                    <tr>
+                                                        <td >Untaxed Amount:</td>
+                                                        <td style="margin-left:10px;">$<?php if($untaxed_amount_total == ""){echo "0.00";}else{echo $untaxed_amount_total;} ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tax:</td>
+                                                        <td>$<?php if($total_taxes == ""){echo "0.00";}else{echo $total_taxes;} ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Total:</td>
+                                                        <td>$<?php if($total_total == ""){echo "0.00";}else{echo $total_total;} ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Amount Due:</td>
+                                                        <td>$<?php if($amount_due_total == ""){echo "0.00";}else{echo $amount_due_total;} ?></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                    </div>
+                                </div>
 
-        </div>
-        <div class="row">
-            <div class="invoice-table">
-                <table>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Customers</td>
-                        <td><?php echo $customer; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Delivery Address</td>
-                        <td><?php echo $delivery_address; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Payment Terms</td>
-                        <td><?php echo $payment_terms; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Global Comments</td>
-                        <td><?php echo $global; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Invoice Notes</td>
-                        <td><?php echo $invoice_notes; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Customer Notes</td>
-                        <td><?php echo $customerNotes; ?></td>
-                    </tr>
-                </table>
             </div>
-            <div class="invoice-table">
-                <table>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Invoice Date</td>
-                        <td><?php echo $invoice_date; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Due Date</td>
-                        <td><?php echo $due_date; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Sales Person</td>
-                        <td><?php echo $sales_person; ?></td>
-                    </tr>
+    </div>
+                    </div>
                     
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Customer PO#</td>
-                        <td><?php echo $customer_po; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Warehouse Notes</td>
-                        <td><?php echo $warehouse_notes; ?></td>
-                    </tr>
-                </table>
+                </div>
+                
             </div>
-        </div>
-        <div class="row">
-            <div class="invoice-line-table">
-                    <table>
-                        <tr>
-                            <th>Sku</th>
-                            <th>Product</th>
-                            <th>Serial Number</th>
-                            <th>Notes</th>
-                            <th>RMA Notes</th>
-                            <th>QTY Ordered</th>
-                            <th>Quantity</th>
-                            <th>QTY Bo</th>
-                            <th>Price</th>
-                            <th>Unit Price after Disocunt</th>
-                            <th>Taxes</th>
-                            <th>Subtotal</th>
-                        </tr>
-                        
-                        <?php
-                        
-                            foreach($invoice_lines as $line)
-                            { ?>
-                                <tr>
-                                    <td><?php echo $line->getSku(); ?></td>
-                                    <td><?php echo $line->getProduct(); ?></td>
-                                    <td><?php echo $line->getSerial() ?></td>
-                                    <td><?php echo $line->getNotes(); ?></td>
-                                    <td><?php echo $line->getRma(); ?></td>
-                                    <td><?php echo $line->getQty_delivered(); ?></td>
-                                    <td><?php echo $line->getQuantity(); ?></td>
-                                    <td><?php echo $line->getQuantity_bo(); ?></td>
-                                    <td>$<?php echo $line->getUnit_price(); ?></td>
-                                    <td>$<?php echo $line->getUnit_price_after(); ?></td>
-                                    <td><?php echo $line->getTaxes(); ?></td>
-                                    <td>$<?php echo $line->getUntaxed_amount(); ?></td>
-                                </tr>
-                           <?php }
-                        
-                        ?>
-                   
-                    </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="invoice-total-line">
-                    <table>
-                        <tr>
-                            <td>Untaxed Amount:</td>
-                            <td>$<?php if($untaxed_amount_total == ""){echo "0.00";}else{echo $untaxed_amount_total;} ?></td>
-                        </tr>
-                        <tr>
-                            <td>Tax:</td>
-                            <td>$<?php if($total_taxes == ""){echo "0.00";}else{echo $total_taxes;} ?></td>
-                        </tr>
-                        <tr>
-                            <td>Total:</td>
-                            <td>$<?php if($total_total == ""){echo "0.00";}else{echo $total_total;} ?></td>
-                        </tr>
-                        <tr>
-                            <td>Amount Due:</td>
-                            <td>$<?php if($amount_due_total == ""){echo "0.00";}else{echo $amount_due_total;} ?></td>
-                        </tr>
-                    </table>
-            </div>
-        </div>
-    </section>
+</section>
 <?php }
 
 static function invoiceINDetailed($typ, $invoice, $user, $typee, $invo){ 
@@ -1591,141 +1617,172 @@ static function invoicePDetailed($typ, $invoice, $invoice_lines, $user, $type, $
     
     ?>
 
-    <section class="inv-content">   
+<section>
+    <div class="col-lg-12">
         <div class="row">
-            <h1 class="menu-detailed-title"> <?php echo $invo;?> </h1>
-            <a href="menu-Pdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="print_button" /></a>
-            <form method="POST">
-                <input type="submit" value="Print" name="print" class="print_button" />
-            </form>
-
-        </div>
-        <div class="row">
-            <div class="invoice-table">
-                <table>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Vendor</td>
-                        <td><?php echo $vendor; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Deliver to</td>
-                        <td><?php echo $deliver_to; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Payment Terms</td>
-                        <td><?php echo $terms; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Comments</td>
-                        <td><?php echo $comments; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Status</td>
-                        <td><?php echo $status; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Stellar Status</td>
-                        <td><?php echo $stellar_status; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Sales order</td>
-                        <td><?php echo $sales_number; ?></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="invoice-table">
-                <table>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Order Date</td>
-                        <td><?php echo $order_date; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Schedule Date</td>
-                        <td><?php echo $schedule_date; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Sales Person</td>
-                        <td><?php echo $sales_person; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Broker</td>
-                        <td><?php echo $broker; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Source Document</td>
-                        <td><?php echo $source_document; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Currancy</td>
-                        <td><?php echo $currancy; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Bill Reference</td>
-                        <td><?php echo $bill_reference; ?></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="invoice-line-table">
-                    <table>
-                        <tr>
-                            <th>Created On</th>
-                            <th>Purchase Order</th>
-                            <th>Sku</th>
-                            <th>Product</th>
-                            <th>Vendor</th>
-                            <th>Quantity</th>
-                            <th>Received Qty</th>
-                            <th>Unit Cost</th>
-                            <th>Taxes</th>
-                            <th>Subtotal</th>
-                            <th>Total</th>
-
-                        
-                        <?php
-                        
-                            foreach($invoice_lines as $line)
-                            { ?>
-                                <tr>
-                                    <td><?php echo $line->getCreated_on(); ?></td>
-                                    <td><?php echo $line->getPurchase_number(); ?></td>
-                                    <td><?php echo $line->getSku() ?></td>
-                                    <td><?php echo $line->getProduct(); ?></td>
-                                    <td><?php echo $line->getVendor(); ?></td>
-                                    <td><?php echo $line->getQuantity(); ?></td>
-                                    <td><?php echo $line->getReceive_qty(); ?></td>
-                                    <td><?php echo $line->getUnit_cost(); ?></td>
-                                    <td>$<?php echo $line->getTaxes(); ?></td>
-                                    <td>$<?php echo $line->getSubtotal(); ?></td>
-                                    <td>$<?php echo $line->getTotal(); ?></td>
-                                </tr>
-                           <?php }
-                        
-                        ?>
-                   
-                    </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="invoice-total-line">
-                    <table>
-                        <tr>
-                            <td>Untaxed Amount:</td>
-                            <td>$<?php if($untaxed_amount == ""){echo "0.00";}else{echo $untaxed_amount;} ?></td>
-                        </tr>
-                        <tr>
-                            <td>Tax:</td>
-                            <td>$<?php if($total_taxes == ""){echo "0.00";}else{echo $total_taxes;} ?></td>
-                        </tr>
-                        <tr>
-                            <td>Total:</td>
-                            <td>$<?php if($total_total == ""){echo "0.00";}else{echo $total_total;} ?></td>
-                        </tr>
-                    </table>
-            </div>
-        </div>
-    </section>
+                    <div class="col-lg-12" style="text-align:center;">
+                        <form method="POST">
+                            <a href="menu-Pdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
+                            <input type="submit" value="Print" name="print" class="btn btn-light" style="color:white; background:#0a3d67;" />
+                        </form>
+                    </div>
+                    <div class="row center" style="width:95%; border-radius:10px; padding:30px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+                        <div class="col-lg-12" style="margin-bottom:40px;">
+                            <h2 class="menu-detailed-title"> <?php echo $invo;?> </h2>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Vendor</h4>
+                                <p><?php echo $vendor; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Delivering TO</h4>
+                                <p><?php echo $deliver_to; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Payment Terms</h4>
+                                <p><?php echo $terms; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Comments</h4>
+                                <p><?php echo $comments; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Status</h4>
+                                <p><?php echo $status; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Stellar Status</h4>
+                                <p><?php echo $stellar_status; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Sales Order</h4>
+                                <p><?php echo $sales_number; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Order Date</h4>
+                                <p><?php echo $order_date; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Schedule Date</h4>
+                                <p><?php echo $schedule_date; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Sales Person</h4>
+                                <p><?php echo $sales_person; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Source Document</h4>
+                                <p><?php echo $source_document; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Broker</h4>
+                                <p><?php echo $broker; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Currancy</h4>
+                                <p><?php echo $currancy; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Bill Reference</h4>
+                                <p><?php echo $bill_reference; ?></p>
+                            </div>
+                        </div>
+                        <br><br><br>
+                        <div class="content col-lg-12">
+                                    <div class="row">
+                                                <table class="table">
+                                                    <thead class="thead" style="background:#0a3d67; color:white;">
+                                                        <tr>
+                                                            <th scope="col">Created On</th>
+                                                            <th scope="col">Purchase Order</th>
+                                                            <th scope="col">Sku</th>
+                                                            <th scope="col">Product</th>
+                                                            <th scope="col">Vendor</th>
+                                                            <th scope="col">Quantity</th>
+                                                            <th scope="col">Received Qty</th>
+                                                            <th scope="col">Unit Cost</th>
+                                                            <th scope="col">Taxes</th>
+                                                            <th scope="col">Subtotal</th>
+                                                            <th scope="col">Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php
+                                                
+                                                foreach($invoice_lines as $line)
+                                                { ?>
+                                                    <tr>
+                                                    <td><?php echo $line->getCreated_on(); ?></td>
+                                                    <td><?php echo $line->getPurchase_number(); ?></td>
+                                                    <td><?php echo $line->getSku() ?></td>
+                                                    <td><?php echo $line->getProduct(); ?></td>
+                                                    <td><?php echo $line->getVendor(); ?></td>
+                                                    <td><?php echo $line->getQuantity(); ?></td>
+                                                    <td><?php echo $line->getReceive_qty(); ?></td>
+                                                    <td><?php echo $line->getUnit_cost(); ?></td>
+                                                    <td>$<?php echo $line->getTaxes(); ?></td>
+                                                    <td>$<?php echo $line->getSubtotal(); ?></td>
+                                                    <td>$<?php echo $line->getTotal(); ?></td>
+                                                    </tr>
+                                            <?php }
+                                            
+                                                ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="row" style="float:right;">
+                                                <div class="invoice-total-line">
+                                                        <table>
+                                                            <tr>
+                                                                <td>Untaxed Amount:</td>
+                                                                <td>$<?php if($untaxed_amount == ""){echo "0.00";}else{echo $untaxed_amount;} ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Tax:</td>
+                                                                <td>$<?php if($total_taxes == ""){echo "0.00";}else{echo $total_taxes;} ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Total:</td>
+                                                                <td>$<?php if($total_total == ""){echo "0.00";}else{echo $total_total;} ?></td>
+                                                            </tr>
+                                                        </table>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end row--> 
+        </div> <!-- end row-->     
+    </div><!-- end col-lg-12-->   
+</section>
 <?php }
 
 static function invoiceJoIDetailed($typ, $invoice, $invoice_lines, $user, $type, $invo){ 
@@ -1746,87 +1803,104 @@ static function invoiceJoIDetailed($typ, $invoice, $invoice_lines, $user, $type,
     
     ?>
 
-    <section class="inv-content">   
-        <div class="row">
-            <h1 class="menu-detailed-title"> <?php echo $invo;?> </h1>
-            <a href="menu-JoEdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="print_button" /></a>
-            <form method="POST">
-                <input type="submit" value="Print" name="print" class="print_button" />
-            </form>
 
-        </div>
+<section>
+    <div class="col-lg-12">
         <div class="row">
-            <div class="invoice-table">
-                <table>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Date</td>
-                        <td><?php echo $date; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Customer</td>
-                        <td><?php echo $Customer; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Reference</td>
-                        <td><?php echo $Reference; ?></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="invoice-table">
-                <table>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Journal</td>
-                        <td><?php echo $journal; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Status</td>
-                        <td><?php echo $status; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="width:200px; font-weight:bold;">Amount</td>
-                        <td><?php echo $amount; ?></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="invoice-line-table">
-                    <table>
-                        <tr>
-                            <th>Created On</th>
-                            <th>Number</th>
-                            <th>Account</th>
-                            <th>Customer</th>
-                            <th>label</th>
-                            <th>reference</th>
-                            <th>Debit</th>
-                            <th>Credit</th>
-                            <th>Due Date</th>
+                    <div class="col-lg-12" style="text-align:center;">
+                        <form method="POST">
+                            <a href="menu-JoEdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
+                            <input type="submit" value="Print" name="print" class="btn btn-light" style="color:white; background:#0a3d67;" />
+                        </form>
+                    </div>
+                    <div class="row center" style="width:95%; border-radius:10px; padding:30px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+                        <div class="col-lg-12" style="margin-bottom:40px;">
+                            <h2 class="menu-detailed-title"> <?php echo $invo;?> </h2>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Date</h4>
+                                <p><?php echo $date; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Customer</h4>
+                                <p><?php echo $Customer; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Reference</h4>
+                                <p><?php echo $Reference; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Journal</h4>
+                                <p><?php echo $journal; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Status</h4>
+                                <p><?php echo $status; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div>
+                                <h4>Amount</h4>
+                                <p><?php echo $amount; ?></p>
+                            </div>
+                        </div>
+                        <br><br><br>
+                        <div class="content col-lg-12">
+                                    <div class="row">
+                                                <table class="table">
+                                                    <thead class="thead" style="background:#0a3d67; color:white;">
+                                                        <tr>
+                                                            <th scope="col">Created On</th>
+                                                            <th scope="col">Number</th>
+                                                            <th scope="col">Account</th>
+                                                            <th scope="col">Customer</th>
+                                                            <th scope="col">Label</th>
+                                                            <th scope="col">Reference</th>
+                                                            <th scope="col">Debit</th>
+                                                            <th scope="col">Credit</th>
+                                                            <th scope="col">Due Date</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php
+                                                
+                                                foreach($invoice_lines as $line)
+                                                { ?>
+                                                    <tr>
+                                                        <td><?php echo $line->getCreated_on(); ?></td>
+                                                        <td><?php echo $line->getNumber(); ?></td>
+                                                        <td><?php echo $line->getAccount() ?></td>
+                                                        <td><?php echo $line->getCustomer(); ?></td>
+                                                        <td><?php echo $line->getLabel(); ?></td>
+                                                        <td><?php echo $line->getReference(); ?></td>
+                                                        <td><?php if($line->getDebit() == ""){ }else{ ?> $ <?php echo $line->getDebit(); } ?></td>
+                                                        <td><?php if($line->getCredit() == ""){ }else{ ?> $ <?php echo $line->getCredit(); } ?></td>
+                                                        <td><?php echo $line->getDate(); ?></td>
+                                                    </tr>
+                                            <?php }
+                                            
+                                                ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end row--> 
+        </div> <!-- end row-->     
+    </div><!-- end col-lg-12-->   
+</section>
 
-                        
-                        <?php
-                        
-                            foreach($invoice_lines as $line)
-                            { ?>
-                                <tr>
-                                    <td><?php echo $line->getCreated_on(); ?></td>
-                                    <td><?php echo $line->getNumber(); ?></td>
-                                    <td><?php echo $line->getAccount() ?></td>
-                                    <td><?php echo $line->getCustomer(); ?></td>
-                                    <td><?php echo $line->getLabel(); ?></td>
-                                    <td><?php echo $line->getReference(); ?></td>
-                                    <td><?php if($line->getDebit() == ""){ }else{ ?> $ <?php echo $line->getDebit(); } ?></td>
-                                    <td><?php if($line->getCredit() == ""){ }else{ ?> $ <?php echo $line->getCredit(); } ?></td>
-                                    <td><?php echo $line->getDate(); ?></td>
-                                </tr>
-                           <?php }
-                        
-                        ?>
-                   
-                    </table>
-            </div>
-        </div>
-    </section>
 <?php }
 
 static function invoiceDetailed($typ, $invoice, $invoice_lines, $user, $type, $invo){ 
@@ -1859,17 +1933,17 @@ static function invoiceDetailed($typ, $invoice, $invoice_lines, $user, $type, $i
     <section>
             <div class="col-lg-12">
                 <div class="row">
-                    <div class="col-lg-3">
-                        <h2 class="menu-detailed-title"> <?php echo $invo;?> </h2>
-                    </div>
-                    <div class="col-lg-9" style="float:right;">
+                    <div class="col-lg-12" style="text-align:center;">
                         <form method="POST">
                             <a href="menu-detailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
                             <input type="submit" value="Print" name="print" class="btn btn-light" style="color:white; background:#0a3d67;" />
                         </form>
-                    </div><br><br><br><br><br><br>
-
+                    </div>
                     <div class="row center" style="width:95%; border-radius:10px; padding:30px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+                        <div class="col-lg-12">
+                            <h2 class="menu-detailed-title"> <?php echo $invo;?> </h2>
+                        </div>
+                        <br><br><br><br>
                         <div class="col-lg-4">
                             <div>
                                 <h4>Customer</h4>
@@ -1942,15 +2016,6 @@ static function invoiceDetailed($typ, $invoice, $invoice_lines, $user, $type, $i
                                 <p><?php echo $warehouse_notes; ?></p>
                             </div>
                         </div>
-                    </div>
-                    
-                </div>
-            </div>
-    </section>
-    <!-- Page Content -->
-    <section id="page-content">
-        <div class="content col-lg-12">
-            <div class="row">
                         <table class="table">
                             <thead class="thead" style="background:#0a3d67; color:white;">
                                 <tr>
@@ -1992,35 +2057,30 @@ static function invoiceDetailed($typ, $invoice, $invoice_lines, $user, $type, $i
                         ?>
                             </tbody>
                         </table>
+                        <div style="margin-left:88%;">
+                            <table style="text-align:right; ">
+                                    <tr>
+                                        <td >Untaxed Amount:</td>
+                                        <td style="margin-left:10px;">$<?php if($untaxed_amount_total == ""){echo "0.00";}else{echo $untaxed_amount_total;} ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tax:</td>
+                                        <td>$<?php if($total_taxes == ""){echo "0.00";}else{echo $total_taxes;} ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total:</td>
+                                        <td>$<?php if($total_total == ""){echo "0.00";}else{echo $total_total;} ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amount Due:</td>
+                                        <td>$<?php if($amount_due_total == ""){echo "0.00";}else{echo $amount_due_total;} ?></td>
+                                    </tr>
+                            </table>
+                        </div>
                     </div>
-                    <div class="row" style=" float:right; margin-right:50px; ">
-            
-                        <table>
-                            <tr>
-                                <td >Untaxed Amount:</td>
-                                <td style="margin-left:10px;">$<?php if($untaxed_amount_total == ""){echo "0.00";}else{echo $untaxed_amount_total;} ?></td>
-                            </tr>
-                            <tr>
-                                <td>Tax:</td>
-                                <td>$<?php if($total_taxes == ""){echo "0.00";}else{echo $total_taxes;} ?></td>
-                            </tr>
-                            <tr>
-                                <td>Total:</td>
-                                <td>$<?php if($total_total == ""){echo "0.00";}else{echo $total_total;} ?></td>
-                            </tr>
-                            <tr>
-                                <td>Amount Due:</td>
-                                <td>$<?php if($amount_due_total == ""){echo "0.00";}else{echo $amount_due_total;} ?></td>
-                            </tr>
-                        </table>
-                    </div>
+                </div>
             </div>
-        </div>
-
-            </div>
-        </div>
     </section>
-        <!-- end: Page Content -->
 <?php }
 
 static function formAdd($typ){ ?>
