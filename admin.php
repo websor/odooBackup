@@ -41,7 +41,7 @@ require_once('Page.class.php');
 //Website Structure
 Page::head2();
 Page::header2($email, $type);
-Page::menuAdmin( $email, $type, $msg);
+Page::menuAdmin($email, $type, $msg);
 Page::footer2();
 Page::endHead2();
 

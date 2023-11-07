@@ -322,7 +322,7 @@ static function menuAdmin($email, $type, $msg){ ?>
             <div class="row pricing-table">
                 <div class="col-lg-4 col-md-12 col-12">
                     <div class="plan featured">
-                    <a href="addInvoices.php?typ=Inventory&user=<?php echo $email; ?>&type=<?php echo $type; ?>"><div class="plan-header" style="background:#fec470; height:320px; color:black; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                    <a href="addInvoices.php?typ=AdminData&user=<?php echo $email; ?>&type=<?php echo $type; ?>"><div class="plan-header" style="background:#fec470; height:320px; color:black; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
                             <img src="images/addData.png" style="width:50%;" />
                             <p class="text-muted"></p>
                             <p class="text-muted"></p>
@@ -332,7 +332,7 @@ static function menuAdmin($email, $type, $msg){ ?>
                 </div>
                 <div class="col-lg-4 col-md-12 col-12">
                     <div class="plan featured">
-                    <a href="users.php?typ=Customer&user=<?php echo $email; ?>&type=<?php echo $type; ?>"><div class="plan-header" style="background:#fec470; color:black; height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                    <a href="users.php?typ=AdminUser&user=<?php echo $email; ?>&type=<?php echo $type; ?>"><div class="plan-header" style="background:#fec470; color:black; height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
                             <img src="images/customer.png" style="width:50%;" />
                             <p class="text-muted"></p>
                             <p class="text-muted"></p>
@@ -987,6 +987,153 @@ static function menuBadetailed($typ, $invoices, $user, $type, $invoice_number, $
             </div>
         </section>
         <!-- end: Page Content -->
+<?php }
+
+static function menuUdetailed($user, $type, $msg, $invoices, $action ,$u, $userToEdit){ 
+        if($userToEdit != "")
+        {
+            foreach ($userToEdit as $edit)
+            {   
+                $editId = $edit->getId();
+                $editName = $edit->getName();
+                $editEmail= $edit->getEmail();
+                $editType= $edit->getType();
+                $editPassword= $edit->getPassword();
+            }  
+        }
+        else{
+            $editId = "";
+            $editName = "";
+            $editEmail = "";
+            $editType = "";
+            $editPassword = "";
+        }
+    ?>
+    <!-- Page Content -->
+    <section id="page-content">
+        <div class="content col-lg-12"> 
+            <?php if($msg != ""){ ?> <h2 style="text-align:center; background:#063970; color:white; border-radius:20px;"><?php echo $msg; ?></h2><br><br> <?php } ?>
+            <dic class="row">
+                        <div class="col-lg-3">
+                            <h2 class="menu-detailed-title">Users</h2>
+                        </div>
+                        <div class="col-lg-9" style="text-align:center;">
+                            <form method="post">
+                                <a href="admin.php?user=<?php echo $user; ?>&type=<?php echo $type; ?>"><spam class="btn btn-light" style="background:#0a3d67; color:white;">Go Back</spam></a>
+                            </form>
+                        </div>
+                        <?php if($action != "") {?> <div class="col-lg-8"> <?php } else{ ?> <div class="col-lg-12"> <?php } ?>
+                        
+                            <table class="table">
+                                <thead class="thead" style="background:#0a3d67; color:white">
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Password</th>
+                                        <th scope="col"><a href="users.php?type=<?php echo $type; ?>&user=<?php echo $user; ?>&action=A"><img src="images/add.png" style="width:20px;"/></a></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php   /**
+                                     * READING THE Balance OBJECT
+                                     * 
+                                     */ 
+
+                                    foreach ($invoices as $invoice)
+                                    {   ?>
+                                    
+                                        <tr>
+                                            <td><?php echo $invoice->getName(); ?></td>
+                                            <td><?php echo $invoice->getEmail(); ?></td>
+                                            <td><?php echo $invoice->getType();  ?></td>
+                                            <td><?php echo $invoice->getPassword(); ?></td>
+                                            <td><a href="users.php?type=<?php echo $type; ?>&user=<?php echo $user; ?>&action=D&u=<?php echo $invoice->getEmail(); ?>"><img src="images/delete.png" style="width:20px;"/></a></td>
+                                            <td><a href="users.php?type=<?php echo $type; ?>&user=<?php echo $user; ?>&action=E&u=<?php echo $invoice->getEmail(); ?>"><img src="images/edit.png" style="width:20px;"/></a></td>
+                                        </tr></a>
+
+                                        <?php     
+                                    }  ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <?php if($action == "D"){ ?>
+                        <div class="col-lg-4" id="delete" style=" box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+                            <h4 class="menu-detailed-title">Delete User</h4>
+                            <h5 class="menu-detailed-title">Are you sure you want to remore <strong><?php echo $u ?></strong> from the user list?</h5>
+                            <form method="POST">
+                                <input type="text" value="<?php echo $type; ?>" name="typeD" style="display:none;"/>
+                                <input type="text" value="<?php echo $user; ?>" name="userD" style="display:none;"/>
+                                <input type="submit" value="Delete" name="delete" class="btn btn-light" style="background:#0a3d67; color:white;" />
+                            </form>
+                        </div>
+                        <?php }else if($action == "E"){ ?>
+                        <div class="col-lg-4" id="edit" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+                            <h4 class="menu-detailed-title">Edit User</h4>
+                            <h4 class="menu-detailed-title">Are you sure you want to edit this users?</h4>
+                            <form method="POST">
+                                <input type="text" value="<?php echo $type; ?>" name="typeE" style="display:none;"/>
+                                <input type="text" value="<?php echo $user; ?>" name="userE" style="display:none;"/>
+                                    <table>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        <tr>
+                                            <td style="margin-left:5px;"><input type="text" required value="<?php echo $editName; ?>" name="name"/></td>
+                                            <td style="margin-left:5px;"> <input type="email" required value="<?php echo $editEmail; ?>" name="email"/></td>
+                                            <td style="margin-left:5px;"> <input type="text"  value="<?php echo $editId; ?>" name="id" style="display:none;"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Customer Type</th>
+                                            <th>Password</th>
+                                        </tr>
+                                        <tr>
+                                            <td style="margin-left:5px;"><input type="text" required value="<?php echo $editType; ?>" name="type"/></td>
+                                            <td style="margin-left:5px;"> <input type="text" required value="<?php echo $editPassword; ?>" name="password"/></td>
+                                        </tr>
+                                    </table>
+                                <input type="submit" value="Edit" name="edit" class="btn btn-light" style="background:#0a3d67; color:white;" />
+                            </form>
+                        </div>
+                        <?php }else if($action == "A"){ ?>
+                        <div class="col-lg-4" id="edit" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+                            <h4 class="menu-detailed-title">Adding a New User</h4>
+                            <h4 class="menu-detailed-title"></h4>
+                            <form method="POST">
+                                <input type="text" value="<?php echo $type; ?>" name="typeA" style="display:none;"/>
+                                <input type="text" value="<?php echo $user; ?>" name="userA" style="display:none;"/>
+                                    <table>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        <tr>
+                                            <td style="margin-left:5px;"><input type="text" required placeholder="Name" name="addName"/></td>
+                                            <td style="margin-left:5px;"> <input type="email" required placeholder="Email"  name="addEmail"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Customer Type</th>
+                                            <th>Password</th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select name="addType" id="type" required >
+                                                    <option value="">--Please choose an User--</option>
+                                                    <option value="2">Sales Team</option>
+                                                    <option value="1">Admin</option>
+                                                </select>
+                                            </td>
+                                            <td style="margin-left:5px;"> <input type="password" required  placeholder="Password" name="addPassword"/></td>
+                                        </tr>
+                                    </table>
+                                <input type="submit" value="Add User" name="add" class="btn btn-light" style="background:#0a3d67; color:white;" />
+                            </form>
+                        </div><?php  } ?>
+            </div>
+        </div>
+    </section>
 <?php }
 
 static function menuINdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
@@ -2197,7 +2344,8 @@ static function invoiceDetailed($typ, $invoice, $invoice_lines, $user, $type, $i
 
 static function formAdd($typ){ ?>
 <section>   
-    <div class="col-lg-12">
+    <div class="col-lg-10" style="text-align:center; margin-left:auto; margin-right:auto; border-radius:20px; padding:40px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+        <h3>The only file accepted is an excel file.</h3><br><br><br>
         <div class="row">
                 <div class="col-lg-4">
                     <div class="row">
@@ -2214,7 +2362,7 @@ static function formAdd($typ){ ?>
 
                 <div class="col-lg-4">
                     <div class="row">
-                        <h1>Add the invoice line file lot</h1>
+                        <h2>Add the invoice line file lot</h2>
                     </div>
                     <div class="row">
                         <form method="POST" enctype="multipart/form-data">
@@ -2227,7 +2375,7 @@ static function formAdd($typ){ ?>
 
                 <div class="col-lg-4">
                     <div class="row">
-                        <h1>Add the CreditNote file lot</h1>
+                        <h2>Add the CreditNote file lot</h2>
                     </div>
                     <div class="row">
                         <form method="POST" enctype="multipart/form-data">
@@ -2240,7 +2388,7 @@ static function formAdd($typ){ ?>
 
                 <div class="col-lg-4">
                     <div class="row">
-                        <h1>Add Purchases file lot</h1>
+                        <h2>Add Purchases file lot</h2>
                     </div>
                     <div class="row">
                         <form method="POST" enctype="multipart/form-data">
@@ -2253,7 +2401,7 @@ static function formAdd($typ){ ?>
 
                 <div class="col-lg-4">
                     <div class="row">
-                        <h1>Add Purchases Line file lot</h1>
+                        <h2>Add Purchases Line file lot</h2>
                     </div>
                     <div class="row">
                         <form method="POST" enctype="multipart/form-data">
@@ -2266,7 +2414,7 @@ static function formAdd($typ){ ?>
 
                 <div class="col-lg-4">
                     <div class="row">
-                        <h1>Add Payment file lot</h1>
+                        <h2>Add Payment file lot</h2>
                     </div>
                     <div class="row">
                         <form method="POST" enctype="multipart/form-data">
@@ -2279,7 +2427,7 @@ static function formAdd($typ){ ?>
 
                 <div class="col-lg-4">
                     <div class="row">
-                        <h1>Add Customer file lot</h1>
+                        <h2>Add Customer file lot</h2>
                     </div>
                     <div class="row">
                         <form method="POST" enctype="multipart/form-data">
@@ -2292,7 +2440,7 @@ static function formAdd($typ){ ?>
 
                 <div class="col-lg-4">
                     <div class="row">
-                        <h1>Add Inventory file lot</h1>
+                        <h2>Add Inventory file lot</h2>
                     </div>
                     <div class="row">
                         <form method="POST" enctype="multipart/form-data">
@@ -2305,7 +2453,7 @@ static function formAdd($typ){ ?>
 
                 <div class="col-lg-4">
                     <div class="row">
-                        <h1>Add Balances file lot</h1>
+                        <h2>Add Balances file lot</h2>
                     </div>
                     <div class="row">
                         <form method="POST" enctype="multipart/form-data">
@@ -2318,7 +2466,7 @@ static function formAdd($typ){ ?>
 
                 <div class="col-lg-4">
                     <div class="row">
-                        <h1>Add Journal Entries file lot</h1>
+                        <h2>Add Journal Entries file lot</h2>
                     </div>
                     <div class="row">
                         <form method="POST" enctype="multipart/form-data">
@@ -2331,7 +2479,7 @@ static function formAdd($typ){ ?>
 
                 <div class="col-lg-4">
                     <div class="row">
-                        <h1>Add Journal Items file lot</h1>
+                        <h2>Add Journal Items file lot</h2>
                     </div>
                     <div class="row">
                         <form method="POST" enctype="multipart/form-data">
