@@ -43,49 +43,98 @@ $conection = include 'config/conection.php';
      $typ = "";
  }
 
-
-$invoice_number="";
+ $invoice_number="";
 $salesOrderSearch="";
 $dateSearch="";
 $customerSearch="";
  
 $invoices = array();
 $count =0;
-/**
-* Call to the database to get all invoices
-* 
-*/ 
 
-$query_user = "select * from invoice_line order by created_on DESC;";
-$result_User = mysqli_query($conection,$query_user);
-while($row_user = mysqli_fetch_assoc($result_User))
-{ $count = $count +1;} 
 
-$query_user = "select * from invoice_line order by created_on DESC limit 50;";
-$result_User = mysqli_query($conection,$query_user);
-while($row_user = mysqli_fetch_assoc($result_User))
-{
-    $newInvoiceLine = new InvoiceLine(); 
-    $newInvoiceLine->setCreatedOn($row_user['created_on']);
-    $newInvoiceLine->setInvoiceNumber($row_user['invoice_number']);
-    $newInvoiceLine->setSalesOrder($row_user['salers_order']);
-    $newInvoiceLine->setSku($row_user['sku']);
-    $newInvoiceLine->setProduct($row_user['product']);
-    $newInvoiceLine->setVendor($row_user['vendor']);
-    $newInvoiceLine->setCustomer($row_user['customer']); 
-    $newInvoiceLine->setQty_delivered($row_user['qty_delivered']);  
-    $newInvoiceLine->setQuantity($row_user['quantity']); 
-    $newInvoiceLine->setUntaxed_amount($row_user['untaxed_amount']); 
-    $newInvoiceLine->setUnit_price($row_user['unit_price']); 
-    $newInvoiceLine->setUnit_price_after($row_user['unit_price_after']); 
-    $newInvoiceLine->setCost($row_user['cost']); 
-    $newInvoiceLine->setTaxes($row_user['taxes']); 
-    $newInvoiceLine->setNotes($row_user['notes']);
-    $newInvoiceLine->setRma($row_user['rma_notes']);  
-    $newInvoiceLine->setQuantity_bo($row_user['quantity_bo']);
-    $newInvoiceLine->setSerial($row_user['serial_numbers']);  
-    $invoices[] = $newInvoiceLine;
-} 
+ if(isset($_GET["item"]))
+ {
+        /**
+    * Call to the database to get all invoices
+    * 
+    */ 
+    $item = $_GET["item"];
+
+    $query_user = "select * from invoice_line WHERE product = '$item' order by created_on DESC;";
+    $result_User = mysqli_query($conection,$query_user);
+    while($row_user = mysqli_fetch_assoc($result_User))
+    { $count = $count +1;} 
+
+    $query_user = "select * from invoice_line WHERE product = '$item' order by created_on DESC limit 100;";
+    $result_User = mysqli_query($conection,$query_user);
+    while($row_user = mysqli_fetch_assoc($result_User))
+    {
+        $newInvoiceLine = new InvoiceLine(); 
+        $newInvoiceLine->setCreatedOn($row_user['created_on']);
+        $newInvoiceLine->setInvoiceNumber($row_user['invoice_number']);
+        $newInvoiceLine->setSalesOrder($row_user['salers_order']);
+        $newInvoiceLine->setSku($row_user['sku']);
+        $newInvoiceLine->setProduct($row_user['product']);
+        $newInvoiceLine->setVendor($row_user['vendor']);
+        $newInvoiceLine->setCustomer($row_user['customer']); 
+        $newInvoiceLine->setQty_delivered($row_user['qty_delivered']);  
+        $newInvoiceLine->setQuantity($row_user['quantity']); 
+        $newInvoiceLine->setUntaxed_amount($row_user['untaxed_amount']); 
+        $newInvoiceLine->setUnit_price($row_user['unit_price']); 
+        $newInvoiceLine->setUnit_price_after($row_user['unit_price_after']); 
+        $newInvoiceLine->setCost($row_user['cost']); 
+        $newInvoiceLine->setTaxes($row_user['taxes']); 
+        $newInvoiceLine->setNotes($row_user['notes']);
+        $newInvoiceLine->setRma($row_user['rma_notes']);  
+        $newInvoiceLine->setQuantity_bo($row_user['quantity_bo']);
+        $newInvoiceLine->setSerial($row_user['serial_numbers']);  
+        $invoices[] = $newInvoiceLine;
+    } 
+
+    $salesOrderSearch = $item;
+ }
+ else
+ {
+        /**
+    * Call to the database to get all invoices
+    * 
+    */ 
+
+    $query_user = "select * from invoice_line order by created_on DESC;";
+    $result_User = mysqli_query($conection,$query_user);
+    while($row_user = mysqli_fetch_assoc($result_User))
+    { $count = $count +1;} 
+
+    $query_user = "select * from invoice_line order by created_on DESC limit 100;";
+    $result_User = mysqli_query($conection,$query_user);
+    while($row_user = mysqli_fetch_assoc($result_User))
+    {
+        $newInvoiceLine = new InvoiceLine(); 
+        $newInvoiceLine->setCreatedOn($row_user['created_on']);
+        $newInvoiceLine->setInvoiceNumber($row_user['invoice_number']);
+        $newInvoiceLine->setSalesOrder($row_user['salers_order']);
+        $newInvoiceLine->setSku($row_user['sku']);
+        $newInvoiceLine->setProduct($row_user['product']);
+        $newInvoiceLine->setVendor($row_user['vendor']);
+        $newInvoiceLine->setCustomer($row_user['customer']); 
+        $newInvoiceLine->setQty_delivered($row_user['qty_delivered']);  
+        $newInvoiceLine->setQuantity($row_user['quantity']); 
+        $newInvoiceLine->setUntaxed_amount($row_user['untaxed_amount']); 
+        $newInvoiceLine->setUnit_price($row_user['unit_price']); 
+        $newInvoiceLine->setUnit_price_after($row_user['unit_price_after']); 
+        $newInvoiceLine->setCost($row_user['cost']); 
+        $newInvoiceLine->setTaxes($row_user['taxes']); 
+        $newInvoiceLine->setNotes($row_user['notes']);
+        $newInvoiceLine->setRma($row_user['rma_notes']);  
+        $newInvoiceLine->setQuantity_bo($row_user['quantity_bo']);
+        $newInvoiceLine->setSerial($row_user['serial_numbers']);  
+        $invoices[] = $newInvoiceLine;
+    } 
+ }
+
+
+
+
 
  //Cheching for POST FILTERS
 if(isset($_POST["search"]))
@@ -106,7 +155,7 @@ if(isset($_POST["search"]))
         while($row_user = mysqli_fetch_assoc($result_User))
         { $count = $count+1; }
 
-        $query_user = "select * from invoice_line where invoice_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND serial_numbers like '%$dateSearch%' AND product like '%$salesOrderSearch%' limit 50;";
+        $query_user = "select * from invoice_line where invoice_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND serial_numbers like '%$dateSearch%' AND product like '%$salesOrderSearch%' limit 100;";
         $result_User = mysqli_query($conection,$query_user);
         while($row_user = mysqli_fetch_assoc($result_User))
         { 
@@ -136,12 +185,14 @@ if(isset($_POST["search"]))
 }
 
  //Cheching for POST FILTERS
- if(isset($_POST["Clear"]))
+ if(isset($_POST["clear"]))
  {
     $invoice_number = "";
     $customerSearch = "";
     $dateSearch = "";
     $salesOrderSearch="";
+    $item = "";
+    header("location:menu-ILdetailed.php?user=$email&type=$type&typ=$typ");
  }
 
 //Website Structure

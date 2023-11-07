@@ -51,35 +51,75 @@ $customerSearch="";
  
 $invoices = array();
 $count =0;
-/**
-* Call to the database to get all invoices
-* 
-*/ 
 
-$query_user = "select * from purchase_line order by created_on DESC;";
-$result_User = mysqli_query($conection,$query_user);
-while($row_user = mysqli_fetch_assoc($result_User))
-{ $count = $count +1;} 
-
-$query_user = "select * from purchase_line order by created_on DESC limit 50;";
-$result_User = mysqli_query($conection,$query_user);
-while($row_user = mysqli_fetch_assoc($result_User))
+if(isset($_GET["item"]))
 {
-    $newInvoiceLine = new PurchasesLine(); 
-    $newInvoiceLine->setSku($row_user['sku']);
-    $newInvoiceLine->setProduct($row_user['product']);
-    $newInvoiceLine->setQuantity($row_user['quantity']);
-    $newInvoiceLine->setUnit_cost($row_user['unit_cost']); 
-    $newInvoiceLine->setTaxes($row_user['taxes']);  
-    $newInvoiceLine->setQuantity($row_user['quantity']); 
-    $newInvoiceLine->setSubtotal($row_user['subtotal']); 
-    $newInvoiceLine->setPurchase_number($row_user['purchase_number']); 
-    $newInvoiceLine->setVendor($row_user['vendor']); 
-    $newInvoiceLine->setTotal($row_user['total']); 
-    $newInvoiceLine->setReceive_qty($row_user['received_qty']); 
-    $newInvoiceLine->setCreated_on($row_user['created_on']);
-    $invoices[] = $newInvoiceLine;
-} 
+    $item = $_GET["item"];
+    /**
+    * Call to the database to get all pruchases line
+    * 
+    */ 
+
+    $query_user = "select * from purchase_line WHERE sku = '$item' order by created_on DESC;";
+    $result_User = mysqli_query($conection,$query_user);
+    while($row_user = mysqli_fetch_assoc($result_User))
+    { $count = $count +1;} 
+
+    $query_user = "select * from purchase_line WHERE sku = '$item' order by created_on DESC limit 100;";
+    $result_User = mysqli_query($conection,$query_user);
+    while($row_user = mysqli_fetch_assoc($result_User))
+    {
+        $newInvoiceLine = new PurchasesLine(); 
+        $newInvoiceLine->setSku($row_user['sku']);
+        $newInvoiceLine->setProduct($row_user['product']);
+        $newInvoiceLine->setQuantity($row_user['quantity']);
+        $newInvoiceLine->setUnit_cost($row_user['unit_cost']); 
+        $newInvoiceLine->setTaxes($row_user['taxes']);  
+        $newInvoiceLine->setQuantity($row_user['quantity']); 
+        $newInvoiceLine->setSubtotal($row_user['subtotal']); 
+        $newInvoiceLine->setPurchase_number($row_user['purchase_number']); 
+        $newInvoiceLine->setVendor($row_user['vendor']); 
+        $newInvoiceLine->setTotal($row_user['total']); 
+        $newInvoiceLine->setReceive_qty($row_user['received_qty']); 
+        $newInvoiceLine->setCreated_on($row_user['created_on']);
+        $invoices[] = $newInvoiceLine;
+    } 
+
+    $salesOrderSearch = $item;
+}
+else
+{
+    $item = "";
+    /**
+    * Call to the database to get all invoices
+    * 
+    */ 
+
+    $query_user = "select * from purchase_line order by created_on DESC;";
+    $result_User = mysqli_query($conection,$query_user);
+    while($row_user = mysqli_fetch_assoc($result_User))
+    { $count = $count +1;} 
+
+    $query_user = "select * from purchase_line order by created_on DESC limit 50;";
+    $result_User = mysqli_query($conection,$query_user);
+    while($row_user = mysqli_fetch_assoc($result_User))
+    {
+        $newInvoiceLine = new PurchasesLine(); 
+        $newInvoiceLine->setSku($row_user['sku']);
+        $newInvoiceLine->setProduct($row_user['product']);
+        $newInvoiceLine->setQuantity($row_user['quantity']);
+        $newInvoiceLine->setUnit_cost($row_user['unit_cost']); 
+        $newInvoiceLine->setTaxes($row_user['taxes']);  
+        $newInvoiceLine->setQuantity($row_user['quantity']); 
+        $newInvoiceLine->setSubtotal($row_user['subtotal']); 
+        $newInvoiceLine->setPurchase_number($row_user['purchase_number']); 
+        $newInvoiceLine->setVendor($row_user['vendor']); 
+        $newInvoiceLine->setTotal($row_user['total']); 
+        $newInvoiceLine->setReceive_qty($row_user['received_qty']); 
+        $newInvoiceLine->setCreated_on($row_user['created_on']);
+        $invoices[] = $newInvoiceLine;
+    } 
+}
 
  //Cheching for POST FILTERS
 if(isset($_POST["search"]))
@@ -124,12 +164,14 @@ if(isset($_POST["search"]))
 }
 
  //Cheching for POST FILTERS
- if(isset($_POST["Clear"]))
+ if(isset($_POST["clear"]))
  {
     $invoice_number = "";
     $customerSearch = "";
     $dateSearch = "";
     $salesOrderSearch="";
+    $item = "";
+    header("location:menu-PLdetailed.php?user=$email&typ=$typ&type=$type");
  }
 
 //Website Structure
