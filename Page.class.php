@@ -299,7 +299,7 @@ static function footer2() { ?>
 
                      <?php if($type=="1"){ ?><div class="col-lg-4 col-md-12 col-12">
                         <div class="plan featured">
-                            <a href="admin.php?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Montly Reports"><div class="plan-header" style="background:#fec470; color:black;  height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                            <a href="admin.php?user=<?php echo $email; ?>&type=<?php echo $type; ?>&typ=Administrator"><div class="plan-header" style="background:#fec470; color:black;  height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
                                 <img src="images/admin.png" style="width:50%;" />
                                 <p class="text-muted"></p>
                                 <p class="text-muted"></p>
@@ -313,6 +313,38 @@ static function footer2() { ?>
         </section>
         <!-- end: Pricing Table -->
     <?php }
+
+static function menuAdmin($email, $type, $msg){ ?>
+    <!-- Pricing Table -->
+    <section id="section3" class="p-t-120 p-b-120">
+        <div class="container">
+            <hr class="space">
+            <div class="row pricing-table">
+                <div class="col-lg-4 col-md-12 col-12">
+                    <div class="plan featured">
+                    <a href="addInvoices.php?typ=Inventory&user=<?php echo $email; ?>&type=<?php echo $type; ?>"><div class="plan-header" style="background:#fec470; height:320px; color:black; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                            <img src="images/addData.png" style="width:50%;" />
+                            <p class="text-muted"></p>
+                            <p class="text-muted"></p>
+                            <div class="plan-price" style="font-size:30px;">Add Data</div>
+                        </div></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-12">
+                    <div class="plan featured">
+                    <a href="users.php?typ=Customer&user=<?php echo $email; ?>&type=<?php echo $type; ?>"><div class="plan-header" style="background:#fec470; color:black; height:320px; box-shadow: rgba(10,61,103,255) 0px 3px 8px;">
+                            <img src="images/customer.png" style="width:50%;" />
+                            <p class="text-muted"></p>
+                            <p class="text-muted"></p>
+                            <div class="plan-price" style="font-size:30px;">Users</div>
+                        </div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end: Pricing Table -->
+<?php }
 
     static function menu($email, $type, $msg){ ?>
         <section>
@@ -2164,151 +2196,154 @@ static function invoiceDetailed($typ, $invoice, $invoice_lines, $user, $type, $i
 <?php }
 
 static function formAdd($typ){ ?>
-    <section>   
-        <div class="adding_block">
-            <div class="row">
-                <h1> <?php echo "Add the ".$typ;?> file lot</h1>
-            </div>
-            <div class="row">
-                <form method="POST" enctype="multipart/form-data">
-                    <input type="file" name="invoiceFile"/> <br><br>
-                    <input type="submit" value="Submit file"  name="import" style="background:#152c4e; color:white;"/>
-                    <br><br><br><br>
-                </form>
-            </div>
-        </div>
+<section>   
+    <div class="col-lg-12">
+        <div class="row">
+                <div class="col-lg-4">
+                    <div class="row">
+                        <h2> <?php echo "Add the ".$typ;?> file lot</h2>
+                    </div>
+                    <div class="row">
+                        <form method="POST" enctype="multipart/form-data">
+                            <input type="file" name="invoiceFile"/> <br><br>
+                            <input type="submit" value="Submit file"  name="import" style="background:#152c4e; color:white;"/>
+                            <br><br><br><br>
+                        </form>
+                    </div>
+                </div>
 
-        <div class="adding_block">
-            <div class="row">
-                <h1>Add the invoice line file lot</h1>
-            </div>
-            <div class="row">
-                <form method="POST" enctype="multipart/form-data">
-                    <input type="file" name="invoiceLineFile"/> <br><br>
-                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import2" style="background:#152c4e; color:white;"/>
-                    <br><br><br><br>
-                </form>
-            </div>
-        </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <h1>Add the invoice line file lot</h1>
+                    </div>
+                    <div class="row">
+                        <form method="POST" enctype="multipart/form-data">
+                            <input type="file" name="invoiceLineFile"/> <br><br>
+                            <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import2" style="background:#152c4e; color:white;"/>
+                            <br><br><br><br>
+                        </form>
+                    </div>
+                </div>
 
-        <div class="adding_block">
-            <div class="row">
-                <h1>Add the CreditNote file lot</h1>
-            </div>
-            <div class="row">
-                <form method="POST" enctype="multipart/form-data">
-                    <input type="file" name="creditNoteFile"/> <br><br>
-                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import3" style="background:#152c4e; color:white;"/>
-                    <br><br><br><br>
-                </form>
-            </div>
-        </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <h1>Add the CreditNote file lot</h1>
+                    </div>
+                    <div class="row">
+                        <form method="POST" enctype="multipart/form-data">
+                            <input type="file" name="creditNoteFile"/> <br><br>
+                            <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import3" style="background:#152c4e; color:white;"/>
+                            <br><br><br><br>
+                        </form>
+                    </div>
+                </div>
 
-        <div class="adding_block">
-            <div class="row">
-                <h1>Add Purchases file lot</h1>
-            </div>
-            <div class="row">
-                <form method="POST" enctype="multipart/form-data">
-                    <input type="file" name="purchasesFile"/> <br><br>
-                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import4" style="background:#152c4e; color:white;"/>
-                    <br><br><br><br>
-                </form>
-            </div>
-        </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <h1>Add Purchases file lot</h1>
+                    </div>
+                    <div class="row">
+                        <form method="POST" enctype="multipart/form-data">
+                            <input type="file" name="purchasesFile"/> <br><br>
+                            <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import4" style="background:#152c4e; color:white;"/>
+                            <br><br><br><br>
+                        </form>
+                    </div>
+                </div>
 
-        <div class="adding_block">
-            <div class="row">
-                <h1>Add Purchases Line file lot</h1>
-            </div>
-            <div class="row">
-                <form method="POST" enctype="multipart/form-data">
-                    <input type="file" name="purchasesLineFile"/> <br><br>
-                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import5" style="background:#152c4e; color:white;"/>
-                    <br><br><br><br>
-                </form>
-            </div>
-        </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <h1>Add Purchases Line file lot</h1>
+                    </div>
+                    <div class="row">
+                        <form method="POST" enctype="multipart/form-data">
+                            <input type="file" name="purchasesLineFile"/> <br><br>
+                            <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import5" style="background:#152c4e; color:white;"/>
+                            <br><br><br><br>
+                        </form>
+                    </div>
+                </div>
 
-        <div class="adding_block">
-            <div class="row">
-                <h1>Add Payment file lot</h1>
-            </div>
-            <div class="row">
-                <form method="POST" enctype="multipart/form-data">
-                    <input type="file" name="paymentsFile"/> <br><br>
-                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import6" style="background:#152c4e; color:white;"/>
-                    <br><br><br><br>
-                </form>
-            </div>
-        </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <h1>Add Payment file lot</h1>
+                    </div>
+                    <div class="row">
+                        <form method="POST" enctype="multipart/form-data">
+                            <input type="file" name="paymentsFile"/> <br><br>
+                            <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import6" style="background:#152c4e; color:white;"/>
+                            <br><br><br><br>
+                        </form>
+                    </div>
+                </div>
 
-        <div class="adding_block">
-            <div class="row">
-                <h1>Add Customer file lot</h1>
-            </div>
-            <div class="row">
-                <form method="POST" enctype="multipart/form-data">
-                    <input type="file" name="alfredoFile"/> <br><br>
-                    <input type="submit" value="Submit file" name="import7" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="background:#152c4e; color:white;"/>
-                    <br><br><br><br>
-                </form>
-            </div>
-        </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <h1>Add Customer file lot</h1>
+                    </div>
+                    <div class="row">
+                        <form method="POST" enctype="multipart/form-data">
+                            <input type="file" name="alfredoFile"/> <br><br>
+                            <input type="submit" value="Submit file" name="import7" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="background:#152c4e; color:white;"/>
+                            <br><br><br><br>
+                        </form>
+                    </div>
+                </div>
 
-        <div class="adding_block">
-            <div class="row">
-                <h1>Add Inventory file lot</h1>
-            </div>
-            <div class="row">
-                <form method="POST" enctype="multipart/form-data">
-                    <input type="file" name="inventoryFile"/> <br><br>
-                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import8" style="background:#152c4e; color:white;"/>
-                    <br><br><br><br>
-                </form>
-            </div>
-        </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <h1>Add Inventory file lot</h1>
+                    </div>
+                    <div class="row">
+                        <form method="POST" enctype="multipart/form-data">
+                            <input type="file" name="inventoryFile"/> <br><br>
+                            <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import8" style="background:#152c4e; color:white;"/>
+                            <br><br><br><br>
+                        </form>
+                    </div>
+                </div>
 
-        <div class="adding_block">
-            <div class="row">
-                <h1>Add Balances file lot</h1>
-            </div>
-            <div class="row">
-                <form method="POST" enctype="multipart/form-data">
-                    <input type="file" name="balanceFile"/> <br><br>
-                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import9" style="background:#152c4e; color:white;"/>
-                    <br><br><br><br>
-                </form>
-            </div>
-        </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <h1>Add Balances file lot</h1>
+                    </div>
+                    <div class="row">
+                        <form method="POST" enctype="multipart/form-data">
+                            <input type="file" name="balanceFile"/> <br><br>
+                            <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import9" style="background:#152c4e; color:white;"/>
+                            <br><br><br><br>
+                        </form>
+                    </div>
+                </div>
 
-        <div class="adding_block">
-            <div class="row">
-                <h1>Add Journal Entries file lot</h1>
-            </div>
-            <div class="row">
-                <form method="POST" enctype="multipart/form-data">
-                    <input type="file" name="journalEntries"/> <br><br>
-                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import10" style="background:#152c4e; color:white;"/>
-                    <br><br><br><br>
-                </form>
-            </div>
-        </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <h1>Add Journal Entries file lot</h1>
+                    </div>
+                    <div class="row">
+                        <form method="POST" enctype="multipart/form-data">
+                            <input type="file" name="journalEntries"/> <br><br>
+                            <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import10" style="background:#152c4e; color:white;"/>
+                            <br><br><br><br>
+                        </form>
+                    </div>
+                </div>
 
-        <div class="adding_block">
-            <div class="row">
-                <h1>Add Journal Items file lot</h1>
-            </div>
-            <div class="row">
-                <form method="POST" enctype="multipart/form-data">
-                    <input type="file" name="journalItems"/> <br><br>
-                    <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import11" style="background:#152c4e; color:white;"/>
-                    <br><br><br><br>
-                </form>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <h1>Add Journal Items file lot</h1>
+                    </div>
+                    <div class="row">
+                        <form method="POST" enctype="multipart/form-data">
+                            <input type="file" name="journalItems"/> <br><br>
+                            <input type="submit" value="Submit file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="import11" style="background:#152c4e; color:white;"/>
+                            <br><br><br><br>
+                        </form>
+                    </div>
             </div>
         </div>
-        
-    </section>
+    </div>        
+</section>
 <?php }
 
     static function endHead(){ ?>
