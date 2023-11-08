@@ -51,6 +51,35 @@ $customerSearch="";
  
 $invoices = array();
 $count =0;
+
+// Variables for pagination
+if(isset($_GET["vendorSearch"]))
+{
+    $pagVendor = $_GET["vendorSearch"];
+}
+else
+{
+    $pagVendor = "";
+}
+
+if(isset($_GET["productSearch"]))
+{
+    $pagProduct = $_GET["productSearch"];
+}
+else
+{
+    $pagProduct = "";
+}
+
+if(isset($_GET["skuSearch"]))
+{
+    $pagSku = $_GET["skuSearch"];
+}
+else
+{
+    $pagSku = "";
+}
+
 /**
 * Call to the database to get all invoices
 * 
