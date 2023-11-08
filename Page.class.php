@@ -705,11 +705,12 @@ static function menuILdetailed($typ, $invoices, $user, $type, $invoice_number, $
                     { 
                         $serialExplode = explode("/",$invoice->getSerial());
                         $arrayCount = count($serialExplode);
+                        $referenceType =  explode("/", $invoice->getInvoice_number());
                         ?>
                     
                         <tr>
                             <td><?php echo $invoice->getCreatedOn() ?></td>
-                            <td><?php echo $invoice->getInvoice_number() ?></td>
+                            <?php if($referenceType[0] == "INV"){ ?> <td><a href="invoice-detailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getInvoice_number();  ?>"><?php echo $invoice->getInvoice_number() ?></a></td> <?php }else{ ?> <td><a href="invoice-CNdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>&inv=<?php echo $invoice->getInvoice_number();  ?>"><?php echo $invoice->getInvoice_number() ?></a></td> <?php } ?>
                             <td><?php echo $invoice->getSales_order() ?></td>
                             <td><?php echo $invoice->getSku() ?></td>
                             <td><?php echo $invoice->getProduct() ?></td>
@@ -1434,7 +1435,7 @@ static function invoiceCNDetailed($typ, $invoice, $invoice_lines, $user, $type, 
                 <div class="row">
                     <div class="col-lg-12" style="text-align:center;">
                         <form method="POST">
-                            <a href="menu-CNdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
+                            <a href="menu-CNdetailed.php?user=<?php echo $user; ?>&typ=CreditNotes&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
                             <input type="submit" value="Print" name="print" class="btn btn-light" style="color:white; background:#0a3d67;" />
                         </form>
                     </div>
@@ -2200,7 +2201,7 @@ static function invoiceDetailed($typ, $invoice, $invoice_lines, $user, $type, $i
                 <div class="row">
                     <div class="col-lg-12" style="text-align:center;">
                         <form method="POST">
-                            <a href="menu-detailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
+                            <a href="menu-detailed.php?user=<?php echo $user; ?>&typ=Invoices&type=<?php echo $type; ?>"><input type="button" value="GO BACK" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
                             <input type="submit" value="Print" name="print" class="btn btn-light" style="color:white; background:#0a3d67;" />
                         </form>
                     </div>

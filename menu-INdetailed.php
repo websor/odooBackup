@@ -43,11 +43,21 @@ $conection = include 'config/conection.php';
      $typ = "";
  }
 
+ if(isset($_GET["page"]))
+ {
+    $page = $_GET["page"];
+ }
+ else{
+    header("location:menu-INdetailed.php?typ=$typ&user=$email&type=$type&page=1");
+ }
+
 
 $invoice_number="";
 $salesOrderSearch="";
 $dateSearch="";
 $customerSearch="";
+$totalLines = 50;
+
  
 $invoices = array();
 $count =0;
@@ -61,7 +71,12 @@ $result_User = mysqli_query($conection,$query_user);
 while($row_user = mysqli_fetch_assoc($result_User))
 { $count = $count +1;} 
 
-$query_user = "select * from inventory order by product ASC limit 50;";
+$totalPages = $count / $totalLines;
+$init = ($page - 1) * $totalLines;
+var_dump($init);
+var_dump($totalPages);
+
+$query_user = "select * from inventory order by product ASC limit 0,50;";
 $result_User = mysqli_query($conection,$query_user);
 while($row_user = mysqli_fetch_assoc($result_User))
 {
