@@ -71,12 +71,22 @@ $result_User = mysqli_query($conection,$query_user);
 while($row_user = mysqli_fetch_assoc($result_User))
 { $count = $count +1;} 
 
-$totalPages = $count / $totalLines;
+$totalPages1 = $count / $totalLines;
+$modulePages = $count % $totalLines; // Checking if the number is decimal or not
+
+if($modulePages == 0)
+{
+    $totalPages = round($totalPages1);
+}
+else{
+    $totalPages = round($totalPages1) + 1;
+}
+
 $init = ($page - 1) * $totalLines;
 var_dump($init);
 var_dump($totalPages);
 
-$query_user = "select * from inventory order by product ASC limit 0,50;";
+$query_user = "select * from inventory order by product ASC limit $init,50;";
 $result_User = mysqli_query($conection,$query_user);
 while($row_user = mysqli_fetch_assoc($result_User))
 {
@@ -139,7 +149,7 @@ if(isset($_POST["search"]))
 //Website Structure
 Page::head2();
 Page::header2($email, $type);
-Page::menuINdetailed($typ, $invoices, $email, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count);
+Page::menuINdetailed($typ, $invoices, $email, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count, $init, $totalPages, $page);
 Page::footer2();
 Page::endHead2();
 

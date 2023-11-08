@@ -110,7 +110,7 @@ if(isset($_POST["search"]))
             $count = $count +1;
          }
 
-        $query_user = "select * from creditnotes where creditnote_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND invoice_date like '%$dateSearch%' AND source_document like '%$salesOrderSearch%' limit 50;";
+        $query_user = "select * from creditnotes where creditnote_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND invoice_date like '%$dateSearch%' AND source_document like '%$salesOrderSearch%' order by invoice_date DESC limit 50;";
         $result_User = mysqli_query($conection,$query_user);
         while($row_user = mysqli_fetch_assoc($result_User))
         { 

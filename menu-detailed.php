@@ -165,7 +165,7 @@ if(isset($_POST["search"]))
             $count = $count +1;
         }
 
-        $query_user = "select * from invoices where invoice_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND invoice_date like '%$dateSearch%' AND sales_order like '%$salesOrderSearch%' limit 300;";
+        $query_user = "select * from invoices where invoice_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND invoice_date like '%$dateSearch%' AND sales_order like '%$salesOrderSearch%' order by invoice_date DESC limit 300;";
         $result_User = mysqli_query($conection,$query_user);
         while($row_user = mysqli_fetch_assoc($result_User))
         { 

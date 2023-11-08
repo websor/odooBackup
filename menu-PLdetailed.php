@@ -140,7 +140,7 @@ if(isset($_POST["search"]))
         while($row_user = mysqli_fetch_assoc($result_User))
         { $count = $count+1; }
 
-        $query_user = "select * from purchase_line where purchase_number like '%$invoice_number%' AND vendor like '%$customerSearch%' AND created_on like '%$dateSearch%' AND sku like '%$salesOrderSearch%' limit 100;";
+        $query_user = "select * from purchase_line where purchase_number like '%$invoice_number%' AND vendor like '%$customerSearch%' AND created_on like '%$dateSearch%' AND sku like '%$salesOrderSearch%' order by created_on DESC limit 100;";
         $result_User = mysqli_query($conection,$query_user);
         while($row_user = mysqli_fetch_assoc($result_User))
         { 

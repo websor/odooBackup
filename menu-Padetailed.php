@@ -104,7 +104,7 @@ if(isset($_POST["search"]))
         while($row_user = mysqli_fetch_assoc($result_User))
         { $count = $count + 1; }
 
-        $query_user = "select * from payments where payment_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND payment_date like '%$dateSearch%' limit 50;";
+        $query_user = "select * from payments where payment_number like '%$invoice_number%' AND customer like '%$customerSearch%' AND payment_date like '%$dateSearch%' order by payment_date DESC  limit 50;";
         $result_User = mysqli_query($conection,$query_user);
         while($row_user = mysqli_fetch_assoc($result_User))
         { 
