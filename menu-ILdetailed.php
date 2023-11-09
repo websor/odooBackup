@@ -60,12 +60,12 @@ $count =0;
     */ 
     $item = $_GET["item"];
 
-    $query_user = "select * from invoice_line WHERE product = '$item' order by created_on DESC;";
+    $query_user = "select * from invoice_line WHERE sku = '$item' order by created_on DESC;";
     $result_User = mysqli_query($conection,$query_user);
     while($row_user = mysqli_fetch_assoc($result_User))
     { $count = $count +1;} 
 
-    $query_user = "select * from invoice_line WHERE product = '$item' order by created_on DESC limit 100;";
+    $query_user = "select * from invoice_line WHERE sku = '$item' order by created_on DESC limit 100;";
     $result_User = mysqli_query($conection,$query_user);
     while($row_user = mysqli_fetch_assoc($result_User))
     {

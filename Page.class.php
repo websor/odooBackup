@@ -1780,7 +1780,7 @@ static function invoiceINDetailed($typ, $invoice, $user, $typee, $invo){
                             <h2 class="menu-detailed-title"> <?php echo $product;?> </h2>
                         </div>
                         <div class="col-lg-2">
-                            <a href="menu-ILdetailed.php?user=<?php echo $user; ?>&typ=Invoice Line&type=<?php echo $typee; ?>&item=<?php echo $product; ?>"><input type="button" value="Sales History" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
+                            <a href="menu-ILdetailed.php?user=<?php echo $user; ?>&typ=Invoice Line&type=<?php echo $typee; ?>&item=<?php echo $sku; ?>"><input type="button" value="Sales History" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
                         </div>
                         <div class="col-lg-2">
                             <a href="menu-PLdetailed.php?user=<?php echo $user; ?>&typ=Purchase Line&type=<?php echo $typee; ?>&item=<?php echo $sku; ?>"><input type="button" value="Purchase History" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
