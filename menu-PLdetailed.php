@@ -48,6 +48,7 @@ $invoice_number="";
 $salesOrderSearch="";
 $dateSearch="";
 $customerSearch="";
+
  
 $invoices = array();
 $count =0;

@@ -118,7 +118,7 @@ if($pagVendor == "" && $pagProduct == "" && $pagSku == "")
         {
             $totalPages = ceil($totalPages1);
         }else{
-            $totalPages1 = floor($totalPages1);
+            $totalPages = floor($totalPages1);
         }
     }
     $init = ($page - 1) * $totalLines;
@@ -167,7 +167,7 @@ if($pagVendor == "" && $pagProduct == "" && $pagSku == "")
                 {
                     $totalPages = ceil($totalPages1);
                 }else{
-                    $totalPages1 = floor($totalPages1);
+                    $totalPages = floor($totalPages1);
                 }
             }
 
@@ -224,7 +224,7 @@ else
                 {
                     $totalPages = ceil($totalPages1);
                 }else{
-                    $totalPages1 = floor($totalPages1);
+                    $totalPages = floor($totalPages1);
                 }
             }
 
