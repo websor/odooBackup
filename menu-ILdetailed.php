@@ -139,7 +139,7 @@ $pro = "";
             {
                 $totalPages = ceil($totalPages1);
             }else{
-                $totalPages1 = floor($totalPages1);
+                $totalPages = floor($totalPages1);
             }
         }
     
