@@ -1236,7 +1236,7 @@ static function menuUdetailed($user, $type, $msg, $invoices, $action ,$u, $userT
                                         <tr>
                                             <td><?php echo $invoice->getName(); ?></td>
                                             <td><?php echo $invoice->getEmail(); ?></td>
-                                            <td><?php echo $invoice->getType();  ?></td>
+                                            <td><?php if($invoice->getType() == "1"){ echo "1: Admin"; } else if($invoice->getType() == "2"){ echo "2: User "; }  ?></td>
                                             <td><?php echo $invoice->getPassword(); ?></td>
                                             <td><a href="users.php?type=<?php echo $type; ?>&user=<?php echo $user; ?>&action=D&u=<?php echo $invoice->getEmail(); ?>"><img src="images/delete.png" style="width:20px;"/></a></td>
                                             <td><a href="users.php?type=<?php echo $type; ?>&user=<?php echo $user; ?>&action=E&u=<?php echo $invoice->getEmail(); ?>"><img src="images/edit.png" style="width:20px;"/></a></td>
@@ -1310,8 +1310,8 @@ static function menuUdetailed($user, $type, $msg, $invoices, $action ,$u, $userT
                                             <td>
                                                 <select name="addType" id="type" required >
                                                     <option value="">--Please choose an User--</option>
-                                                    <option value="2">Sales Team</option>
-                                                    <option value="1">Admin</option>
+                                                    <option value="2">2: Sales Team</option>
+                                                    <option value="1">1: Admin</option>
                                                 </select>
                                             </td>
                                             <td style="margin-left:5px;"> <input type="password" required  placeholder="Password" name="addPassword"/></td>
