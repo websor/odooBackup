@@ -1394,7 +1394,16 @@ static function menuPdetailed($typ, $invoices, $user, $type, $invoice_number, $c
         <!-- end: Page Content -->
 <?php }
 
-static function menuJoEdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count){ ?>
+static function menuJoEdetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count, $init, $totalPages, $page){ 
+    $temp = $init + 50;
+        if($temp < $count)
+        {
+            $finalNumber = $temp;
+        }
+        else{
+            $finalNumber = $count;
+        }
+    ?>
     <!-- Page Content -->
     <section id="page-content">
         <div class="content col-lg-12">  
@@ -1410,6 +1419,7 @@ static function menuJoEdetailed($typ, $invoices, $user, $type, $invoice_number, 
                             <?php if($dateSearch == ""){ ?><input type="text" placeholder="Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
                             <input type="submit" value="search"class="btn btn-light" name="search" style="background:#0a3d67; border-color:#0a3d67; color:white;">
                             <input type="submit" value="Clear" class="btn btn-light" name="clear" style="background:#0a3d67; border-color:#0a3d67; color:white;">
+                            <spam class="btn btn-light" style="color:white; background:#0a3d67;">Results from <?php echo $init + 1; ?> - <?php echo $finalNumber; ?></spam>
                             <spam class="btn btn-light" style="color:white; background:#0a3d67;">Total Rows: <?php echo $count ?></spam>
                         </form>
                     </div>
@@ -1451,6 +1461,26 @@ static function menuJoEdetailed($typ, $invoices, $user, $type, $invoice_number, 
                 ?>
                             </tbody>
                         </table>
+                        <div class="col-lg-12" >
+                            <?php
+                                for($i=1;$i <= $totalPages; $i++)
+                                { 
+                                    if($i == $page)
+                                    { ?>
+                                            <div style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; width:30px; text-align:center; float:left; margin:5px; font-weight:bold;">
+                                                <?php echo $i; ?>
+                                            </div> 
+                                        <?php 
+                                    }
+                                    else{ ?>
+                                            <a href="menu-JoEdetailed.php?typ=<?php echo $typ; ?>&user=<?php echo $user; ?>&type=<?php echo $type; ?>&page=<?php echo $i; ?>&skuSearch=<?php echo $invoice_number; ?>&vendorSearch=<?php echo $customerSearch; ?>&productSearch=<?php echo $salesOrderSearch; ?>&dateSearch=<?php echo $dateSearch; ?>"><div style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; width:30px; text-align:center; float:left; margin:5px;">
+                                                <?php echo $i; ?>
+                                            </div></a>
+                                        <?php
+                                    }
+                                }
+                            ?>
+                        </div>
                     </div>
 
                 </div>
