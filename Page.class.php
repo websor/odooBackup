@@ -1490,7 +1490,16 @@ static function menuJoEdetailed($typ, $invoices, $user, $type, $invoice_number, 
     
 <?php }
 
-   static function menuDetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count, $inv){ ?>
+   static function menuDetailed($typ, $invoices, $user, $type, $invoice_number, $customerSearch, $dateSearch, $salesOrderSearch, $count, $inv, $init, $totalPages, $page){
+    $temp = $init + 50;
+    if($temp < $count)
+    {
+        $finalNumber = $temp;
+    }
+    else{
+        $finalNumber = $count;
+    }
+    ?>
         <!-- Page Content -->
         <section id="page-content">
                 <div class="content col-lg-12">
@@ -1500,14 +1509,24 @@ static function menuJoEdetailed($typ, $invoices, $user, $type, $invoice_number, 
                         </div>
                         <div class="content col-lg-9">
                         <form method="post">
-                            <?php if($invoice_number == ""){ ?><input type="text" placeholder="Invoice Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
-                            <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Sales Order Number" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
-                            <?php if($dateSearch == ""){ ?><input type="text" placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
-                            <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
-                            <input type="submit" value="search" class="btn btn-light" style="color:white; background:#0a3d67;" name="search">
-                            <?php if($invoice_number != "" || $customerSearch == "" || $dateSearch == "" || $salesOrderSearch == ""){ ?><input type="submit" value="Clear" class="btn btn-light" style="color:white; background:#0a3d67;" name="clear"><?php }else{} ?>
+                            <?php
+                            if($inv == "")
+                            {
+                                if($invoice_number == ""){ ?><input type="text" placeholder="Invoice Number" name="invoiceNumberSearch" class="search_field"> <?php }else{ ?> <input type="text" value="<?php echo $invoice_number; ?>" disabled name="invoiceNumberSearch" class="search_field"> <input type="text" value="<?php echo $invoice_number; ?>" name="invoiceNumberSearch" style="display:none;" /> <?php } ?>
+                                <?php if($salesOrderSearch == ""){ ?><input type="text" placeholder="Sales Order Number" name="salesOrderSearch" class="search_field"><?php }else{ ?> <input type="text" value="<?php echo $salesOrderSearch; ?>" disabled placeholder="Sales Order Number" name="salesOrderSearch" class="search_field" > <input type="text" value="<?php echo $salesOrderSearch; ?>" name="salesOrderSearch" style="display:none;" /> <?php } ?>
+                                <?php if($dateSearch == ""){ ?><input type="text" placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $dateSearch; ?>" disabled placeholder="Invoice Date" name="invoiceDateSearch" class="search_field"><input type="text" value="<?php echo $dateSearch; ?>" name="invoiceDateSearch" style="display:none;" /><?php }  ?>
+                                <?php if($customerSearch == ""){ ?><input type="text" placeholder="Customer" name="customerSearch" class="search_field"><?php }else{ ?><input type="text" value="<?php echo $customerSearch; ?>" disabled placeholder="Customer" name="customerSearch" class="search_field"><input style="display:none;" type="text" style="width:300px" value="<?php echo $customerSearch; ?>" name="customerSearch"  /><?php } ?>
+                                <input type="submit" value="search" class="btn btn-light" style="color:white; background:#0a3d67;" name="search">
+                                <?php if($invoice_number != "" || $customerSearch == "" || $dateSearch == "" || $salesOrderSearch == ""){ ?><input type="submit" value="Clear" class="btn btn-light" style="color:white; background:#0a3d67;" name="clear"><?php }else{} ?>
+                                <spam class="btn btn-light" style="color:white; background:#0a3d67;">Results from <?php echo $init + 1; ?> - <?php echo $finalNumber; ?></spam>
+                                <spam class="btn btn-light" style="color:white; background:#0a3d67;">Total rows: <?php echo $count; ?></spam>
+                           <?php }
+                            else
+                            { ?>
+                                <spam class="btn btn-light" style="color:white; background:#0a3d67;">Results from <?php echo $init + 1; ?> - <?php echo $finalNumber; ?></spam>
+                                <spam class="btn btn-light" style="color:white; background:#0a3d67;">Total rows: <?php echo $count; ?></spam>
+                           <?php  } ?>
                             
-                            <spam class="btn btn-light" style="color:white; background:#0a3d67;">Total rows: <?php echo $count; ?></spam>
                         </form>
                         </div>
                             <table class="table">
@@ -1553,7 +1572,26 @@ static function menuJoEdetailed($typ, $invoices, $user, $type, $invoice_number, 
                     ?>
                                 </tbody>
                             </table>
-                        
+                            <div class="col-lg-12" >
+                            <?php
+                                for($i=1;$i <= $totalPages; $i++)
+                                { 
+                                    if($i == $page)
+                                    { ?>
+                                            <div style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; width:30px; text-align:center; float:left; margin:5px; font-weight:bold;">
+                                                <?php echo $i; ?>
+                                            </div> 
+                                        <?php 
+                                    }
+                                    else{ ?>
+                                            <a href="menu-detailed.php?typ=<?php echo $typ; ?>&user=<?php echo $user; ?>&type=<?php echo $type; ?>&page=<?php echo $i; ?>&skuSearch=<?php echo $invoice_number; ?>&vendorSearch=<?php echo $customerSearch; ?>&productSearch=<?php echo $salesOrderSearch; ?>&dateSearch=<?php echo $dateSearch; ?>&inv=<?php echo $inv; ?>"><div style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; width:30px; text-align:center; float:left; margin:5px;">
+                                                <?php echo $i; ?>
+                                            </div></a>
+                                        <?php
+                                    }
+                                }
+                            ?>
+                        </div>
                     </div>
                 </div>
         </section>
