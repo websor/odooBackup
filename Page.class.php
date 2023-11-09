@@ -1723,7 +1723,7 @@ static function invoiceCNDetailed($typ, $invoice, $invoice_lines, $user, $type, 
                     <div class="col-lg-12" style="text-align:center;">
                         <form method="POST">
                             <a href="menu-CNdetailed.php?user=<?php echo $user; ?>&typ=CreditNotes&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
-                            <input type="submit" value="Print" name="print" class="btn btn-light" style="color:white; background:#0a3d67;" />
+                            
                         </form>
                     </div>
                     <div class="row center" style="width:95%; border-radius:10px; padding:30px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
@@ -2176,7 +2176,7 @@ static function invoicePDetailed($typ, $invoice, $invoice_lines, $user, $type, $
                     <div class="col-lg-12" style="text-align:center;">
                         <form method="POST">
                             <a href="menu-Pdetailed.php?user=<?php echo $user; ?>&typ=Purchases&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
-                            <input type="submit" value="Print" name="print" class="btn btn-light" style="color:white; background:#0a3d67;" />
+                            
                         </form>
                     </div>
                     <div class="row center" style="width:95%; border-radius:10px; padding:30px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
@@ -2363,7 +2363,7 @@ static function invoiceJoIDetailed($typ, $invoice, $invoice_lines, $user, $type,
                     <div class="col-lg-12" style="text-align:center;">
                         <form method="POST">
                             <a href="menu-JoEdetailed.php?user=<?php echo $user; ?>&typ=<?php echo $typ; ?>&type=<?php echo $type; ?>"><input type="button" value="Go back" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
-                            <input type="submit" value="Print" name="print" class="btn btn-light" style="color:white; background:#0a3d67;" />
+                           
                         </form>
                     </div>
                     <div class="row center" style="width:95%; border-radius:10px; padding:30px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
@@ -2483,13 +2483,12 @@ static function invoiceDetailed($typ, $invoice, $invoice_lines, $user, $type, $i
     
     ?>
 
-    <section>
+    <section id="ficha">
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-12" style="text-align:center;">
                         <form method="POST">
                             <a href="menu-detailed.php?user=<?php echo $user; ?>&typ=Invoices&type=<?php echo $type; ?>"><input type="button" value="GO BACK" name="goBack" class="btn btn-light" style="color:white; background:#0a3d67;" /></a>
-                            <input type="submit" value="Print" name="print" class="btn btn-light" style="color:white; background:#0a3d67;" />
                         </form>
                     </div>
                     <div class="row center" style="width:95%; border-radius:10px; padding:30px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
