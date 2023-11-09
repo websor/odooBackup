@@ -35,6 +35,24 @@ else
     $msg = "";
 }
 
+$conection = include 'config/conection.php';
+
+//check username
+$query_user = "select * from users where email = '$email';";
+$result_User = mysqli_query($conection,$query_user);
+while($row_user = mysqli_fetch_assoc($result_User))
+{ 
+  $typeDB = $row_user['type'];
+}
+
+
+if($typeDB == $type)
+{
+    //nothing happend
+}
+else{
+    header("location:index.php");
+}
 
 require_once('Page.class.php');
 
