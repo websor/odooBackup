@@ -146,7 +146,7 @@ $pro = "";
         $init = ($page - 1) * $totalLines;
         // PAGINATION LOGIC //
 
-    $query_user = "select * from invoice_line WHERE sku = '$inv' order by created_on DESC limit 100;";
+    $query_user = "select * from invoice_line WHERE sku = '$inv' order by created_on DESC limit $init,50;";
     $result_User = mysqli_query($conection,$query_user);
     while($row_user = mysqli_fetch_assoc($result_User))
     {
